@@ -13,6 +13,10 @@ public interface ITaxiController {
 
     IPerson login(String login, String pass);
 
+    public Client addClient();
+
+    public Driver addDriver();
+
     List<Client> getAllClients();
 
     List<Driver> getAllDrivers();
