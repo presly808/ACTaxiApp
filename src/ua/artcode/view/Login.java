@@ -1,5 +1,7 @@
 package ua.artcode.view;
 
+import ua.artcode.controller.ITaxiController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,8 +16,10 @@ import java.nio.file.StandardOpenOption;
  */
 public class Login extends JFrame {
 
+    private ITaxiController controller;
     private JTextField loginField, passwordField;
     private JButton loginButton;
+    private JLabel label;
 
     public static void main(String[] args) {
         new Login();
@@ -23,10 +27,10 @@ public class Login extends JFrame {
 
     Login() {
 
-        setSize(400, 400);
+        setSize(400, 300);
         init();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Login");
+        setTitle("Taxi App");
         setVisible(true);
     }
 
@@ -35,17 +39,29 @@ public class Login extends JFrame {
         JPanel panel = new JPanel();
 
         loginField = new JTextField(30);
+        loginField.setText("login");
+        loginField.setToolTipText("Login");
+        label = new JLabel("Login Form");
 
         passwordField = new JTextField(30);
+        passwordField.setText("password");
+        passwordField.setToolTipText("Password");
 
         loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                if (controller.login(loginField.getText(), passwordField.getText()) != null) {
+                    new MenuFrame(controller);
+                } else
+                    JOptionPane.showMessageDialog(Login.this,
+                            "Wrong user's credentials.",
+                            "Login error",
+                            JOptionPane.ERROR_MESSAGE);
             }
         });
-
+        loginField.requestFocus();
+        panel.add(label);
         panel.add(loginField);
         panel.add(passwordField);
         panel.add(loginButton);
