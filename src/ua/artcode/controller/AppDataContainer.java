@@ -1,10 +1,7 @@
 package ua.artcode.controller;
 
 import ua.artcode.exception.AdminControllerHasAlreadyCreated;
-import ua.artcode.model.Admin;
-import ua.artcode.model.Client;
-import ua.artcode.model.Driver;
-import ua.artcode.model.Ticket;
+import ua.artcode.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +17,9 @@ public class AppDataContainer {
     private List<Admin> admins = new ArrayList<>();
 
     public Admin login(String login, String name){
-        return null;
+        return new Admin(login, name, new ID().getID());
     }
+
+
 
 }

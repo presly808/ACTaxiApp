@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class AdminController implements ITaxiController {
 
+    private static boolean isCreate;
 
     private static final AdminController INSTANCE = new AdminController();
 
@@ -18,12 +19,13 @@ public class AdminController implements ITaxiController {
 
     // todo lazy initialization using singleton pattern, load data from file see trello task
     public static AdminController getAdminController() {
-
         return INSTANCE;
     }
 
     @Override
     public Client login(String login, String pass) {
+
+
         return null;
     }
 
@@ -43,27 +45,27 @@ public class AdminController implements ITaxiController {
     }
 
     @Override
-    public Client getClientById(int id) {
+    public Client getClientById(long id) {
         return null;
     }
 
     @Override
-    public Driver getDriverById(int id) {
+    public Driver getDriverById(long id) {
         return null;
     }
 
     @Override
-    public Ticket getTicketById(int id) {
+    public Ticket getTicketById(long id) {
         return null;
     }
 
     @Override
-    public boolean setDriverToTicket(int clientId, int driverId) {
+    public boolean setDriverToTicket(long clientId, long driverId) {
         return false;
     }
 
     @Override
-    public Ticket findTicketByClientId(int id) {
+    public Ticket findTicketByClientId(long id) {
         return null;
     }
 }
