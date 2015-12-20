@@ -1,14 +1,18 @@
 package ua.artcode.view;
 
 
+import ua.artcode.controller.ITaxiController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame {
+    ITaxiController iTaxiController;
 
-    public MenuFrame(JButton buttonShowTikets) throws HeadlessException {
+    public MenuFrame(ITaxiController menuController) throws HeadlessException {
+        this.iTaxiController = menuController;
         setTitle("Choosing some acction");
         setSize(400 , 400);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -23,7 +27,6 @@ public class MenuFrame extends JFrame {
         buttonShowTikets.addActionListener(acctionListenerForButtonShowTikets);
         setLayout(new GridLayout(2 , 1 ));
         getContentPane().add(buttonShowTikets);
-
     }
 
 
@@ -36,4 +39,5 @@ public class MenuFrame extends JFrame {
             //method who show next window with tikets
         }
     }
+
 }
