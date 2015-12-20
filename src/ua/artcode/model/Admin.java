@@ -1,10 +1,14 @@
 package ua.artcode.model;
 
-// TODO OLEG replace id by simple type (long) in cotroller will be generation of id
-public class Admin {
+import ua.artcode.controller.IPerson;
 
-    private String login;
-    private String pass;
+import java.io.Serializable;
+
+// TODO OLEG replace id by simple type (long) in cotroller will be generation of id
+public class Admin implements IPerson, Serializable {
+
+    private String login = "admin";
+    private String pass = "admin";
     private long iDAdmin;
 
     public Admin(String login, String pass, long iD) {
@@ -20,4 +24,6 @@ public class Admin {
     public long getID() {
         return iDAdmin;
     }
+
+    public String getPass() { return pass; }
 }

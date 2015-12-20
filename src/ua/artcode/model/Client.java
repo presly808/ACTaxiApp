@@ -1,9 +1,13 @@
 package ua.artcode.model;
 
+import ua.artcode.controller.IPerson;
+
+import java.io.Serializable;
+
 /**
  * Created by dexter on 20.12.15.
  */
-public class Client {
+public class Client implements IPerson, Serializable {
 
     private String login;
     private String pass;

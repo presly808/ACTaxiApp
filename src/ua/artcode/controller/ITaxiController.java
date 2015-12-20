@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ITaxiController {
 
-    Client login(String login, String pass);
+    IPerson login(String login, String pass);
 
     List<Client> getAllClients();
 
@@ -19,14 +19,14 @@ public interface ITaxiController {
 
     List<Ticket> getTickets();
 
-    Client getClientById(int id);
+    Client getClientById(long id);
 
-    Driver getDriverById(int id);
+    Driver getDriverById(long id);
 
-    Ticket getTicketById(int id);
+    Ticket getTicketById(long id);
 
-    boolean setDriverToTicket(int clientId, int driverId);
+    boolean setDriverToTicket(long clientId, long driverId);
 
-    Ticket findTicketByClientId(int id);
+    Ticket findTicketByClientId(long id);
 
 }

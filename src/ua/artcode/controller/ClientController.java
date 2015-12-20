@@ -21,4 +21,8 @@ public class ClientController {
     public String getPass() {
         return pass;
     }
+
+//    public Ticket makeRequest(){
+//
+//    }
 }

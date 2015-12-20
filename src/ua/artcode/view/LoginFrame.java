@@ -47,6 +47,7 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (controller.login(loginField.getText(), passwordField.getText()) != null) {
                     new MenuFrame(controller);
+                    LoginFrame.this.dispose();
                 } else
                     JOptionPane.showMessageDialog(LoginFrame.this,
                             "Wrong username/password",
