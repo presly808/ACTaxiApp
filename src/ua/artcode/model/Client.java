@@ -10,15 +10,16 @@ public class Client {
     private int phoneNumber;
     private String location;
     private long cash;
-    private ID iDClient = new ID();
+    private long iDClient;
 
-    public Client(String login, int phoneNumber, String location, long cash, String pass) {
+    public Client(String login, int phoneNumber, String location, long cash, String pass, long iDClient) {
 
         this.login = login;
         this.phoneNumber = phoneNumber;
         this.location = location;
         this.cash = cash;
         this.pass = pass;
+        this.iDClient = iDClient;
 
     }
 
@@ -36,7 +37,7 @@ public class Client {
     }
 
     public long getiD() {
-        return iDClient.getID();
+        return iDClient;
     }
 
     public String getLocation() {
