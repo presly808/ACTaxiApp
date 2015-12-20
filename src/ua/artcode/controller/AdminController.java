@@ -22,18 +22,22 @@ public class AdminController implements ITaxiController {
         return INSTANCE;
     }
 
-    public void addClient(){
+    public Client addClient(String name, int phone, String location, String pass, long cash){
 
-        Client client = new Client("name", 123, "location", 123, "pass", new ID().getID());
+        Client client = new Client(name, phone, location, cash, pass, new ID().getID());
         appDataContainer.addClientToData(client);
         TaxiAppSave.save("file", appDataContainer);
+
+        return client;
     }
 
-    public void addDriver(){
+    public Driver addDriver(String name, Car car){
 
-        Driver driver = new Driver("name", new Car(), new ID().getID());
+        Driver driver = new Driver(name, car, new ID().getID());
         appDataContainer.addDriverToData(driver);
         TaxiAppSave.save("file", appDataContainer);
+
+        return driver;
     }
 
     @Override
@@ -43,12 +47,12 @@ public class AdminController implements ITaxiController {
 
     @Override
     public List<Client> getAllClients() {
-        return null;
+        return appDataContainer.getListClients();
     }
 
     @Override
     public List<Driver> getAllDrivers() {
-        return null;
+        return appDataContainer.getListDrivers();
     }
 
     @Override
