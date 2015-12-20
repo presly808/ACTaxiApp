@@ -1,13 +1,12 @@
 package ua.artcode.view;
 
-import ua.artcode.controller.Login;
 import ua.artcode.controller.ITaxiController;
+import ua.artcode.controller.Login;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 /**
  * Created by sensej on 19.12.15.
@@ -22,7 +21,6 @@ public class LoginFrame extends JFrame {
     private JPanel panel;
 
     public LoginFrame() {
-
 
         setSize(400, 200);
         init();
@@ -73,7 +71,9 @@ public class LoginFrame extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ITaxiController controller = Login.login(loginField.getText(), Arrays.toString(passwordField.getPassword()));
+                Login login = new Login();
+
+                ITaxiController controller = login.login(loginField.getText(), passwordField.getText());
                 if (controller != null) {
                     new MenuFrame(controller);
                     LoginFrame.this.dispose();

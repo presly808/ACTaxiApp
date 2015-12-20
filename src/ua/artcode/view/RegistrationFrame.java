@@ -61,13 +61,15 @@ public class RegistrationFrame extends JFrame {
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Client client = Login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+                Login login = new Login();
+                Client client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
                         locationField.getText(), passwordField.getText());
                 if (client != null) {
                     JOptionPane.showMessageDialog(RegistrationFrame.this,
                             String.format("%s account has been succcessfully created", loginField.getText()),
                             "Successful registration",
                             JOptionPane.INFORMATION_MESSAGE);
+                    RegistrationFrame.this.dispose();
                 }
             }
         });

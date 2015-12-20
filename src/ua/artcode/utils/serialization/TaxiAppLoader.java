@@ -10,18 +10,19 @@ import java.io.ObjectInputStream;
  */
 public class TaxiAppLoader {
 
-    public static AppDataContainer load(String nameFile){
+    public static AppDataContainer load(String nameFile) {
+        AppDataContainer temp = null;
 
-        try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nameFile))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nameFile))) {
 
-            AppDataContainer temp = new AppDataContainer((AppDataContainer)ois.readObject());
+            temp = new AppDataContainer((AppDataContainer) ois.readObject());
 
 
         } catch (Exception ex) {
             ex.printStackTrace();
         }
 
-        return new AppDataContainer();
+        return temp;
     }
 }
 

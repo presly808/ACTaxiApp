@@ -2,18 +2,17 @@ package ua.artcode.test;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.artcode.controller.*;
+import ua.artcode.controller.AppDataContainer;
+import ua.artcode.controller.ControllerFactory;
 import ua.artcode.controller.ITaxiController;
-import ua.artcode.model.Car;
+import ua.artcode.controller.Login;
 import ua.artcode.model.Client;
-import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static junit.framework.TestCase.assertNotNull;
 
 public class TestITaxiController {
 
@@ -31,9 +30,9 @@ public class TestITaxiController {
 //        controller.getAllDrivers().add(new Driver("Driver2", new Car(), 2));
 //        controller.getAllDrivers().add(new Driver("Driver3", new Car(), 3));
 
- }
+    }
 
- //// TODO: 20.12.15  
+    //// TODO: 20.12.15
 // @Test
 // public void testLogin() throws Exception{
 //  Client client = new Client("Login", 333333, "Home", 300, "12345", 45);
@@ -99,6 +98,16 @@ public class TestITaxiController {
 
     @Test
     public void testFindTicketByClientId() throws Exception {
+
+
+    }
+
+    @Test
+    public void testLogin() throws Exception {
+        Login login = new Login();
+        Client client = login.addClient("John", 9992233, "Kiev", "password");
+        ITaxiController controller = login.login(client.getLogin(), client.getPass());
+        assertNotNull(controller);
 
 
     }
