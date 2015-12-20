@@ -17,7 +17,11 @@ public class ID {
         this.iD = (date.getTime());
     }
 
-    public long getID() {
+    public long getId() {
         return iD;
+    }
+
+    public static long genId(){
+        return new ID().getId();
     }
 }
