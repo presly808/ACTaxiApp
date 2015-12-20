@@ -12,27 +12,15 @@ import java.util.List;
  */
 public class AdminController implements ITaxiController {
 
-    private static String login = "admin";
-    private static String pass = "admin";
-    private static boolean isCreate;
 
-    private AdminController(){
-        isCreate = true;
-    }
+    private static final AdminController INSTANCE = new AdminController();
 
-    public static AdminController getAdminController() throws AdminControllerHasAlreadyCreated{
-        if(isCreate){
-            throw new AdminControllerHasAlreadyCreated();
-        }
-        return  new AdminController();
-    }
+    private AdminController(){}
 
-    public static String getLogin() {
-        return login;
-    }
+    // todo lazy initialization using singleton pattern, load data from file see trello task
+    public static AdminController getAdminController() {
 
-    public static String getPass() {
-        return pass;
+        return INSTANCE;
     }
 
     @Override
