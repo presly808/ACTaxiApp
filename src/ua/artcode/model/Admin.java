@@ -2,6 +2,7 @@ package ua.artcode.model;
 
 
 public class Admin {
+
     private String login;
     private String pass;
     private ID iDAdmin = new ID();
