@@ -25,7 +25,13 @@ public class MenuFrame extends JFrame {
         JButton buttonShowTikets = new JButton("Show all Tikets");
         AcctionListenerForButtonShowTikets acctionListenerForButtonShowTikets = new AcctionListenerForButtonShowTikets();
         buttonShowTikets.addActionListener(acctionListenerForButtonShowTikets);
-        setLayout(new GridLayout(2 , 1 ));
+        setLayout(new GridLayout(2 ,1 ));
+        getContentPane().add(buttonShowTikets);
+
+        JButton buttonShowDrivers = new JButton("Show all Tikets");
+        AcctionListenerForButtonShowDrivers acctionListenerForButtonShowDrivers = new AcctionListenerForButtonShowDrivers();
+        buttonShowDrivers.addActionListener(acctionListenerForButtonShowTikets);
+        setLayout(new GridLayout(4 ,2 ));
         getContentPane().add(buttonShowTikets);
     }
 
@@ -40,4 +46,12 @@ public class MenuFrame extends JFrame {
         }
     }
 
+
+    public class AcctionListenerForButtonShowDrivers implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //method who show next window with drivers
+        }
+    }
 }
