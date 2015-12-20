@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by dexter on 20.12.15.
  */
-public class ClientController implements ITaxiController {
+public class ClientController implements IClientController {
 
     private String login;
     private String pass;

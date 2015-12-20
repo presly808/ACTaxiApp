@@ -23,9 +23,9 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public Client addClient(String name, int phone, String location, String pass, long cash){
+    public Client addClient(String name, int phone, String location, String pass ){
 
-        Client client = new Client(name, phone, location, cash, pass, ID.genId());
+        Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
         TaxiAppSave.save("file", appDataContainer);
 

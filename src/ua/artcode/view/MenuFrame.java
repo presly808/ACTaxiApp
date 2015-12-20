@@ -4,11 +4,11 @@ package ua.artcode.view;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame {
-
     private  ITaxiController menuController;
     private JPanel panel;
     private JButton showTicketsButton;
@@ -34,9 +34,10 @@ public class MenuFrame extends JFrame {
         label = new JLabel("ADMIN PANEL");
         showTicketsButton = new JButton("Show tickets");
         showTicketsButton.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                new TicketsFrame();
+                new TicketsFrame(menuController);
                 MenuFrame.this.dispose();
             }
         });

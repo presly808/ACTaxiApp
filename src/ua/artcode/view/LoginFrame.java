@@ -18,9 +18,10 @@ public class LoginFrame extends JFrame {
     private JPasswordField passwordField;
     private JButton loginButton, registerButton;
     private JLabel label;
+    private JPanel southButtonsPanel;
+    private JPanel panel;
 
-
-    public LoginFrame( ) {
+    public LoginFrame() {
 
 
         setSize(400, 200);
@@ -47,13 +48,8 @@ public class LoginFrame extends JFrame {
 
     private void init() {
 
-        JPanel panel = new JPanel();
-
-
-        JPanel southButtonsPanel = new JPanel(new GridLayout(1, 2));
-        southButtonsPanel.add(registerButton);
-        southButtonsPanel.add(loginButton);
-        getContentPane().add(southButtonsPanel, BorderLayout.NORTH);
+        panel = new JPanel();
+        southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
         loginField = new JTextField(30);
         loginField.setText("login");
@@ -69,7 +65,7 @@ public class LoginFrame extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new RegistrationFrame();
             }
         });
 
@@ -88,12 +84,13 @@ public class LoginFrame extends JFrame {
                             JOptionPane.ERROR_MESSAGE);
             }
         });
-
+        southButtonsPanel.add(registerButton);
+        southButtonsPanel.add(loginButton);
+        getContentPane().add(southButtonsPanel, BorderLayout.SOUTH);
         loginField.requestFocus();
         panel.add(label);
         panel.add(loginField);
         panel.add(passwordField);
-        panel.add(loginButton);
         this.add(panel);
 
     }
