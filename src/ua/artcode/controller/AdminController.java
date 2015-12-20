@@ -11,8 +11,6 @@ import java.util.List;
  */
 public class AdminController implements ITaxiController {
 
-    private static final AdminController INSTANCE = new AdminController(TaxiAppLoader.load("file"));
-
     AppDataContainer appDataContainer;
     String me = "admin";
 
@@ -20,8 +18,8 @@ public class AdminController implements ITaxiController {
         this.appDataContainer = appDataContainer;
     }
 
-    public static AdminController getAdminController() {
-        return INSTANCE;
+    public static AdminController getAdminController(AppDataContainer appDataContainer) {
+        return new AdminController(appDataContainer);
     }
 
     public Client addClient(String name, int phone, String location, String pass, long cash){
