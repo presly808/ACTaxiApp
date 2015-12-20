@@ -31,7 +31,7 @@ public class AdminController implements ITaxiController {
         return client;
     }
 
-    public Driver addDriver(String name, Car car){
+    public Driver addDriver(){
 
         Driver driver = new Driver(name, car, new ID().getID());
         appDataContainer.addDriverToData(driver);

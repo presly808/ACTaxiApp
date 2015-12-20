@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.model.Car;
 import ua.artcode.model.Client;
 import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
@@ -13,9 +14,9 @@ public interface ITaxiController {
 
     IPerson login(String login, String pass);
 
-    public Client addClient();
+    Client addClient(String name, int phone, String location, String pass, long cash);
 
-    public Driver addDriver();
+    Driver addDriver(String name, Car car);
 
     List<Client> getAllClients();
 
