@@ -1,4 +1,4 @@
-package ua.artcode.taxiAppLoader;
+package ua.artcode.utils.serialization;
 
 import ua.artcode.controller.AppDataContainer;
 
