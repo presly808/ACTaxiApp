@@ -1,7 +1,8 @@
 package ua.artcode.model;
 
-
+// TODO OLEG replace id by simple type (long) in cotroller will be generation of id
 public class Admin {
+
     private String login;
     private String pass;
     private ID iDAdmin = new ID();

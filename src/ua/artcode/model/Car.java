@@ -1,10 +1,11 @@
 package ua.artcode.model;
 
 /**
- * Created by ivan on 20.12.15.
+ * TODO VANIA constructors, get, set, toString, equals
  */
 public class Car {
     private String car;
+    // TODO make car number string
     private int numb;
     private String color;
 }

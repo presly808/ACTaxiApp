@@ -7,8 +7,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+// TODO format code
 public class MenuFrame extends JFrame {
+    // TODO BODIA private field
     ITaxiController iTaxiController;
 
     public MenuFrame(ITaxiController menuController) throws HeadlessException {
@@ -31,6 +32,7 @@ public class MenuFrame extends JFrame {
 
 
         JButton buttonShowDrivers = new JButton("Show all Tikets");
+        //TODO delete unnecessary variable
         AcctionListenerForButtonShowDrivers acctionListenerForButtonShowDrivers = new AcctionListenerForButtonShowDrivers();
         buttonShowDrivers.addActionListener(acctionListenerForButtonShowTikets);
         menuPanel.add(buttonShowDrivers);
