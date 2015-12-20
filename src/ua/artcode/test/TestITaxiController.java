@@ -19,7 +19,6 @@ public class TestITaxiController {
  public void testLogin() throws Exception{
   Client client = new Client("Login", 333333, "Home", 300, "12345", 45);
   assertNotNull(controller.login(client.getLogin(),client.getPass()));
-
  }
 
  @Test
