@@ -14,15 +14,13 @@ public class AdminController implements ITaxiController {
 
     private static boolean isCreate;
 
-    private AdminController(){
-        isCreate = true;
-    }
+    private static final AdminController INSTANCE = new AdminController();
 
-    public static AdminController getAdminController() throws AdminControllerHasAlreadyCreated{
-        if(isCreate){
-            throw new AdminControllerHasAlreadyCreated();
-        }
-        return  new AdminController();
+    private AdminController(){}
+
+    // todo lazy initialization using singleton pattern, load data from file see trello task
+    public static AdminController getAdminController() {
+        return INSTANCE;
     }
 
     @Override
