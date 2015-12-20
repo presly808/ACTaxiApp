@@ -42,9 +42,6 @@ public class MenuFrame extends JFrame {
         menuPanel.add(buttonShowDrivers);
     }
 
-
-
-
     public class AcctionListenerForButtonShowTikets implements ActionListener{
 
         @Override
@@ -52,7 +49,6 @@ public class MenuFrame extends JFrame {
             //method who show next window with tikets
         }
     }
-
 
     public class AcctionListenerForButtonShowDrivers implements ActionListener{
 
