@@ -56,7 +56,7 @@ public class MenuFrame extends JFrame {
         addClientButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                new AddClientFrame();
             }
         });
 
