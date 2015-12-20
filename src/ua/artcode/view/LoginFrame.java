@@ -3,29 +3,23 @@ package ua.artcode.view;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 
 /**
  * Created by sensej on 19.12.15.
  */
-public class Login extends JFrame {
+public class LoginFrame extends JFrame {
 
     private ITaxiController controller;
     private JTextField loginField, passwordField;
     private JButton loginButton;
     private JLabel label;
 
-    public static void main(String[] args) {
-        new Login();
-    }
 
-    Login() {
+    public LoginFrame(ITaxiController taxiController) {
+
+        controller = taxiController;
 
         setSize(400, 300);
         init();
@@ -54,7 +48,7 @@ public class Login extends JFrame {
                 if (controller.login(loginField.getText(), passwordField.getText()) != null) {
                     new MenuFrame(controller);
                 } else
-                    JOptionPane.showMessageDialog(Login.this,
+                    JOptionPane.showMessageDialog(LoginFrame.this,
                             "Wrong username/password",
                             "Login error",
                             JOptionPane.ERROR_MESSAGE);
