@@ -46,27 +46,27 @@ public class AdminController implements ITaxiController {
     }
 
     @Override
-    public Client getClientById(int id) {
+    public Client getClientById(long id) {
         return null;
     }
 
     @Override
-    public Driver getDriverById(int id) {
+    public Driver getDriverById(long id) {
         return null;
     }
 
     @Override
-    public Ticket getTicketById(int id) {
+    public Ticket getTicketById(long id) {
         return null;
     }
 
     @Override
-    public boolean setDriverToTicket(int clientId, int driverId) {
+    public boolean setDriverToTicket(long clientId, long driverId) {
         return false;
     }
 
     @Override
-    public Ticket findTicketByClientId(int id) {
+    public Ticket findTicketByClientId(long id) {
         return null;
     }
 }
