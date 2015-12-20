@@ -12,8 +12,6 @@ import java.util.List;
  */
 public class AdminController implements ITaxiController {
 
-    private static String login = "admin";
-    private static String pass = "admin";
     private static boolean isCreate;
 
     private AdminController(){
@@ -25,14 +23,6 @@ public class AdminController implements ITaxiController {
             throw new AdminControllerHasAlreadyCreated();
         }
         return  new AdminController();
-    }
-
-    public static String getLogin() {
-        return login;
-    }
-
-    public static String getPass() {
-        return pass;
     }
 
     @Override
