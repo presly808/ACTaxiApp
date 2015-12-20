@@ -23,7 +23,7 @@ public class TestITaxiController {
 
  @Before
  public void setUp() throws Exception {
-  controller = ControllerFactory.getAdminController();
+  controller = Login.getAdminController();
   controller.getAllClients().add(new Client("Login1", 111111, "Home1", 100, "12345", 1));
   controller.getAllClients().add(new Client("Login2", 222222, "Home2", 200, "12345", 2));
   controller.getAllClients().add(new Client("Login3", 333333, "Home3", 300, "12345", 3));

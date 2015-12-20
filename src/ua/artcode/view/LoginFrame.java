@@ -1,6 +1,6 @@
 package ua.artcode.view;
 
-import ua.artcode.controller.ControllerFactory;
+import ua.artcode.controller.Login;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
@@ -77,7 +77,7 @@ public class LoginFrame extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ITaxiController controller = ControllerFactory.login(loginField.getText(), Arrays.toString(passwordField.getPassword()));
+                ITaxiController controller = Login.login(loginField.getText(), Arrays.toString(passwordField.getPassword()));
                 if (controller != null) {
                     new MenuFrame(controller);
                     LoginFrame.this.dispose();
