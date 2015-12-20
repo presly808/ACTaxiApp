@@ -1,4 +1,4 @@
-package ua.artcode.test;
+package ua.artcode.model;
 
 
 public class Admin {
