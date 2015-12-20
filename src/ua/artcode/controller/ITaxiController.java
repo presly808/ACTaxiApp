@@ -12,26 +12,6 @@ import java.util.List;
  */
 public interface ITaxiController {
 
-    Client addClient(String name, int phone, String location, String pass, long cash);
-
-    Driver addDriver(String name, Car car);
-
-    List<Client> getAllClients();
-
-    List<Driver> getAllDrivers();
-
-    List<Ticket> getTickets();
-
-    Client getClientById(long id);
-
-    Driver getDriverById(long id);
-
-    Ticket getTicketById(long id);
-
-    boolean setDriverToTicket(long clientId, long driverId);
-
-    Ticket findTicketByClientId(long id);
-
     public String whoAmI();
 
 }

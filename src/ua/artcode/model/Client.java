@@ -26,14 +26,6 @@ public class Client implements Serializable, IPerson {
 
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public String getPass() {
-        return pass;
-    }
-
     public int getPhoneNumber() {
 
         return phoneNumber;
@@ -65,6 +57,16 @@ public class Client implements Serializable, IPerson {
 
     public void setCash(long cash) {
         this.cash = cash;
+    }
+
+    @Override
+    public String getLogin() {
+        return login;
+    }
+
+    @Override
+    public String getPass() {
+        return pass;
     }
 
     @Override

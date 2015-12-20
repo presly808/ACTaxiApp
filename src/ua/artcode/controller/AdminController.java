@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by dexter on 20.12.15.
  */
-public class AdminController implements ITaxiController {
+public class AdminController implements IAdminController {
 
     AppDataContainer appDataContainer;
     String me = "admin";
@@ -22,6 +22,7 @@ public class AdminController implements ITaxiController {
         return new AdminController(appDataContainer);
     }
 
+    @Override
     public Client addClient(String name, int phone, String location, String pass, long cash){
 
         Client client = new Client(name, phone, location, cash, pass, ID.genId());
@@ -31,6 +32,7 @@ public class AdminController implements ITaxiController {
         return client;
     }
 
+    @Override
     public Driver addDriver(String name, Car car){
 
         Driver driver = new Driver(name, car, ID.genId());
@@ -80,6 +82,7 @@ public class AdminController implements ITaxiController {
         return null;
     }
 
+    @Override
     public String whoAmI(){
         return me;
     }

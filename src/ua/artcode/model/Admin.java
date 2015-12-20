@@ -15,6 +15,7 @@ public class Admin implements Serializable, IPerson {
         this.iDAdmin = iD;
     }
 
+    @Override
     public String getLogin() {
         return login;
     }
@@ -23,6 +24,7 @@ public class Admin implements Serializable, IPerson {
         return iDAdmin;
     }
 
+    @Override
     public String getPass() { return pass; }
 
     @Override

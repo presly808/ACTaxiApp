@@ -9,5 +9,8 @@ public class ControllerFactory {
         return AdminController.getAdminController(appDataContainer);
     }
 
+    public static ClientController getClientController(){
+        return new ClientController();
+    }
 
 }

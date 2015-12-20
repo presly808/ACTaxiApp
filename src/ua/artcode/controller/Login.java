@@ -20,12 +20,18 @@ public class Login {
         }
 
         return person.whoAmI().equals("admin") ?
-                ControllerFactory.getAdminController(appDataContainer) : null;
+                ControllerFactory.getAdminController(appDataContainer) :
+                ControllerFactory.getClientController();
     }
 
     private static IPerson searchIPerson(String login, String pass){
 
         for(IPerson tmp : appDataContainer.getListAdmins()){
+            if(login.equals(tmp.getLogin()) && pass.equals(tmp.getPass())){
+                return tmp;
+            }
+        }
+        for(IPerson tmp : appDataContainer.getListClients()){
             if(login.equals(tmp.getLogin()) && pass.equals(tmp.getPass())){
                 return tmp;
             }
@@ -42,6 +48,4 @@ public class Login {
 
         return client;
     }
-
-
 }
