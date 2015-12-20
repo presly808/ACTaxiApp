@@ -3,6 +3,7 @@ package ua.artcode.view;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +13,8 @@ import java.awt.event.ActionListener;
 public class LoginFrame extends JFrame {
 
     private ITaxiController controller;
-    private JTextField loginField, passwordField;
+    private JTextField loginField;
+    private JPasswordField passwordField;
     private JButton loginButton;
     private JLabel label;
 
@@ -21,12 +23,26 @@ public class LoginFrame extends JFrame {
 
         controller = taxiController;
 
-        setSize(400, 300);
+        setSize(400, 200);
         init();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Taxi App");
         setResizable(false);
+        setInFrameCenter();
         setVisible(true);
+    }
+
+    private void setInFrameCenter() {
+
+        Toolkit tk = Toolkit.getDefaultToolkit();
+
+        Dimension dim = tk.getScreenSize();
+
+        int xPos = (dim.width / 2) - (this.getWidth() / 2);
+        int yPos = (dim.height / 2) - (this.getHeight() / 2);
+
+        setLocation(xPos, yPos);
+
     }
 
     private void init() {
@@ -38,9 +54,10 @@ public class LoginFrame extends JFrame {
         loginField.setToolTipText("Login");
         label = new JLabel("Login Form");
 
-        passwordField = new JTextField(30);
-        passwordField.setText("password");
+        passwordField = new JPasswordField(30);
         passwordField.setToolTipText("Password");
+        passwordField.setEchoChar('*');
+
 
         loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
