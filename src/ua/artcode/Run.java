@@ -1,7 +1,6 @@
 package ua.artcode;
 
-import ua.artcode.controller.AdminContollerFactory;
-import ua.artcode.controller.AdminController;
+import ua.artcode.controller.AdminControllerFactory;
 import ua.artcode.view.LoginFrame;
 
 /**
@@ -10,6 +9,6 @@ import ua.artcode.view.LoginFrame;
 public class Run {
 
     public static void main(String[] args) {
-        new LoginFrame(AdminContollerFactory.getAdminController());
+        new LoginFrame(AdminControllerFactory.getAdminController());
     }
 }

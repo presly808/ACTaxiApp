@@ -1,7 +1,11 @@
 package ua.artcode.model;
 
+import ua.artcode.controller.IPerson;
+
+import java.io.Serializable;
+
 // TODO OLEG replace id by simple type (long) in cotroller will be generation of id
-public class Admin {
+public class Admin implements IPerson, Serializable {
 
     private String login = "admin";
     private String pass = "admin";
