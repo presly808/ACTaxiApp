@@ -4,13 +4,14 @@ package ua.artcode.model;
  * Created by ivan on 20.12.15.
  */
 public class Driver {
-    private int id = 0;
+
+    private ID iDDriver = new ID();
     private String name;
     private Car car;
     private boolean status = false;
 
     public Driver(String name, Car car) {
-        this.id = id++;
+
         this.name = name;
         this.car = car;
 
@@ -26,6 +27,10 @@ public class Driver {
 
     public boolean isStatus() {
         return status;
+    }
+
+    public long getiDDriver() {
+        return iDDriver.getID();
     }
 
     public boolean takeTicket(){
