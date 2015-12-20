@@ -5,15 +5,16 @@ package ua.artcode.model;
  */
 public class Driver {
 
-    private ID iDDriver = new ID();
+    private long iDDriver;
     private String name;
     private Car car;
     private boolean status = false;
 
-    public Driver(String name, Car car) {
+    public Driver(String name, Car car, long iDDriver) {
 
         this.name = name;
         this.car = car;
+        this.iDDriver = iDDriver;
 
     }
 
@@ -30,7 +31,7 @@ public class Driver {
     }
 
     public long getiDDriver() {
-        return iDDriver.getID();
+        return iDDriver;
     }
 
     public boolean takeTicket(){

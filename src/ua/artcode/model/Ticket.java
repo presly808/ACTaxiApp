@@ -7,8 +7,8 @@ import java.util.Date;
  */
 public class Ticket {
 
-    private int idDriver;
-    private int idClient;
+    private long idDriver;
+    private long idClient;
     private String fromLocation;
     private String toLocation;
     private double price;
@@ -16,10 +16,10 @@ public class Ticket {
     private Date arrivalTaxiTime;
     private Date requestTime;
     private Date arrivalDestinationTime;
-    private ID iDTicket = new ID();
+    private long iDTicket;
 
-    public Ticket(int idDriver, int idClient, String fromLocation, String toLocation,
-                  double price, TicketStatus status, Date arrivalTaxiTime, Date requestTime, Date arrivalDestinationTime) {
+    public Ticket(long idDriver, long idClient, String fromLocation, String toLocation,
+                  double price, TicketStatus status, Date arrivalTaxiTime, Date requestTime, Date arrivalDestinationTime, long iDTicket) {
 
         this.idDriver = idDriver;
         this.idClient = idClient;
@@ -30,14 +30,15 @@ public class Ticket {
         this.arrivalTaxiTime = arrivalTaxiTime;
         this.requestTime = requestTime;
         this.arrivalDestinationTime = arrivalDestinationTime;
+        this.iDTicket = iDTicket;
 
     }
 
-    public int getIdDriver() {
+    public long getIdDriver() {
         return idDriver;
     }
 
-    public int getIdClient() {
+    public long getIdClient() {
         return idClient;
     }
 
@@ -99,6 +100,6 @@ public class Ticket {
     }
 
     public long getiDTicket() {
-        return iDTicket.getID();
+        return iDTicket;
     }
 }

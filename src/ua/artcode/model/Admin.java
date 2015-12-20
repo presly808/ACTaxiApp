@@ -5,11 +5,12 @@ public class Admin {
 
     private String login;
     private String pass;
-    private ID iDAdmin = new ID();
+    private long iDAdmin;
 
-    public Admin(String login, String pass) {
+    public Admin(String login, String pass, long iD) {
         this.login = login;
         this.pass = pass;
+        this.iDAdmin = iD;
     }
 
     public String getLogin() {
@@ -17,6 +18,6 @@ public class Admin {
     }
 
     public long getID() {
-        return iDAdmin.getID();
+        return iDAdmin;
     }
 }
