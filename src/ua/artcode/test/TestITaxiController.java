@@ -17,7 +17,7 @@ public class TestITaxiController {
 
  @Test
  public void testLogin() throws Exception{
-  Client client = new Client("Login", 333333, "Home", 300, "12345");
+  Client client = new Client("Login", 333333, "Home", 300, "12345", );
   assertTrue(true);
 
  }
@@ -54,6 +54,6 @@ public class TestITaxiController {
  public void testGetClientById(ITaxiController iTaxiController) throws Exception {
   List<Ticket> ticketsFromController = iTaxiController.getTickets();
 
-  ticketsFromController.get()
+  ticketsFromController.get(1);
  }
 }
