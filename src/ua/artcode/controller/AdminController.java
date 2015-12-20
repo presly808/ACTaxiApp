@@ -3,6 +3,7 @@ package ua.artcode.controller;
 import ua.artcode.exception.AdminControllerHasAlreadyCreated;
 import ua.artcode.model.*;
 import ua.artcode.taxiAppLoader.TaxiAppLoader;
+import ua.artcode.taxiAppLoader.TaxiAppSave;
 
 import java.io.Serializable;
 import java.util.List;
@@ -15,18 +16,26 @@ public class AdminController implements ITaxiController {
     private static final AdminController INSTANCE = new AdminController(TaxiAppLoader.load("nameFile"));
     AppDataContainer appDataContainer;
 
-    private AdminController(){
-        appDataContainer = new AppDataContainer();
-    }
-
     private AdminController(AppDataContainer appDataContainer){
         this.appDataContainer = appDataContainer;
     }
 
     public static AdminController getAdminController() {
-
-
         return INSTANCE;
+    }
+
+    public void addClient(){
+
+        Client client = new Client("name", 123, "location", 123, "pass", new ID().getID());
+        appDataContainer.addClientToData(client);
+        TaxiAppSave.save("file", appDataContainer);
+    }
+
+    public void addDriver(){
+
+        Driver driver = new Driver("name", new Car(), new ID().getID());
+        appDataContainer.addDriverToData(driver);
+        TaxiAppSave.save("file", appDataContainer);
     }
 
     @Override

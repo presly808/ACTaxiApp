@@ -28,6 +28,18 @@ public class AppDataContainer implements Serializable {
 
     }
 
+    public void addClientToData(Client client){
+
+        this.clients.add(client);
+
+    }
+
+    public void addDriverToData(Driver driver){
+
+        this.driver.add(driver);
+
+    }
+
     public Admin login(String login, String name){
         return new Admin(login, name, new ID().getID());
     }
