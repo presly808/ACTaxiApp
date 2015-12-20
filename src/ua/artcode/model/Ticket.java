@@ -7,7 +7,7 @@ import java.util.Date;
  */
 public class Ticket {
 
-    private  static int id;
+    private static int id;
     private int idDriver;
     private int idClient;
     private String fromLocation;
@@ -30,32 +30,21 @@ public class Ticket {
         this.arrivalTaxiTime = arrivalTaxiTime;
         this.requestTime = requestTime;
         this.arrivalDestinationTime = arrivalDestinationTime;
-        this.id ++;
+        this.id++;
     }
 
     public static int getId() {
         return id;
     }
 
-    public static void setId(int id) {
-        Ticket.id = id;
-    }
-
     public int getIdDriver() {
         return idDriver;
-    }
-
-    public void setIdDriver(int idDriver) {
-        this.idDriver = idDriver;
     }
 
     public int getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(int idClient) {
-        this.idClient = idClient;
-    }
 
     public String getFromLocation() {
         return fromLocation;
