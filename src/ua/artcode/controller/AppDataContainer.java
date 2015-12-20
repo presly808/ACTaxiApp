@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by dexter on 20.12.15.
  */
-public class AppDataContainer implements Serializable {
+public class AppDataContainer implements Serializable, IAppDataContainer {
 
     private List<Ticket> tickets = new ArrayList<>();
     private List<Driver> driver = new ArrayList<>();
@@ -40,10 +40,14 @@ public class AppDataContainer implements Serializable {
 
     }
 
-    public Admin login(String login, String name){
-        return new Admin(login, name, new ID().getID());
+    public List getListClients(){
+        return clients;
     }
 
+    @Override
+    public List getListDrivers() {
+        return driver;
+    }
 
 
 }

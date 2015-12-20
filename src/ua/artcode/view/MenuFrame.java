@@ -14,7 +14,8 @@ public class MenuFrame extends JFrame {
     private JButton showTicketsButton;
     private JButton showDriversButton;
     private JLabel label;
-
+    private JButton addDriverButton;
+    private JButton addClientButton;
 
     public MenuFrame(ITaxiController menuController) {
         this.menuController = menuController;
@@ -22,6 +23,7 @@ public class MenuFrame extends JFrame {
         setTitle("Taxi App");
         setSize(200, 100);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         setVisible(true);
         pack();
     }
@@ -49,8 +51,21 @@ public class MenuFrame extends JFrame {
             }
         });
 
+        addClientButton = new JButton("Add Client");
+        addDriverButton = new JButton("Add Driver");
+
+        addClientButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+
         panel.add(showTicketsButton);
         panel.add(showDriversButton);
+        panel.add(addClientButton);
+        panel.add(addDriverButton);
         getContentPane().add(panel);
     }
 }

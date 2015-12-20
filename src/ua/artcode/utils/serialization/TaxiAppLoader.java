@@ -1,4 +1,4 @@
-package ua.artcode.taxiAppLoader;
+package ua.artcode.utils.serialization;
 
 import ua.artcode.controller.AppDataContainer;
 
@@ -12,6 +12,7 @@ public class TaxiAppLoader {
 
     public static AppDataContainer load(String nameFile){
 
+        //TODO invalid closing stream (finally or try with resources)
         try {
 
             ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nameFile));

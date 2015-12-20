@@ -1,9 +1,8 @@
 package ua.artcode.controller;
 
-import ua.artcode.exception.AdminControllerHasAlreadyCreated;
-import ua.artcode.model.Client;
-import ua.artcode.model.Driver;
-import ua.artcode.model.Ticket;
+import ua.artcode.model.*;
+import ua.artcode.utils.serialization.TaxiAppLoader;
+import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.List;
 
@@ -12,32 +11,48 @@ import java.util.List;
  */
 public class AdminController implements ITaxiController {
 
-    private static boolean isCreate;
+    private static final AdminController INSTANCE = new AdminController(TaxiAppLoader.load("nameFile"));
+    AppDataContainer appDataContainer;
 
-    private static final AdminController INSTANCE = new AdminController();
+    private AdminController(AppDataContainer appDataContainer){
+        this.appDataContainer = appDataContainer;
+    }
 
-    private AdminController(){}
-
-    // todo lazy initialization using singleton pattern, load data from file see trello task
     public static AdminController getAdminController() {
         return INSTANCE;
     }
 
+    public Client addClient(String name, int phone, String location, String pass, long cash){
+
+        Client client = new Client(name, phone, location, cash, pass, new ID().getID());
+        appDataContainer.addClientToData(client);
+        TaxiAppSave.save("file", appDataContainer);
+
+        return client;
+    }
+
+    public Driver addDriver(){
+
+        Driver driver = new Driver(name, car, new ID().getID());
+        appDataContainer.addDriverToData(driver);
+        TaxiAppSave.save("file", appDataContainer);
+
+        return driver;
+    }
+
     @Override
-    public Client login(String login, String pass) {
-
-
-        return null;
+    public Admin login(String login, String pass) {
+        return new Admin(login,pass,new ID().getID());
     }
 
     @Override
     public List<Client> getAllClients() {
-        return null;
+        return appDataContainer.getListClients();
     }
 
     @Override
     public List<Driver> getAllDrivers() {
-        return null;
+        return appDataContainer.getListDrivers();
     }
 
     @Override

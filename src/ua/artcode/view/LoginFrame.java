@@ -29,6 +29,7 @@ public class Login extends JFrame {
         init();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Taxi App");
+        setResizable(false);
         setVisible(true);
     }
 
