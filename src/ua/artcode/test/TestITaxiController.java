@@ -17,15 +17,15 @@ public class TestITaxiController {
 
  @Test
  public void testLogin() throws Exception{
-  Client client = new Client("Login", 333333, "Home", 300, "12345", );
+  Client client = new Client("Login", 333333, "Home", 300, "12345", 34);
   assertTrue(true);
 
  }
 
  @Test
  public void testGetAllClients(ITaxiController iTaxiController) throws Exception {
-  Client client1 = new Client("Login1", 333333, "Home", 300, "12345");
-  Client client2 = new Client("Login2", 333332, "Home", 300, "12345");
+  Client client1 = new Client("Login1", 333333, "Home", 300, "12345", 23);
+  Client client2 = new Client("Login2", 333332, "Home", 300, "12345", 23);
 
   List<Client> clients = new ArrayList<>();
   clients.add(client1);
