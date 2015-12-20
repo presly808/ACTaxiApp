@@ -1,29 +1,21 @@
 package ua.artcode.model;
 
-import ua.artcode.controller.IPerson;
-
-import java.io.Serializable;
-
-/**
- * Created by dexter on 20.12.15.
- */
-public class Client implements IPerson, Serializable {
+public class Client {
 
     private String login;
     private String pass;
     private int phoneNumber;
     private String location;
     private long cash;
-    private long iDClient;
+    private ID iDClient = new ID();
 
-    public Client(String login, int phoneNumber, String location, long cash, String pass, long iDClient) {
+    public Client(String login, int phoneNumber, String location, long cash, String pass) {
 
         this.login = login;
         this.phoneNumber = phoneNumber;
         this.location = location;
         this.cash = cash;
         this.pass = pass;
-        this.iDClient = iDClient;
 
     }
 
@@ -41,7 +33,7 @@ public class Client implements IPerson, Serializable {
     }
 
     public long getiD() {
-        return iDClient;
+        return iDClient.getID();
     }
 
     public String getLocation() {

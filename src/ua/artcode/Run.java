@@ -1,14 +1,11 @@
 package ua.artcode;
 
-import ua.artcode.controller.AdminControllerFactory;
-import ua.artcode.view.LoginFrame;
 
-/**
- * Created by serhii on 20.12.15.
- */
+import ua.artcode.view.MenuFrame;
+
 public class Run {
-
     public static void main(String[] args) {
-        new LoginFrame(AdminControllerFactory.getAdminController());
+        MenuFrame menuFrame = new MenuFrame(null);
+
     }
 }
