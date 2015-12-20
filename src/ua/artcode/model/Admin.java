@@ -4,12 +4,11 @@ package ua.artcode.model;
 public class Admin {
     private String login;
     private String pass;
-    private long ID = 0;
+    private ID iDAdmin = new ID();
 
     public Admin(String login, String pass) {
         this.login = login;
         this.pass = pass;
-        this.ID++;
     }
 
     public String getLogin() {
@@ -17,6 +16,6 @@ public class Admin {
     }
 
     public long getID() {
-        return ID;
+        return iDAdmin.getID();
     }
 }
