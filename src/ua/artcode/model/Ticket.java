@@ -1,11 +1,12 @@
 package ua.artcode.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by sensej on 20.12.15.
  */
-public class Ticket {
+public class Ticket implements Serializable {
 
     private long idDriver;
     private long idClient;

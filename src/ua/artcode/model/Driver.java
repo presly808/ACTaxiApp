@@ -1,9 +1,11 @@
 package ua.artcode.model;
 
+import java.io.Serializable;
+
 /**
  * Created by ivan on 20.12.15.
  */
-public class Driver {
+public class Driver implements Serializable {
 
     private long iDDriver;
     private String name;

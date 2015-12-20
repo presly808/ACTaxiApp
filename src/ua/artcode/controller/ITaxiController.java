@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface ITaxiController {
 
-    Client login(String login, String pass);
+    IPerson login(String login, String pass);
 
     List<Client> getAllClients();
 
