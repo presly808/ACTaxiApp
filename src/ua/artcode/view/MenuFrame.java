@@ -17,22 +17,23 @@ public class MenuFrame extends JFrame {
         setSize(400 , 400);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
-        addButtons();
+        JPanel menuPanel = new JPanel();
+        addButtons(menuPanel);
 
     }
 
-    private void addButtons(){
+    private void addButtons(JPanel menuPanel){
+
         JButton buttonShowTikets = new JButton("Show all Tikets");
         AcctionListenerForButtonShowTikets acctionListenerForButtonShowTikets = new AcctionListenerForButtonShowTikets();
         buttonShowTikets.addActionListener(acctionListenerForButtonShowTikets);
-        setLayout(new GridLayout(2 ,1 ));
-        getContentPane().add(buttonShowTikets);
+        menuPanel.add(buttonShowTikets);
+
 
         JButton buttonShowDrivers = new JButton("Show all Tikets");
         AcctionListenerForButtonShowDrivers acctionListenerForButtonShowDrivers = new AcctionListenerForButtonShowDrivers();
         buttonShowDrivers.addActionListener(acctionListenerForButtonShowTikets);
-        setLayout(new GridLayout(4 ,2 ));
-        getContentPane().add(buttonShowTikets);
+        menuPanel.add(buttonShowDrivers);
     }
 
 
