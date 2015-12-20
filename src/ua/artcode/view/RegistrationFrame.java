@@ -1,6 +1,7 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.Login;
+import ua.artcode.model.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,48 +14,36 @@ import java.awt.event.ActionListener;
 public class RegistrationFrame extends JFrame {
 
 
-    //Client addClient(String name, int phone, String location, String pass, long cash);
     private JTextField loginField, phoneField, locationField;
     private JPasswordField passwordField;
     private JButton cancelButton, createAccountButton;
     private JPanel southButtonsPanel;
     private JPanel panel;
+    private JLabel registrationLabel;
 
 
     public RegistrationFrame() {
 
 
-        setSize(400, 200);
+        setSize(400, 300);
         init();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Taxi App");
         setResizable(false);
-        setInFrameCenter();
         setVisible(true);
 
     }
 
-    private void setInFrameCenter() {
-
-        Toolkit tk = Toolkit.getDefaultToolkit();
-
-        Dimension dim = tk.getScreenSize();
-
-        int xPos = (dim.width / 2) - (this.getWidth() / 2);
-        int yPos = (dim.height / 2) - (this.getHeight() / 2);
-
-        setLocation(xPos, yPos);
-
-    }
 
     private void init() {
-
+        registrationLabel = new JLabel("Registration form");
         panel = new JPanel();
         southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
         loginField = new JTextField(30);
         loginField.setText("login");
         loginField.setToolTipText("Login");
+
 
         phoneField = new JTextField(30);
         phoneField.setText("Phone number");
@@ -72,9 +61,14 @@ public class RegistrationFrame extends JFrame {
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+                Client client = Login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
                         locationField.getText(), passwordField.getText());
-
+                if (client != null) {
+                    JOptionPane.showMessageDialog(RegistrationFrame.this,
+                            String.format("%s account has been succcessfully created", loginField.getText()),
+                            "Successful registration",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         });
 
@@ -90,6 +84,8 @@ public class RegistrationFrame extends JFrame {
         getContentPane().add(southButtonsPanel, BorderLayout.SOUTH);
 
         loginField.requestFocus();
+
+        panel.add(registrationLabel);
         panel.add(loginField);
         panel.add(passwordField);
         panel.add(locationField);
@@ -98,6 +94,4 @@ public class RegistrationFrame extends JFrame {
         this.add(panel);
 
     }
-
-
 }
