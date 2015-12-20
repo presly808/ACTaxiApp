@@ -1,13 +1,11 @@
 package ua.artcode.model;
 
-import ua.artcode.controller.IPerson;
-
 import java.io.Serializable;
 
 /**
  * Created by dexter on 20.12.15.
  */
-public class Client implements IPerson, Serializable {
+public class Client implements Serializable, IPerson {
 
     private String login;
     private String pass;
@@ -15,6 +13,7 @@ public class Client implements IPerson, Serializable {
     private String location;
     private long cash;
     private long iDClient;
+    private String me = "client";
 
     public Client(String login, int phoneNumber, String location, long cash, String pass, long iDClient) {
 
@@ -66,5 +65,10 @@ public class Client implements IPerson, Serializable {
 
     public void setCash(long cash) {
         this.cash = cash;
+    }
+
+    @Override
+    public String whoAmI() {
+        return me;
     }
 }

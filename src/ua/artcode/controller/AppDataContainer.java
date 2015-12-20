@@ -40,13 +40,17 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
 
     }
 
-    public List getListClients(){
+    public List<Client> getListClients(){
         return clients;
     }
 
     @Override
-    public List getListDrivers() {
+    public List<Driver> getListDrivers() {
         return driver;
+    }
+
+    public List<Admin> getListAdmins() {
+        return admins;
     }
 
 

@@ -1,14 +1,13 @@
 package ua.artcode.model;
 
-import ua.artcode.controller.IPerson;
-
 import java.io.Serializable;
 
-public class Admin implements IPerson, Serializable {
+public class Admin implements Serializable, IPerson {
 
     private String login = "admin";
     private String pass = "admin";
     private long iDAdmin;
+    private String me = "admin";
 
     public Admin(String login, String pass, long iD) {
         this.login = login;
@@ -25,4 +24,9 @@ public class Admin implements IPerson, Serializable {
     }
 
     public String getPass() { return pass; }
+
+    @Override
+    public String whoAmI() {
+        return me;
+    }
 }
