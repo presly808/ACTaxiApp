@@ -3,7 +3,6 @@ package ua.artcode.utils.geolocation;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -19,9 +18,18 @@ import java.util.Scanner;
 public class GoogleMapsAPIImpl implements GoogleMapsAPI {
 
 
-    public static final String GET_FORMATTED_QUERY_TEMPLATE = "https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s&key=%s";
-    public static final String GET_UNFORMATTED_QUERY_TEMPLATE = "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s";
-    public static final String GOOGLE_API_KEY = "AIzaSyAw1tCKgkKOkkCaun42Em3kCf0R9Oo7tZY";
+
+    public static final String GET_FORMATTED_QUERY_TEMPLATE =
+            "https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s&key=%s";
+
+    public static final String GET_UNFORMATTED_QUERY_TEMPLATE =
+            "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s";
+
+    public static final String GET_DISTANCE_QUERY_TEMPLATE =
+            "https://maps.googleapis.com/maps/api/directions/json?origin=place_id:%s&destination=place_id:%s&key=%s";
+
+    public static final String GOOGLE_API_KEY =
+            "AIzaSyAw1tCKgkKOkkCaun42Em3kCf0R9Oo7tZY";
 
     @Override
     public Location findLocation(String unformatted) {
@@ -64,14 +72,16 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
 
 
         JSONObject geometry = (JSONObject) firstFound.get("geometry");
+        String placeId = firstFound.get("place_id").toString();
+
         JSONObject location = (JSONObject) geometry.get("location");
 
         String addressFormattedName = firstFound.get("formatted_address").toString();
-        String lat =  location.get("lat").toString();
+        String lat = location.get("lat").toString();
         String lng = location.get("lng").toString();
 
         return new Location(addressFormattedName,
-                                    Double.parseDouble(lat), Double.parseDouble(lng));
+                Double.parseDouble(lat), Double.parseDouble(lng), placeId);
     }
 
     private String sendGetRequest(String preparedQuery) throws IOException {
@@ -88,10 +98,10 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
 
     }
 
-    private String getStringContent(InputStream is) throws IOException{
+    private String getStringContent(InputStream is) throws IOException {
         Scanner sc = new Scanner(is);
         StringBuilder sb = new StringBuilder();
-        while(sc.hasNextLine()){
+        while (sc.hasNextLine()) {
             sb.append(sc.nextLine()).append("\n");
         }
 
@@ -100,6 +110,16 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
 
     @Override
     public double getDistance(Location pointA, Location pointB) {
+        final String formattedQuery = String.format(GET_DISTANCE_QUERY_TEMPLATE,
+                pointA.getPlaceId(), pointB.getPlaceId(), GOOGLE_API_KEY);
+
+        try {
+            String body = sendGetRequest(formattedQuery);
+            System.out.println(body);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         return 0;
     }
 }

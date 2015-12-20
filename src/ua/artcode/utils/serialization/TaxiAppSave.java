@@ -12,21 +12,13 @@ public class TaxiAppSave {
 
     public static void save(String nameFile, AppDataContainer appDataContainer){
 
-        try {
-
-            FileOutputStream out = new FileOutputStream(nameFile);
-            ObjectOutputStream oout = new ObjectOutputStream(out);
+        try(FileOutputStream out = new FileOutputStream(nameFile);
+            ObjectOutputStream oout = new ObjectOutputStream(out)) {
 
             oout.writeObject(appDataContainer);
 
-            out.close();
-            oout.close();
-
-
         } catch (Exception ex) {
-
             ex.printStackTrace();
-
         }
     }
 }

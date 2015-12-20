@@ -17,5 +17,12 @@ public class TestGoogleApi {
         Assert.assertNotNull(location);
     }
 
+    @Test
+    public void findDistance(){
+        Location location1 = googleMapsAPI.findLocation("Україна", "Київ", "Бульва Лесі Українки", "5");
+        Location location2 = googleMapsAPI.findLocation("Україна", "Київ", "Старокиєвська", "10");
+        Assert.assertNotNull(googleMapsAPI.getDistance(location1,location2));
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.model.Admin;
 import ua.artcode.model.Client;
 import ua.artcode.model.Driver;
 
@@ -12,8 +13,8 @@ public interface IAppDataContainer {
 
     void addClientToData(Client client);
     void addDriverToData(Driver driver);
-    List getListClients();
-    List getListDrivers();
-
+    List<Client> getListClients();
+    List<Driver> getListDrivers();
+    List<Admin> getListAdmins();
 
 }

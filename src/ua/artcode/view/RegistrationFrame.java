@@ -1,27 +1,27 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.Login;
-import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 /**
- * Created by sensej on 19.12.15.
+ * Created by sensej on 20.12.15.
  */
-public class LoginFrame extends JFrame {
+public class RegistrationFrame extends JFrame {
 
-    private JTextField loginField;
+
+    //Client addClient(String name, int phone, String location, String pass, long cash);
+    private JTextField loginField, phoneField, locationField;
     private JPasswordField passwordField;
-    private JButton loginButton, registerButton;
-    private JLabel label;
+    private JButton cancelButton, createAccountButton;
     private JPanel southButtonsPanel;
     private JPanel panel;
 
-    public LoginFrame() {
+
+    public RegistrationFrame() {
 
 
         setSize(400, 200);
@@ -31,6 +31,7 @@ public class LoginFrame extends JFrame {
         setResizable(false);
         setInFrameCenter();
         setVisible(true);
+
     }
 
     private void setInFrameCenter() {
@@ -54,43 +55,46 @@ public class LoginFrame extends JFrame {
         loginField = new JTextField(30);
         loginField.setText("login");
         loginField.setToolTipText("Login");
-        label = new JLabel("Login Form");
+
+        phoneField = new JTextField(30);
+        phoneField.setText("Phone number");
+        phoneField.setToolTipText("Phone number");
+
+        locationField = new JTextField(30);
+        locationField.setText("Your location");
+        locationField.setToolTipText("Location");
 
         passwordField = new JPasswordField(30);
         passwordField.setToolTipText("Password");
-        passwordField.setEchoChar('*');
 
 
-        registerButton = new JButton("Sign Up");
-        registerButton.addActionListener(new ActionListener() {
+        createAccountButton = new JButton("Create Account");
+        createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new RegistrationFrame();
+                Login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+                        locationField.getText(), passwordField.getText());
+
             }
         });
 
-        loginButton = new JButton("Login");
-        loginButton.addActionListener(new ActionListener() {
+        cancelButton = new JButton("Cancel");
+        cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ITaxiController controller = Login.login(loginField.getText(), Arrays.toString(passwordField.getPassword()));
-                if (controller != null) {
-                    new MenuFrame(controller);
-                    LoginFrame.this.dispose();
-                } else
-                    JOptionPane.showMessageDialog(LoginFrame.this,
-                            "Wrong username/password",
-                            "Login error",
-                            JOptionPane.ERROR_MESSAGE);
+                RegistrationFrame.this.dispose();
             }
         });
-        southButtonsPanel.add(registerButton);
-        southButtonsPanel.add(loginButton);
+        southButtonsPanel.add(createAccountButton);
+        southButtonsPanel.add(cancelButton);
         getContentPane().add(southButtonsPanel, BorderLayout.SOUTH);
+
         loginField.requestFocus();
-        panel.add(label);
         panel.add(loginField);
         panel.add(passwordField);
+        panel.add(locationField);
+        panel.add(phoneField);
+
         this.add(panel);
 
     }

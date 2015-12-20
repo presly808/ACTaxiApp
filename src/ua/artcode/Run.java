@@ -1,10 +1,13 @@
 package ua.artcode;
 
+import ua.artcode.view.LoginFrame;
 
-import ua.artcode.view.Login;
-import ua.artcode.view.MenuFrame;
-
+/**
+ * Created by serhii on 20.12.15.
+ */
 public class Run {
+
     public static void main(String[] args) {
+       new LoginFrame();
     }
 }

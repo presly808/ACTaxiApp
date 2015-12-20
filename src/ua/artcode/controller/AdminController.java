@@ -11,38 +11,33 @@ import java.util.List;
  */
 public class AdminController implements ITaxiController {
 
-    private static final AdminController INSTANCE = new AdminController(TaxiAppLoader.load("nameFile"));
     AppDataContainer appDataContainer;
+    String me = "admin";
 
     private AdminController(AppDataContainer appDataContainer){
         this.appDataContainer = appDataContainer;
     }
 
-    public static AdminController getAdminController() {
-        return INSTANCE;
+    public static AdminController getAdminController(AppDataContainer appDataContainer) {
+        return new AdminController(appDataContainer);
     }
 
-    public Client addClient(String name, int phone, String location, String pass, long cash){
+    public Client addClient(String name, int phone, String location, String pass ){
 
-        Client client = new Client(name, phone, location, cash, pass, new ID().getID());
+        Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
         TaxiAppSave.save("file", appDataContainer);
 
         return client;
     }
 
-    public Driver addDriver(){
+    public Driver addDriver(String name, Car car){
 
-        Driver driver = new Driver(name, car, new ID().getID());
+        Driver driver = new Driver(name, car, ID.genId());
         appDataContainer.addDriverToData(driver);
         TaxiAppSave.save("file", appDataContainer);
 
         return driver;
-    }
-
-    @Override
-    public Admin login(String login, String pass) {
-        return new Admin(login,pass,new ID().getID());
     }
 
     @Override
@@ -83,5 +78,9 @@ public class AdminController implements ITaxiController {
     @Override
     public Ticket findTicketByClientId(long id) {
         return null;
+    }
+
+    public String whoAmI(){
+        return me;
     }
 }

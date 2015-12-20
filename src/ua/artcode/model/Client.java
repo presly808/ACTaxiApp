@@ -1,22 +1,31 @@
 package ua.artcode.model;
 
-public class Client {
+import java.io.Serializable;
+
+/**
+ * Created by dexter on 20.12.15.
+ */
+public class Client implements IPerson, Serializable {
 
     private String login;
     private String pass;
     private int phoneNumber;
     private String location;
-    private long cash;
-    private ID iDClient = new ID();
+    private long iDClient;
 
-    public Client(String login, int phoneNumber, String location, long cash, String pass) {
+    public Client(String login, int phoneNumber, String location , String pass, long iDClient) {
 
         this.login = login;
         this.phoneNumber = phoneNumber;
         this.location = location;
-        this.cash = cash;
         this.pass = pass;
+        this.iDClient = iDClient;
 
+    }
+
+    @Override
+    public String whoAmI() {
+        return null;
     }
 
     public String getLogin() {
@@ -33,15 +42,11 @@ public class Client {
     }
 
     public long getiD() {
-        return iDClient.getID();
+        return iDClient;
     }
 
     public String getLocation() {
         return location;
-    }
-
-    public long getCash() {
-        return cash;
     }
 
     public void setLogin(String login) {
@@ -56,7 +61,4 @@ public class Client {
         this.location = location;
     }
 
-    public void setCash(long cash) {
-        this.cash = cash;
-    }
 }
