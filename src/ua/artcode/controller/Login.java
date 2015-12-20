@@ -45,6 +45,7 @@ public class Login {
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
         TaxiAppSave.save("file", appDataContainer);
+        appDataContainer = TaxiAppLoader.load("file");
 
         return client;
     }
