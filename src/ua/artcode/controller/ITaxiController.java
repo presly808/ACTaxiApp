@@ -12,8 +12,6 @@ import java.util.List;
  */
 public interface ITaxiController {
 
-    IPerson login(String login, String pass);
-
     Client addClient(String name, int phone, String location, String pass, long cash);
 
     Driver addDriver(String name, Car car);
@@ -33,5 +31,7 @@ public interface ITaxiController {
     boolean setDriverToTicket(long clientId, long driverId);
 
     Ticket findTicketByClientId(long id);
+
+    public String whoAmI();
 
 }

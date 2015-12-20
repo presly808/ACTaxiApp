@@ -12,7 +12,9 @@ import java.util.List;
 public class AdminController implements ITaxiController {
 
     private static final AdminController INSTANCE = new AdminController(TaxiAppLoader.load("file"));
+
     AppDataContainer appDataContainer;
+    String me = "admin";
 
     private AdminController(AppDataContainer appDataContainer){
         this.appDataContainer = appDataContainer;
@@ -38,12 +40,6 @@ public class AdminController implements ITaxiController {
         TaxiAppSave.save("file", appDataContainer);
 
         return driver;
-    }
-
-    @Override
-    public Admin login(String login, String pass) {
-
-        return new Admin(login, pass, ID.genId());
     }
 
     @Override
@@ -84,5 +80,9 @@ public class AdminController implements ITaxiController {
     @Override
     public Ticket findTicketByClientId(long id) {
         return null;
+    }
+
+    public String whoAmI(){
+        return me;
     }
 }

@@ -22,7 +22,4 @@ public class ClientController {
         return pass;
     }
 
-//    public Ticket makeRequest(){
-//
-//    }
 }
