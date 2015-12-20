@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ITaxiController {
 
-    Client addClient(String name, int phone, String location, String pass, long cash);
+    Client addClient(String name, int phone, String location, String pass );
 
     Driver addDriver(String name, Car car);
 
