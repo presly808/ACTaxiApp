@@ -18,7 +18,7 @@ public interface ITaxiController {
     Client getClient();
     Driver getDriver();
     Ticket getTicket();
-    boolean SetDriverToTicket(Ticket ticket, Driver driver);
-    Ticket FindTicketbyID(int iDClient);
+    boolean setDriverToTicket(Ticket ticket, Driver driver);
+    Ticket findTicketById(int iDClient);
 
 }
