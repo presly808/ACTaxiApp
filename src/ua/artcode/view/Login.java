@@ -55,7 +55,7 @@ public class Login extends JFrame {
                     new MenuFrame(controller);
                 } else
                     JOptionPane.showMessageDialog(Login.this,
-                            "Wrong user's credentials.",
+                            "Wrong username/password",
                             "Login error",
                             JOptionPane.ERROR_MESSAGE);
             }
