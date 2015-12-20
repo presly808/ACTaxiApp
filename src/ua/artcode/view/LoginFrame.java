@@ -1,27 +1,27 @@
 package ua.artcode.view;
 
+import ua.artcode.controller.AdminControllerFactory;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * Created by sensej on 19.12.15.
  */
 public class LoginFrame extends JFrame {
 
-    private ITaxiController controller;
     private JTextField loginField;
     private JPasswordField passwordField;
-    private JButton loginButton;
+    private JButton loginButton, registerButton;
     private JLabel label;
 
 
-    public LoginFrame(ITaxiController taxiController) {
+    public LoginFrame( ) {
 
-        controller = taxiController;
 
         setSize(400, 200);
         init();
@@ -49,6 +49,12 @@ public class LoginFrame extends JFrame {
 
         JPanel panel = new JPanel();
 
+
+        JPanel southButtonsPanel = new JPanel(new GridLayout(1, 2));
+        southButtonsPanel.add(registerButton);
+        southButtonsPanel.add(loginButton);
+        getContentPane().add(southButtonsPanel, BorderLayout.NORTH);
+
         loginField = new JTextField(30);
         loginField.setText("login");
         loginField.setToolTipText("Login");
@@ -59,11 +65,20 @@ public class LoginFrame extends JFrame {
         passwordField.setEchoChar('*');
 
 
+        registerButton = new JButton("Sign Up");
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
         loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (controller.login(loginField.getText(), passwordField.getText()) != null) {
+                ITaxiController controller = AdminControllerFactory.login(loginField.getText(), Arrays.toString(passwordField.getPassword()));
+                if (controller != null) {
                     new MenuFrame(controller);
                     LoginFrame.this.dispose();
                 } else
@@ -73,6 +88,7 @@ public class LoginFrame extends JFrame {
                             JOptionPane.ERROR_MESSAGE);
             }
         });
+
         loginField.requestFocus();
         panel.add(label);
         panel.add(loginField);
