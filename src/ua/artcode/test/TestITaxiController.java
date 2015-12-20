@@ -54,6 +54,6 @@ public class TestITaxiController {
  public void testGetClientById(ITaxiController iTaxiController) throws Exception {
   List<Ticket> ticketsFromController = iTaxiController.getTickets();
 
-  ticketsFromController.get()
+  ticketsFromController.get(1);
  }
 }
