@@ -9,16 +9,12 @@ import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame {
 
-    private static ITaxiController menuController;
+    private  ITaxiController menuController;
     private JPanel panel;
     private JButton showTicketsButton;
     private JButton showDriversButton;
     private JLabel label;
 
-
-    public static void main(String[] args) {
-        new MenuFrame(menuController);
-    }
 
     public MenuFrame(ITaxiController menuController) {
         this.menuController = menuController;
