@@ -5,5 +5,6 @@ package ua.artcode.model;
  */
 public class Car {
     private String car;
-
+    private int numb;
+    private String color;
 }
