@@ -1,22 +1,17 @@
 package ua.artcode.model;
 
-import java.io.Serializable;
 
-/**
- * Created by ivan on 20.12.15.
- */
-public class Driver implements Serializable {
+public class Driver {
 
-    private long iDDriver;
+    private ID iDDriver = new ID();
     private String name;
     private Car car;
     private boolean status = false;
 
-    public Driver(String name, Car car, long iDDriver) {
+    public Driver(String name, Car car) {
 
         this.name = name;
         this.car = car;
-        this.iDDriver = iDDriver;
 
     }
 
@@ -33,7 +28,7 @@ public class Driver implements Serializable {
     }
 
     public long getiDDriver() {
-        return iDDriver;
+        return iDDriver.getID();
     }
 
     public boolean takeTicket(){
