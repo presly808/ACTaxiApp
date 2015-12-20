@@ -2,7 +2,7 @@ package ua.artcode.test;
 
 import org.junit.Before;
 import org.junit.Test;
-import ua.artcode.controller.AdminContollerFactory;
+import ua.artcode.controller.*;
 import ua.artcode.controller.ITaxiController;
 import ua.artcode.model.Car;
 import ua.artcode.model.Client;
@@ -23,7 +23,7 @@ public class TestITaxiController {
 
  @Before
  public void setUp() throws Exception {
-  controller = AdminContollerFactory.getAdminController();
+  controller = AdminControllerFactory.getAdminController();
   controller.getAllClients().add(new Client("Login1", 111111, "Home1", 100, "12345", 1));
   controller.getAllClients().add(new Client("Login2", 222222, "Home2", 200, "12345", 2));
   controller.getAllClients().add(new Client("Login3", 333333, "Home3", 300, "12345", 3));
