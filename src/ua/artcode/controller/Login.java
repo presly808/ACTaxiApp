@@ -9,9 +9,9 @@ import ua.artcode.utils.serialization.TaxiAppSave;
 
 public class Login {
 
-    private static AppDataContainer appDataContainer = TaxiAppLoader.load("file");
+    private AppDataContainer appDataContainer = TaxiAppLoader.load("file");
 
-    public static ITaxiController login(String login, String pass) {
+    public ITaxiController login(String login, String pass) {
 
         IPerson person = searchIPerson(login, pass);
         if(person == null){
@@ -24,7 +24,7 @@ public class Login {
                 ControllerFactory.getClientController();
     }
 
-    private static IPerson searchIPerson(String login, String pass){
+    private IPerson searchIPerson(String login, String pass){
 
         for(IPerson tmp : appDataContainer.getListAdmins()){
             if(login.equals(tmp.getLogin()) && pass.equals(tmp.getPass())){
@@ -40,7 +40,7 @@ public class Login {
         return null;
     }
 
-    public static Client addClient(String name, int phone, String location, String pass ){
+    public Client addClient(String name, int phone, String location, String pass ){
 
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
