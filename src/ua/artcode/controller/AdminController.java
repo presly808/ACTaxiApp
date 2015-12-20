@@ -27,7 +27,6 @@ public class AdminController implements ITaxiController {
     public Client login(String login, String pass) {
 
 
-
         return null;
     }
 
