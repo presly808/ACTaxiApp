@@ -53,6 +53,6 @@ public class TestITaxiController {
  public void testGetClientById() throws Exception {
   List<Ticket> ticketsFromController = controller.getTickets();
 
-  ticketsFromController.get()
+  ticketsFromController.get(1);
  }
 }

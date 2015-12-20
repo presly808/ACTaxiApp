@@ -1,11 +1,10 @@
 package ua.artcode.controller;
 
 import ua.artcode.exception.AdminControllerHasAlreadyCreated;
-import ua.artcode.model.*;
-import ua.artcode.taxiAppLoader.TaxiAppLoader;
-import ua.artcode.taxiAppLoader.TaxiAppSave;
+import ua.artcode.model.Client;
+import ua.artcode.model.Driver;
+import ua.artcode.model.Ticket;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -13,34 +12,22 @@ import java.util.List;
  */
 public class AdminController implements ITaxiController {
 
-    private static final AdminController INSTANCE = new AdminController(TaxiAppLoader.load("nameFile"));
-    AppDataContainer appDataContainer;
+    private static boolean isCreate;
 
-    private AdminController(AppDataContainer appDataContainer){
-        this.appDataContainer = appDataContainer;
-    }
+    private static final AdminController INSTANCE = new AdminController();
 
+    private AdminController(){}
+
+    // todo lazy initialization using singleton pattern, load data from file see trello task
     public static AdminController getAdminController() {
         return INSTANCE;
     }
 
-    public void addClient(){
-
-        Client client = new Client("name", 123, "location", 123, "pass", new ID().getID());
-        appDataContainer.addClientToData(client);
-        TaxiAppSave.save("file", appDataContainer);
-    }
-
-    public void addDriver(){
-
-        Driver driver = new Driver("name", new Car(), new ID().getID());
-        appDataContainer.addDriverToData(driver);
-        TaxiAppSave.save("file", appDataContainer);
-    }
-
     @Override
-    public Admin login(String login, String pass) {
-        return new Admin(login,pass,new ID().getID());
+    public Client login(String login, String pass) {
+
+
+        return null;
     }
 
     @Override
