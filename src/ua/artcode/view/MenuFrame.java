@@ -1,6 +1,7 @@
 package ua.artcode.view;
 
 
+import ua.artcode.controller.AdminController;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
@@ -20,6 +21,7 @@ public class MenuFrame extends JFrame {
     public MenuFrame(ITaxiController menuController) {
         this.menuController = menuController;
         init();
+        hideButtonForUser();
         setTitle("Taxi App");
         setSize(200, 100);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -32,12 +34,14 @@ public class MenuFrame extends JFrame {
 
         panel = new JPanel();
         label = new JLabel("ADMIN PANEL");
+
+
         showTicketsButton = new JButton("Show tickets");
         showTicketsButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new TicketsFrame(menuController);
+                new TicketsFrame((AdminController)menuController);
                 MenuFrame.this.dispose();
             }
         });
@@ -69,5 +73,13 @@ public class MenuFrame extends JFrame {
         panel.add(addClientButton);
         panel.add(addDriverButton);
         getContentPane().add(panel);
+    }
+
+    void hideButtonForUser() {
+        if (!menuController.whoAmI().equals("admin")) {
+            showTicketsButton.setVisible(false);
+            addClientButton.setVisible(false);
+            addDriverButton.setVisible(false);
+        }
     }
 }
