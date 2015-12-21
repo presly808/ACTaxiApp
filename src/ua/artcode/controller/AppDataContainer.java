@@ -1,6 +1,7 @@
 package ua.artcode.controller;
 
 import ua.artcode.model.*;
+import ua.artcode.utils.database_gen.DataBaseListsGen;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,7 +17,14 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     private List<Client> clients = new ArrayList<>();
     private List<Admin> admins = new ArrayList<>();
 
-    public AppDataContainer(){}
+    public AppDataContainer(){
+
+        tickets = DataBaseListsGen.ticketsListGen(100);
+        driver = DataBaseListsGen.driversListGen(100);
+        clients = DataBaseListsGen.clientsListGen(100);
+        admins = DataBaseListsGen.adminsListGen(100);
+
+    }
 
     public AppDataContainer(AppDataContainer appDataContainer){
 
