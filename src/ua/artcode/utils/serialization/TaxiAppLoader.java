@@ -22,7 +22,7 @@ public class TaxiAppLoader {
             ex.printStackTrace();
         }
 
-        return temp;
+        return new AppDataContainer();
     }
 }
 
