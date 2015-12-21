@@ -53,31 +53,72 @@ public class AdminController implements IAdminController {
 
     @Override
     public List<Ticket> getTickets() {
-        return null;
+        return appDataContainer.getListTickets();
     }
 
     @Override
+    // return null if didn't find client
     public Client getClientById(long id) {
+
+        for(Client tmp : appDataContainer.getListClients()){
+
+            if(id == tmp.getiD()){
+                return tmp;
+            }
+
+        }
+
         return null;
     }
 
     @Override
     public Driver getDriverById(long id) {
+
+        for(Driver tmp : appDataContainer.getListDrivers()){
+
+            if(id == tmp.getiDDriver()){
+                return tmp;
+            }
+
+        }
+
         return null;
     }
 
     @Override
     public Ticket getTicketById(long id) {
+
+        for(Ticket tmp : appDataContainer.getListTickets()){
+
+            if(id == tmp.getiDTicket()){
+                return tmp;
+            }
+
+        }
+
         return null;
     }
 
     @Override
     public boolean setDriverToTicket(long clientId, long driverId) {
+
+
+
+
         return false;
     }
 
     @Override
     public Ticket findTicketByClientId(long id) {
+
+        for(Ticket tmp : appDataContainer.getListTickets()){
+
+            if(id == tmp.getIdClient()){
+                return tmp;
+            }
+
+        }
+
         return null;
     }
 

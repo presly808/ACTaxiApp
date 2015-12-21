@@ -53,5 +53,9 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
         return admins;
     }
 
+    public List<Ticket> getListTickets(){
+        return tickets;
+    }
+
 
 }
