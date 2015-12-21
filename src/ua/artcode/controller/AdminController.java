@@ -1,7 +1,6 @@
 package ua.artcode.controller;
 
 import ua.artcode.model.*;
-import ua.artcode.utils.serialization.TaxiAppLoader;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.List;
@@ -11,8 +10,8 @@ import java.util.List;
  */
 public class AdminController implements IAdminController {
 
-    AppDataContainer appDataContainer;
-    String me = "admin";
+   private AppDataContainer appDataContainer;
+   private String me = "admin";
 
     private AdminController(AppDataContainer appDataContainer){
         this.appDataContainer = appDataContainer;

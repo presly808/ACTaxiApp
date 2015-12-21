@@ -4,18 +4,18 @@ package ua.artcode.view;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame {
-    private  ITaxiController menuController;
+    private ITaxiController menuController;
     private JPanel panel;
     private JButton showTicketsButton;
     private JButton showDriversButton;
     private JLabel label;
     private JButton addDriverButton;
     private JButton addClientButton;
+    private JLabel whoAmIlabel;
 
     public MenuFrame(ITaxiController menuController) {
         this.menuController = menuController;
@@ -57,11 +57,13 @@ public class MenuFrame extends JFrame {
         addClientButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //new AddClientFrame();
+                new AddClientFrame();
             }
         });
 
+        whoAmIlabel = new JLabel(String.format("Signed up as %s", menuController.whoAmI()));
 
+        panel.add(whoAmIlabel);
         panel.add(showTicketsButton);
         panel.add(showDriversButton);
         panel.add(addClientButton);
