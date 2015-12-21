@@ -1,6 +1,5 @@
 package ua.artcode.controller;
 
-import ua.artcode.exception.AdminControllerHasAlreadyCreated;
 import ua.artcode.model.*;
 
 import java.io.Serializable;
@@ -37,6 +36,12 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     public void addDriverToData(Driver driver){
 
         this.driver.add(driver);
+
+    }
+
+    public void addTicketToData(Ticket ticket){
+
+        this.tickets.add(ticket);
 
     }
 

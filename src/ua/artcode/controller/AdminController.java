@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
@@ -100,12 +101,14 @@ public class AdminController implements IAdminController {
     }
 
     @Override
+    // I think maybe this method have to return Ticket... not boolean? What do you think?
     public boolean setDriverToTicket(long clientId, long driverId) {
 
+        Ticket ticket = new Ticket(driverId, clientId, "Simirenko 7a", "Lomonosova 33/43",
+                100, null, null, null, null, ID.genId());
+        appDataContainer.addTicketToData(ticket);
 
-
-
-        return false;
+        return true;
     }
 
     @Override

@@ -17,7 +17,8 @@ public class Ticket {
     private long iDTicket;
 
     public Ticket(long idDriver, long idClient, String fromLocation, String toLocation,
-                  double price, TicketStatus status, Date arrivalTaxiTime, Date requestTime, Date arrivalDestinationTime, long iDTicket) {
+                  double price, TicketStatus status, Date arrivalTaxiTime, Date requestTime,
+                  Date arrivalDestinationTime, long iDTicket) {
 
         this.idDriver = idDriver;
         this.idClient = idClient;
