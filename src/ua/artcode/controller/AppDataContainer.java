@@ -27,24 +27,35 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
 
     }
 
+    @Override
     public void addClientToData(Client client){
 
         this.clients.add(client);
 
     }
 
+    @Override
     public void addDriverToData(Driver driver){
 
         this.driver.add(driver);
 
     }
 
+    @Override
     public void addTicketToData(Ticket ticket){
 
         this.tickets.add(ticket);
 
     }
 
+    @Override
+    public void addAdminToData(Admin admin){
+
+        this.admins.add(admin);
+
+    }
+
+    @Override
     public List<Client> getListClients(){
         return clients;
     }
@@ -54,10 +65,12 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
         return driver;
     }
 
+    @Override
     public List<Admin> getListAdmins() {
         return admins;
     }
 
+    @Override
     public List<Ticket> getListTickets(){
         return tickets;
     }

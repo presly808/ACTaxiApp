@@ -1,6 +1,7 @@
 package ua.artcode.controller;
 
 
+import ua.artcode.model.Admin;
 import ua.artcode.model.Client;
 import ua.artcode.model.ID;
 import ua.artcode.model.IPerson;
@@ -12,6 +13,10 @@ public class Login {
     private AppDataContainer appDataContainer = TaxiAppLoader.load("file");
 
     public ITaxiController login(String login, String pass) {
+
+        //create default admin... he wont be save in "file"..
+        // we need this for default enter to adminController
+        appDataContainer.addAdminToData(new Admin("admin", "admin", 1));
 
         IPerson person = searchIPerson(login, pass);
         if(person == null){
@@ -45,7 +50,6 @@ public class Login {
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
         TaxiAppSave.save("file", appDataContainer);
-        appDataContainer = TaxiAppLoader.load("file");
 
         return client;
     }

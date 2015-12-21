@@ -14,6 +14,8 @@ public interface IAppDataContainer {
 
     void addClientToData(Client client);
     void addDriverToData(Driver driver);
+    void addTicketToData(Ticket ticket);
+    void addAdminToData(Admin admin);
     List<Client> getListClients();
     List<Driver> getListDrivers();
     List<Admin> getListAdmins();
