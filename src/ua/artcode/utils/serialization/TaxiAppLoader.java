@@ -20,9 +20,10 @@ public class TaxiAppLoader {
 
         } catch (Exception ex) {
             ex.printStackTrace();
+            return new AppDataContainer();
         }
 
-        return new AppDataContainer();
+        return temp;
     }
 }
 

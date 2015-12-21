@@ -1,9 +1,11 @@
 package ua.artcode.model;
 
+import javax.sql.rowset.serial.SerialArray;
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Ticket {
+public class Ticket implements Serializable{
 
     private long idDriver;
     private long idClient;
