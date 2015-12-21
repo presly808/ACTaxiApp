@@ -12,9 +12,14 @@ public class Login {
 
     private AppDataContainer appDataContainer;
 
-    public ITaxiController login(String login, String pass) {
+    public Login(){
 
         appDataContainer = TaxiAppLoader.load("file");
+
+    }
+
+    public ITaxiController login(String login, String pass) {
+
         //create default admin... he wont be save in "file"..
         // we need this for default enter to adminController
         appDataContainer.addAdminToData(new Admin("admin", "admin", 1));
