@@ -12,7 +12,7 @@ public class TaxiAppSave {
 
     public static void save(String nameFile, AppDataContainer appDataContainer){
 
-        try(FileOutputStream out = new FileOutputStream(nameFile);
+        try(FileOutputStream out = new FileOutputStream("./resources/db/" + nameFile);
             ObjectOutputStream oout = new ObjectOutputStream(out)) {
 
             oout.writeObject(appDataContainer);

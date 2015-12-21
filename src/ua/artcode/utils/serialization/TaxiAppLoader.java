@@ -13,7 +13,7 @@ public class TaxiAppLoader {
     public static AppDataContainer load(String nameFile) {
         AppDataContainer temp = null;
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nameFile))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./resources/db/" + nameFile))) {
 
             temp = new AppDataContainer((AppDataContainer) ois.readObject());
 
