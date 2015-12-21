@@ -1,47 +1,155 @@
 package ua.artcode.view;
 
-
-import ua.artcode.controller.ITaxiController;
+import ua.artcode.controller.AdminController;
+import ua.artcode.model.Ticket;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+/**
+ * Created by sensej on 21.12.15.
+ */
 public class TicketsFrame extends JFrame {
-    private ITaxiController taxiController;
-    private JPanel panel;
-    private JLabel tickets;
+
+    private AdminController controller;
     private JTable table;
+    private JScrollPane scrollPane;
+    private JButton button;
 
-    public static void main(String[] args) {
-        TicketsFrame ticketsFrame = new TicketsFrame(null);
-    }
-
-    public TicketsFrame(ITaxiController taxiController) throws HeadlessException {
-        this.taxiController = taxiController;
+    public TicketsFrame(AdminController menuController) {
+        this.controller = menuController;
+        setSize(1000, 300);
         init();
-        tickets = new JLabel("Tickets");
-        setTitle("Taxi App");
-        setSize(600 , 400);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Taxi App");
+        setResizable(false);
         setVisible(true);
     }
 
-    public void init(){
-        panel = new JPanel();
-        table = new JTable();
-        TableColumn columnTo = new TableColumn();
-        columnTo.setHeaderValue("To");
-        table.addColumn(columnTo);
+    private void init() {
 
-        TableColumn columnFrom = new TableColumn();
-        columnFrom.setHeaderValue("From");
-        table.addColumn(columnFrom);
+        MyTableModel model = new MyTableModel(controller.getTickets());
+        table = new JTable(model);
 
-        TableColumn columnName = new TableColumn();
-        columnName.setHeaderValue("Name");
-        table.addColumn(columnName);
+        scrollPane = new JScrollPane(table);
+        table.setFillsViewportHeight(true);
+        button = new JButton("Back to Menu");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MenuFrame(controller);
+                dispose();
+            }
+        });
 
+
+
+        getContentPane().add(scrollPane, new BorderLayout().CENTER);
+        getContentPane().add(button, new BorderLayout().SOUTH);
+
+    }
+
+    public class MyTableModel implements TableModel {
+
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
+
+        private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
+
+        private List<Ticket> tickets;
+
+        public MyTableModel(List<Ticket> tickets) {
+            this.tickets = tickets;
+        }
+
+        public void addTableModelListener(TableModelListener listener) {
+            listeners.add(listener);
+        }
+
+        public Class<?> getColumnClass(int columnIndex) {
+            return String.class;
+        }
+
+        public int getColumnCount() {
+            return 10;
+        }
+
+        public String getColumnName(int columnIndex) {
+            switch (columnIndex) {
+                case 0:
+                    return "TicketID";
+                case 1:
+                    return "ClientID";
+                case 2:
+                    return "DriverID";
+                case 3:
+                    return "From";
+                case 4:
+                    return "To";
+                case 5:
+                    return "Price";
+                case 6:
+                    return "RequestTime";
+                case 7:
+                    return "ArriveToClient";
+                case 8:
+                    return "ArriveToPlace";
+                case 9:
+                    return "Status";
+            }
+            return "";
+        }
+
+        public int getRowCount() {
+            return tickets.size();
+        }
+
+        public Object getValueAt(int rowIndex, int columnIndex) {
+            Ticket ticket = tickets.get(rowIndex);
+            switch (columnIndex) {
+                case 0:
+                    return ticket.getiDTicket();
+                case 1:
+                    return ticket.getIdClient();
+                case 2:
+                    return ticket.getIdDriver();
+                case 3:
+                    return ticket.getFromLocation();
+                case 4:
+                    return ticket.getToLocation();
+                case 5:
+                    return ticket.getPrice();
+                case 6:
+                    return dateFormat.format(ticket.getRequestTime());
+                case 7:
+                    return dateFormat.format(ticket.getArrivalTaxiTime());
+                case 8:
+                    return dateFormat.format(ticket.getArrivalDestinationTime());
+                case 9:
+                    return ticket.getStatus();
+            }
+            return "";
+        }
+
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return false;
+        }
+
+        public void removeTableModelListener(TableModelListener listener) {
+            listeners.remove(listener);
+        }
+
+        public void setValueAt(Object value, int rowIndex, int columnIndex) {
+
+        }
 
     }
 }

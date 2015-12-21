@@ -8,6 +8,9 @@ import ua.artcode.view.LoginFrame;
 public class Run {
 
     public static void main(String[] args) {
+
+        // admin credentials
+        // password -admin ; login -admin ;
         new LoginFrame();
     }
 }
