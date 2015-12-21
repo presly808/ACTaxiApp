@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class AdminController implements IAdminController {
 
-   private AppDataContainer appDataContainer;
-   private String me = "admin";
+    private AppDataContainer appDataContainer;
+    private String me = "admin";
 
     private AdminController(AppDataContainer appDataContainer){
         this.appDataContainer = appDataContainer;
