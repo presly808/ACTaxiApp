@@ -32,6 +32,4 @@ public interface IAdminController extends ITaxiController{
 
     Ticket findTicketByClientId(long id);
 
-    public String whoAmI();
-
 }
