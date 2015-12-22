@@ -75,17 +75,17 @@ public class Login {
     }
 
     //if login have already used, method return null
-    public Client addClient(String name, int phone, String location, String pass ){
+    public boolean addClient(String name, int phone, String location, String pass ){
 
         IPerson person = getClient(name);
         if(person != null){
-            return null;
+            return false;
         }
 
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
         TaxiAppSave.save("file", appDataContainer);
 
-        return client;
+        return true;
     }
 }
