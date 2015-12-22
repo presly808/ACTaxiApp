@@ -1,5 +1,6 @@
 package ua.artcode.view;
 
+import org.jdesktop.xswingx.PromptSupport;
 import ua.artcode.controller.ITaxiController;
 import ua.artcode.controller.Login;
 
@@ -46,16 +47,21 @@ public class LoginFrame extends JFrame {
 
     private void init() {
 
+
+        label = new JLabel("Login Form");
+
         panel = new JPanel();
         southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
         loginField = new JTextField(30);
-        loginField.setText("login");
-        loginField.setToolTipText("Login");
-        label = new JLabel("Login Form");
+        PromptSupport.setPrompt("Login", loginField);
+        PromptSupport.setForeground(Color.GRAY, loginField);
+
 
         passwordField = new JPasswordField(30);
-        passwordField.setToolTipText("Password");
+
+        PromptSupport.setPrompt("Password", passwordField);
+        PromptSupport.setForeground(Color.GRAY, passwordField);
         passwordField.setEchoChar('*');
 
 
