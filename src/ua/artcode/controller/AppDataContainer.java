@@ -2,6 +2,7 @@ package ua.artcode.controller;
 
 import ua.artcode.model.*;
 import ua.artcode.utils.database_gen.DataBaseListsGen;
+import ua.artcode.utils.serialization.TaxiAppLoader;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +22,8 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
 
         tickets = DataBaseListsGen.ticketsListGen(100);
         driver = DataBaseListsGen.driversListGen(100);
-        clients = DataBaseListsGen.clientsListGen(100);
+        //clients = DataBaseListsGen.clientsListGen(100);
+        clients = TaxiAppLoader.loadClientsList();
         admins = DataBaseListsGen.adminsListGen(100);
 
     }
