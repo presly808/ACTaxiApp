@@ -1,7 +1,7 @@
 package ua.artcode.view;
 
+import org.jdesktop.xswingx.PromptSupport;
 import ua.artcode.controller.Login;
-import ua.artcode.model.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,35 +41,55 @@ public class RegistrationFrame extends JFrame {
         southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
         loginField = new JTextField(30);
-        loginField.setText("login");
-        loginField.setToolTipText("Login");
-
+        PromptSupport.setPrompt("Login", loginField);
+        PromptSupport.setForeground(Color.GRAY,loginField);
 
         phoneField = new JTextField(30);
-        phoneField.setText("Phone number");
-        phoneField.setToolTipText("Phone number");
+        PromptSupport.setPrompt("Phone number", phoneField);
+        PromptSupport.setForeground(Color.GRAY,phoneField);
+
 
         locationField = new JTextField(30);
-        locationField.setText("Your location");
-        locationField.setToolTipText("Location");
+        PromptSupport.setPrompt("Your location", locationField);
+        PromptSupport.setForeground(Color.GRAY,locationField);
+
 
         passwordField = new JPasswordField(30);
-        passwordField.setToolTipText("Password");
+        PromptSupport.setPrompt("Password", passwordField);
+        PromptSupport.setForeground(Color.GRAY,passwordField);
 
 
         createAccountButton = new JButton("Create Account");
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login login = new Login();
-                Client client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
-                        locationField.getText(), passwordField.getText());
-                if (client != null) {
+
+                if (checkLoginPasswordFilled()) {
+
+                    Login login = new Login();
+
+                    boolean client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+                            locationField.getText(), passwordField.getText());
+
+                    if (client) {
+                        JOptionPane.showMessageDialog(RegistrationFrame.this,
+                                String.format("%s account has been successfully created", loginField.getText()),
+                                "Successful registration",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        RegistrationFrame.this.dispose();
+                    } else {
+
+                        JOptionPane.showMessageDialog(RegistrationFrame.this,
+                                String.format("Provided login has been already created",
+                                        JOptionPane.ERROR_MESSAGE));
+                    }
+
+                } else {
+
                     JOptionPane.showMessageDialog(RegistrationFrame.this,
-                            String.format("%s account has been succcessfully created", loginField.getText()),
-                            "Successful registration",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    RegistrationFrame.this.dispose();
+                            String.format("Login and password fields can't be blank!",
+                                    JOptionPane.OK_OPTION));
+
                 }
             }
         });
@@ -85,8 +105,6 @@ public class RegistrationFrame extends JFrame {
         southButtonsPanel.add(cancelButton);
         getContentPane().add(southButtonsPanel, BorderLayout.SOUTH);
 
-        loginField.requestFocus();
-
         panel.add(registrationLabel);
         panel.add(loginField);
         panel.add(passwordField);
@@ -96,4 +114,12 @@ public class RegistrationFrame extends JFrame {
         this.add(panel);
 
     }
+
+    // check that login and password data provided by user while creating an account;//
+
+    public boolean checkLoginPasswordFilled() {
+
+        return (loginField.getText().equals("") || (passwordField.getText().equals(""))) ? false : true;
+    }
+
 }
