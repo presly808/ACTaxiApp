@@ -84,7 +84,7 @@ public class Login {
 
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
-        TaxiAppSave.save("file", appDataContainer);
+        TaxiAppSave.save("clients.json", appDataContainer.getListClients());
 
         return true;
     }

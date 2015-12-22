@@ -15,4 +15,21 @@ public class Car implements Serializable {
         this.numb = numb;
         this.color = color;
     }
+
+    public Car(String carInit){
+
+        String[] parameters = car.split("|");
+
+        car = parameters[0];
+        numb = new Integer(parameters[1]);
+        color = parameters[2];
+
+    }
+
+    @Override
+    public String toString() {
+        return car +
+                "|" + numb +
+                "|" + color;
+    }
 }

@@ -63,4 +63,14 @@ public class Client implements IPerson, Serializable {
     public String whoAmI() {
         return me;
     }
+
+    @Override
+    public String toString() {
+        return login +
+                ";" + phoneNumber +
+                ";" + location +
+                ";" + pass +
+                ";" + iDClient +
+                ";" + me;
+    }
 }

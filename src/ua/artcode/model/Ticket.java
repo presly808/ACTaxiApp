@@ -19,7 +19,7 @@ public class Ticket implements Serializable{
     private long iDTicket;
 
     public Ticket(long idDriver, long idClient, String fromLocation, String toLocation,
-                  double price, TicketStatus status, Date arrivalTaxiTime, Date requestTime,
+                  double price, String status, Date arrivalTaxiTime, Date requestTime,
                   Date arrivalDestinationTime, long iDTicket) {
 
         this.idDriver = idDriver;
@@ -27,11 +27,20 @@ public class Ticket implements Serializable{
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
         this.price = price;
-        this.status = status;
         this.arrivalTaxiTime = arrivalTaxiTime;
         this.requestTime = requestTime;
         this.arrivalDestinationTime = arrivalDestinationTime;
         this.iDTicket = iDTicket;
+
+        if(status.equals("NEW")){
+            this.status = TicketStatus.NEW;
+        } else if(status.equals("DONE")){
+            this.status = TicketStatus.DONE;
+        } else if(status.equals("IN_PROGRESS")){
+            this.status = TicketStatus.IN_PROGRESS;
+        } else if(status.equals("REJECTED")){
+            this.status = TicketStatus.REJECTED;
+        }
 
     }
 
@@ -102,5 +111,19 @@ public class Ticket implements Serializable{
 
     public long getiDTicket() {
         return iDTicket;
+    }
+
+    @Override
+    public String toString() {
+        return idDriver +
+                ";" + idClient +
+                ";" + fromLocation +
+                ";" + toLocation +
+                ";" + price +
+                ";" + status +
+                ";" + arrivalTaxiTime.getTime() +
+                ";" + requestTime.getTime() +
+                ";" + arrivalDestinationTime.getTime() +
+                ";" + iDTicket;
     }
 }

@@ -9,6 +9,7 @@ public class Admin implements Serializable, IPerson {
     private long iDAdmin;
     private String me = "admin";
 
+
     public Admin(String login, String pass, long iD) {
         this.login = login;
         this.pass = pass;
@@ -30,5 +31,13 @@ public class Admin implements Serializable, IPerson {
     @Override
     public String whoAmI() {
         return me;
+    }
+
+    @Override
+    public String toString() {
+        return login +
+                ";" + pass +
+                ";" + iDAdmin +
+                ";" + me;
     }
 }
