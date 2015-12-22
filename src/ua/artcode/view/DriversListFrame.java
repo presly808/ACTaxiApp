@@ -1,7 +1,7 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.AdminController;
-import ua.artcode.model.Ticket;
+import ua.artcode.model.Driver;
 
 import javax.swing.*;
 import javax.swing.event.TableModelListener;
@@ -9,25 +9,22 @@ import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
- * Created by sensej on 21.12.15.
+ * Created by sensej on 20.12.15.
  */
-public class TicketsFrame extends JFrame {
+public class DriversListFrame extends JFrame {
 
     private AdminController controller;
     private JTable table;
     private JScrollPane scrollPane;
     private JButton button;
 
-    public TicketsFrame(AdminController menuController) {
+    public DriversListFrame(AdminController menuController) {
         this.controller = menuController;
-        setSize(1000, 300);
+        setSize(700, 300);
         init();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Taxi App");
@@ -37,7 +34,7 @@ public class TicketsFrame extends JFrame {
 
     private void init() {
 
-        MyTableModel model = new MyTableModel(controller.getTickets());
+        MyTableModel model = new MyTableModel(controller.getAllDrivers());
         table = new JTable(model);
 
         scrollPane = new JScrollPane(table);
@@ -51,8 +48,6 @@ public class TicketsFrame extends JFrame {
             }
         });
 
-
-
         getContentPane().add(scrollPane, new BorderLayout().CENTER);
         getContentPane().add(button, new BorderLayout().SOUTH);
 
@@ -60,14 +55,13 @@ public class TicketsFrame extends JFrame {
 
     public class MyTableModel implements TableModel {
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
 
         private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
 
-        private List<Ticket> tickets;
+        private java.util.List<Driver> drivers;
 
-        public MyTableModel(List<Ticket> tickets) {
-            this.tickets = tickets;
+        public MyTableModel(java.util.List<Driver> drivers) {
+            this.drivers = drivers;
         }
 
         public void addTableModelListener(TableModelListener listener) {
@@ -79,62 +73,39 @@ public class TicketsFrame extends JFrame {
         }
 
         public int getColumnCount() {
-            return 10;
+            return 4;
         }
 
         public String getColumnName(int columnIndex) {
             switch (columnIndex) {
                 case 0:
-                    return "TicketID";
-                case 1:
-                    return "ClientID";
-                case 2:
                     return "DriverID";
+                case 1:
+                    return "Name";
+                case 2:
+                    return "Car Numder";
                 case 3:
-                    return "From";
-                case 4:
-                    return "To";
-                case 5:
-                    return "Price";
-                case 6:
-                    return "RequestTime";
-                case 7:
-                    return "ArriveToClient";
-                case 8:
-                    return "ArriveToPlace";
-                case 9:
                     return "Status";
             }
             return "";
         }
 
         public int getRowCount() {
-            return tickets.size();
+            return drivers.size();
         }
 
         public Object getValueAt(int rowIndex, int columnIndex) {
-            Ticket ticket = tickets.get(rowIndex);
+            Driver driver = drivers.get(rowIndex);
+
             switch (columnIndex) {
                 case 0:
-                    return ticket.getiDTicket();
+                    return driver.getiDDriver();
                 case 1:
-                    return ticket.getIdClient();
+                    return driver.getName();
                 case 2:
-                    return ticket.getIdDriver();
+                    return driver.getCar().getNumb();
                 case 3:
-                    return ticket.getFromLocation();
-                case 4:
-                    return ticket.getToLocation();
-                case 5:
-                    return ticket.getPrice();
-                case 6:
-                    return dateFormat.format(ticket.getRequestTime());
-                case 7:
-                    return dateFormat.format(ticket.getArrivalTaxiTime());
-                case 8:
-                    return dateFormat.format(ticket.getArrivalDestinationTime());
-                case 9:
-                    return ticket.getStatus();
+                    return driver.isStatus() ? "Free" : "On Duty";
             }
             return "";
         }
