@@ -1,7 +1,6 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.Login;
-import ua.artcode.model.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,15 +61,23 @@ public class RegistrationFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Login login = new Login();
-                Client client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+
+                boolean client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
                         locationField.getText(), passwordField.getText());
-                if (client != null) {
+
+                if (client) {
                     JOptionPane.showMessageDialog(RegistrationFrame.this,
-                            String.format("%s account has been succcessfully created", loginField.getText()),
+                            String.format("%s account has been successfully created", loginField.getText()),
                             "Successful registration",
                             JOptionPane.INFORMATION_MESSAGE);
                     RegistrationFrame.this.dispose();
+                } else {
+
+                    JOptionPane.showMessageDialog(RegistrationFrame.this,
+                            String.format("Provided login has been already created",
+                                    JOptionPane.ERROR_MESSAGE));
                 }
+
             }
         });
 
@@ -96,4 +103,7 @@ public class RegistrationFrame extends JFrame {
         this.add(panel);
 
     }
+
+
+
 }
