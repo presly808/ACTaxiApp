@@ -27,7 +27,7 @@ public class AdminController implements IAdminController {
 
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
-        TaxiAppSave.save("file", appDataContainer);
+        TaxiAppSave.save("clients.json", appDataContainer.getListClients());
 
         return client;
     }
@@ -35,9 +35,9 @@ public class AdminController implements IAdminController {
     @Override
     public Driver addDriver(String name, Car car){
 
-        Driver driver = new Driver(name, car, ID.genId());
+        Driver driver = new Driver(name, car, ID.genId(), new Boolean("false"));
         appDataContainer.addDriverToData(driver);
-        TaxiAppSave.save("file", appDataContainer);
+        TaxiAppSave.save("drivers.json", appDataContainer.getListDrivers());
 
         return driver;
     }
