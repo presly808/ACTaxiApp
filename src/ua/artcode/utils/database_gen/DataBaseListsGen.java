@@ -17,7 +17,7 @@ public class DataBaseListsGen {
 
         for (int i = 0; i < size; i++) {
 
-            clients.add(new Client("" + i, i, "" + i, "" + i, i));
+            clients.add(new Client("" + i, i, "" + i, "client", i));
 
         }
 
@@ -30,7 +30,7 @@ public class DataBaseListsGen {
 
         for (int i = 0; i < size; i++) {
 
-            admins.add(new Admin("" + i, "" + i, i));
+            admins.add(new Admin("" + i, "admin", i));
 
         }
 
