@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class TaxiAppLoader {
 
+    @Deprecated
     public static AppDataContainer load(String nameFile) {
         AppDataContainer temp = null;
 

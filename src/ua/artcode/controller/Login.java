@@ -14,7 +14,7 @@ public class Login {
 
     public Login(){
 
-        appDataContainer = TaxiAppLoader.load("file");
+        appDataContainer = new AppDataContainer();
 
     }
 
