@@ -57,7 +57,7 @@ public class DataBaseListsGen {
         for (int i = 0; i < size; i++) {
 
             tickets.add(new Ticket(i, i, "Pecherskiy" + i, "Dniprovskiy" + i,
-                    i, TicketStatus.NEW, new Date(), new Date(), new Date(), i));
+                    i, "NEW", new Date(), new Date(), new Date(), i));
 
         }
 
