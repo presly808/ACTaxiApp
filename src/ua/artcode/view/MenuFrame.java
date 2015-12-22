@@ -41,7 +41,7 @@ public class MenuFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new TicketsFrame((AdminController)menuController);
+                new TicketsListFrame((AdminController) menuController);
                 MenuFrame.this.dispose();
             }
         });
@@ -50,7 +50,7 @@ public class MenuFrame extends JFrame {
         showDriversButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new DriversFrame();
+                new DriversListFrame(((AdminController) menuController));
                 MenuFrame.this.dispose();
             }
         });
