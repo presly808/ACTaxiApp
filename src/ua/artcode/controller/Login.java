@@ -16,7 +16,6 @@ public class Login {
 
         appDataContainer = TaxiAppLoader.load("file");
 
-
     }
 
     public ITaxiController login(String login, String pass) {
@@ -38,24 +37,47 @@ public class Login {
 
     private IPerson searchIPerson(String login, String pass){
 
-        for(IPerson tmp : appDataContainer.getListAdmins()){
-            if(login.equals(tmp.getLogin()) && pass.equals(tmp.getPass())){
+        IPerson tmp = getAdmin(login);
+        if (tmp != null){
+
+            if(pass.equals(tmp.getPass())){
                 return tmp;
-            }
+            } //else message "unknown pass"
         }
-        for(IPerson tmp : appDataContainer.getListClients()){
-            if(login.equals(tmp.getLogin()) && pass.equals(tmp.getPass())){
+        tmp = getClient(login);
+        if (tmp != null){
+
+            if(pass.equals(tmp.getPass())){
                 return tmp;
-            }
+            } //else message "unknown pass"
         }
 
+        // message "unknown login"
+        return null;
+    }
+
+    private IPerson getClient(String login) {
+        for(IPerson tmp : appDataContainer.getListClients()){
+            if(login.equals(tmp.getLogin())){
+                return tmp;
+            }
+        }
+        return null;
+    }
+
+    private IPerson getAdmin(String login) {
+        for(IPerson tmp : appDataContainer.getListAdmins()){
+            if(login.equals(tmp.getLogin())){
+                return tmp;
+            }
+        }
         return null;
     }
 
     //if login have already used, method return null
     public Client addClient(String name, int phone, String location, String pass ){
 
-        IPerson person = searchIPerson(name, pass);
+        IPerson person = getClient(name);
         if(person != null){
             return null;
         }
