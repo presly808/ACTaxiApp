@@ -53,6 +53,8 @@ public class LoginFrame extends JFrame {
         panel = new JPanel();
         southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
+// added prompts ;
+
         loginField = new JTextField(30);
         PromptSupport.setPrompt("Login", loginField);
         PromptSupport.setForeground(Color.GRAY, loginField);

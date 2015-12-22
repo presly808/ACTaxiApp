@@ -115,7 +115,7 @@ public class RegistrationFrame extends JFrame {
 
     }
 
-    // check that login and password data provided by user while creating an account;
+    // check that login and password data provided by user while creating an account;//
 
     public boolean checkLoginPasswordFilled() {
 
