@@ -52,7 +52,13 @@ public class Login {
         return null;
     }
 
+    //if login have already used, method return null
     public Client addClient(String name, int phone, String location, String pass ){
+
+        IPerson person = searchIPerson(name, pass);
+        if(person != null){
+            return null;
+        }
 
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
