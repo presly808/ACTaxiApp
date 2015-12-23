@@ -19,10 +19,10 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
 
 
 
-    public static final String GET_FORMATTED_QUERY_TEMPLATE =
+    public static final String GET_ADDRESS_FORMATTED_QUERY_TEMPLATE =
             "https://maps.googleapis.com/maps/api/geocode/json?address=%s,%s,%s&key=%s";
 
-    public static final String GET_UNFORMATTED_QUERY_TEMPLATE =
+    public static final String GET_ADDRESS_UNFORMATTED_QUERY_TEMPLATE =
             "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s";
 
     public static final String GET_DISTANCE_QUERY_TEMPLATE =
@@ -33,7 +33,7 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
 
     @Override
     public Location findLocation(String unformatted) {
-        final String preparedQuery = String.format(GET_UNFORMATTED_QUERY_TEMPLATE, prepareQueryReplaceSpaces(unformatted), GOOGLE_API_KEY);
+        final String preparedQuery = String.format(GET_ADDRESS_UNFORMATTED_QUERY_TEMPLATE, prepareQueryReplaceSpaces(unformatted), GOOGLE_API_KEY);
 
         try {
             String jsonResponse = sendGetRequest(preparedQuery);
@@ -51,7 +51,7 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
 
     @Override//todo finish all task
     public Location findLocation(String country, String city, String street, String houseNum) {
-        final String preparedQuery = String.format(GET_FORMATTED_QUERY_TEMPLATE, prepareQueryReplaceSpaces((houseNum + " " + street)), city, country, GOOGLE_API_KEY);
+        final String preparedQuery = String.format(GET_ADDRESS_FORMATTED_QUERY_TEMPLATE, prepareQueryReplaceSpaces((houseNum + " " + street)), city, country, GOOGLE_API_KEY);
 
         try {
             String jsonResponse = sendGetRequest(preparedQuery);
@@ -114,6 +114,7 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
                 pointA.getPlaceId(), pointB.getPlaceId(), GOOGLE_API_KEY);
 
         try {
+            //todo use gsoup library for better mapping
             String body = sendGetRequest(formattedQuery);
             System.out.println(body);
         } catch (IOException e) {
