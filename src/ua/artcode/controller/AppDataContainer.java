@@ -20,7 +20,8 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
 
     public AppDataContainer(){
 
-        tickets = DataBaseListsGen.ticketsListGen(100);
+        //tickets = DataBaseListsGen.ticketsListGen(100);
+        tickets = TaxiAppLoader.loadTicketsList();
         driver = DataBaseListsGen.driversListGen(100);
         //clients = DataBaseListsGen.clientsListGen(100);
         clients = TaxiAppLoader.loadClientsList();
