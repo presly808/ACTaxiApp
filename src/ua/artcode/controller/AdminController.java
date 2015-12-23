@@ -25,28 +25,12 @@ public class AdminController implements IAdminController {
     // return null if db have same login
     @Override
     public Client addClient(String name, int phone, String location, String pass ){
-
-
-        IPerson person = appDataContainer.getClient(name);
-        if(person != null){
-            return null;
-        }
-
-        Client client = new Client(name, phone, location, pass, ID.genId());
-        appDataContainer.addClientToData(client);
-        TaxiAppSave.save("clients.json", appDataContainer.getListClients());
-
-        return client;
+        return Registration.addClientO(name, phone, location, pass, appDataContainer);
     }
 
     @Override
     public Driver addDriver(String name, Car car){
-
-        Driver driver = new Driver(name, car, ID.genId(), new Boolean("false"));
-        appDataContainer.addDriverToData(driver);
-        TaxiAppSave.save("drivers.json", appDataContainer.getListDrivers());
-
-        return driver;
+        return Registration.addDriverO(name, car, appDataContainer);
     }
 
     @Override
