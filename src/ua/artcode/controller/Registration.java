@@ -48,8 +48,12 @@ public class Registration {
         return driver;
     }
 
-    public static Ticket addTicket(String fromLocation, String toLocation, long idClient){
-        return new Ticket(0, idClient, fromLocation, toLocation, 0, "NEW",
+    public static Ticket addTicket(String fromLocation, String toLocation, long idClient, AppDataContainer appDataContainer){
+
+        Ticket ticket = new Ticket(0, idClient, fromLocation, toLocation, 0, "NEW",
                 null, new Date(), null, ID.genId());
+        TaxiAppSave.save("tickets.json", appDataContainer.getListClients());
+
+        return ticket;
     }
 }

@@ -23,7 +23,7 @@ public class ClientController implements IClientController {
     }
 
     public long callTaxi(String fromLocation, String toLocation){
-        currentTicket = Registration.addTicket(fromLocation, toLocation, currentClient.getiD());
+        currentTicket = Registration.addTicket(fromLocation, toLocation, currentClient.getiD(), appDataContainer);
         appDataContainer.addTicketToData(currentTicket);
         return currentTicket.getiDTicket();
     }
