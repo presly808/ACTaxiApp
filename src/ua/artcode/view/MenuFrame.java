@@ -2,6 +2,7 @@ package ua.artcode.view;
 
 
 import ua.artcode.controller.AdminController;
+import ua.artcode.controller.ClientController;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class MenuFrame extends JFrame {
     private JButton addDriverButton;
     private JButton addClientButton;
     private JLabel whoAmIlabel;
+    private JButton orderTaxiButton;
 
     public MenuFrame(ITaxiController menuController) {
         this.menuController = menuController;
@@ -50,18 +52,26 @@ public class MenuFrame extends JFrame {
         showDriversButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new DriversListFrame(((AdminController) menuController));
+                new DriversListFrame((AdminController) menuController);
                 MenuFrame.this.dispose();
             }
         });
 
         addClientButton = new JButton("Add Client");
         addDriverButton = new JButton("Add Driver");
+        orderTaxiButton = new JButton("Order Taxi");
+
+        orderTaxiButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new OrderTaxiFrame((ClientController) menuController);
+            }
+        });
 
         addClientButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddClientFrame();
+                new AddClientFrame((AdminController) menuController);
             }
         });
 
@@ -72,14 +82,18 @@ public class MenuFrame extends JFrame {
         panel.add(showDriversButton);
         panel.add(addClientButton);
         panel.add(addDriverButton);
+        panel.add(orderTaxiButton);
         getContentPane().add(panel);
     }
 
-    void hideButtonForUser() {
+    private void hideButtonForUser() {
         if (!menuController.whoAmI().equals("admin")) {
+            showDriversButton.setVisible(false);
             showTicketsButton.setVisible(false);
             addClientButton.setVisible(false);
             addDriverButton.setVisible(false);
+        } else {
+            orderTaxiButton.setEnabled(false);
         }
     }
 }
