@@ -165,6 +165,8 @@ public class TaxiAppLoader {
 
         ArrayList<Ticket> ticketsList = new ArrayList<>();
 
+        ticketsStr = fixTicketsString(ticketsStr);
+
         String[] tickets = ticketsStr.split(",");
         if(tickets.length < 1){
             return ticketsList;
@@ -183,6 +185,13 @@ public class TaxiAppLoader {
 
         return ticketsList;
 
+    }
+
+    private static String fixTicketsString(String ticketsStr) {
+
+        ticketsStr = ticketsStr.substring(1, ticketsStr.length()-1);
+
+        return ticketsStr;
     }
 
 }
