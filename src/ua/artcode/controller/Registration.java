@@ -4,7 +4,6 @@ import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by dexter on 23.12.15.
@@ -52,8 +51,11 @@ public class Registration {
 
         Ticket ticket = new Ticket(0, idClient, fromLocation, toLocation, 0, "NEW",
                 null, new Date(), null, ID.genId());
-        TaxiAppSave.save("tickets.json", appDataContainer.getListClients());
+        appDataContainer.addTicketToData(ticket);
+        TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+
 
         return ticket;
     }
+
 }

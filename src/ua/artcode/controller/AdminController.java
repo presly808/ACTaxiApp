@@ -5,6 +5,8 @@ import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by dexter on 20.12.15.
@@ -136,4 +138,5 @@ public class AdminController implements IAdminController {
     public String whoAmI(){
         return me;
     }
+
 }
