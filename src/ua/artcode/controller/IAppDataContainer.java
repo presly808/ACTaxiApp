@@ -1,11 +1,7 @@
 package ua.artcode.controller;
 
-import ua.artcode.model.Admin;
-import ua.artcode.model.Client;
-import ua.artcode.model.Driver;
-import ua.artcode.model.Ticket;
+import ua.artcode.model.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,5 +17,7 @@ public interface IAppDataContainer {
     List<Driver> getListDrivers();
     List<Admin> getListAdmins();
     List<Ticket> getListTickets();
-
+    IPerson searchIPerson(String login, String pass);
+    IPerson getClient(String login);
+    IPerson getAdmin(String login);
 }

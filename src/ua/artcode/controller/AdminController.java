@@ -22,8 +22,15 @@ public class AdminController implements IAdminController {
         return new AdminController(appDataContainer);
     }
 
+    // return null if db have same login
     @Override
     public Client addClient(String name, int phone, String location, String pass ){
+
+
+        IPerson person = appDataContainer.getClient(name);
+        if(person != null){
+            return null;
+        }
 
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
