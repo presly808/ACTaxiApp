@@ -43,6 +43,8 @@ public class Driver implements Serializable{
         return iD;
     }
 
+    public boolean getStatus(){ return status;}
+
     public boolean takeTicket(){
         return this.status = true;
     }

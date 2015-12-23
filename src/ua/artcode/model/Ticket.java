@@ -56,17 +56,8 @@ public class Ticket implements Serializable{
         return fromLocation;
     }
 
-
-    public void setFromLocation(String fromLocation) {
-        this.fromLocation = fromLocation;
-    }
-
     public String getToLocation() {
         return toLocation;
-    }
-
-    public void setToLocation(String toLocation) {
-        this.toLocation = toLocation;
     }
 
     public double getPrice() {
@@ -107,6 +98,10 @@ public class Ticket implements Serializable{
 
     public void setArrivalDestinationTime(Date arrivalDestinationTime) {
         this.arrivalDestinationTime = arrivalDestinationTime;
+    }
+
+    public void setIdDriver(long idDriver) {
+        this.idDriver = idDriver;
     }
 
     public long getiDTicket() {

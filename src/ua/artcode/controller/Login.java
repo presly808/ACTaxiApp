@@ -31,7 +31,7 @@ public class Login {
 
         return person.whoAmI().equals("admin") ?
                 ControllerFactory.getAdminController(appDataContainer) :
-                ControllerFactory.getClientController();
+                ControllerFactory.getClientController(person, appDataContainer);
     }
 
     //if login have already used, method return false

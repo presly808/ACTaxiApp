@@ -2,6 +2,7 @@ package ua.artcode.controller;
 
 import ua.artcode.model.Client;
 import ua.artcode.model.Driver;
+import ua.artcode.model.IPerson;
 import ua.artcode.model.Ticket;
 
 import java.util.List;
@@ -11,16 +12,24 @@ import java.util.List;
  */
 public class ClientController implements IClientController {
 
-    private String login;
-    private String pass;
     private String me = "client";
+    private Client currentClient;
+    private Ticket currentTicket;
+    private AppDataContainer appDataContainer;
 
-    public String getLogin() {
-        return login;
+    public ClientController(Client currentClient, AppDataContainer appDataContainer) {
+        this.currentClient = currentClient;
+        this.appDataContainer = appDataContainer;
     }
 
-    public String getPass() {
-        return pass;
+    public long callTaxi(String fromLocation, String toLocation){
+        currentTicket = Registration.addTicket(fromLocation, toLocation, currentClient.getiD());
+        appDataContainer.addTicketToData(currentTicket);
+        return currentTicket.getiDTicket();
+    }
+
+    public Ticket getCurrentTicket(){
+        return currentTicket;
     }
 
     @Override

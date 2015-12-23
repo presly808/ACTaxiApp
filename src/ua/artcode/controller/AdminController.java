@@ -78,6 +78,19 @@ public class AdminController implements IAdminController {
     }
 
     @Override
+    public long getFreeDriver(){
+
+        for(Driver tmp : appDataContainer.getListDrivers()){
+
+            if(!tmp.getStatus()){
+                return tmp.getiDDriver();
+            }
+
+        }
+        return -1;
+    }
+
+    @Override
     public Ticket getTicketById(long id) {
 
         for(Ticket tmp : appDataContainer.getListTickets()){
@@ -95,11 +108,14 @@ public class AdminController implements IAdminController {
     // I think maybe this method have to return Ticket... not boolean? What do you think?
     public boolean setDriverToTicket(long clientId, long driverId) {
 
-        Ticket ticket = new Ticket(driverId, clientId, "Simirenko 7a", "Lomonosova 33/43",
-                100, null, null, null, null, ID.genId());
-        appDataContainer.addTicketToData(ticket);
+        for(Ticket tmp : appDataContainer.getListTickets()){
+            if(tmp.getStatus().equals("NEW")){
+                tmp.setIdDriver(getFreeDriver());
+                return true;
+            }
+        }
 
-        return true;
+        return false;
     }
 
     @Override
