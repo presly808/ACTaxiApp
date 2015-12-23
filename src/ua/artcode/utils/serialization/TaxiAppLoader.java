@@ -148,7 +148,7 @@ public class TaxiAppLoader {
 
         String tickets = "";
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./resources/db/drivers.json"))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./resources/db/tickets.json"))) {
 
             tickets = ((String) ois.readObject());
 
