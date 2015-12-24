@@ -75,7 +75,8 @@ public class MenuFrame extends JFrame {
             }
         });
 
-        whoAmIlabel = new JLabel(String.format("Signed up as %s", menuController.whoAmI()));
+        whoAmIlabel = new JLabel(String.format("Signed up as %s", menuController.getClass() == ClientController.class ? "client"
+                : "admin"));
 
         panel.add(whoAmIlabel);
         panel.add(showTicketsButton);
@@ -87,7 +88,7 @@ public class MenuFrame extends JFrame {
     }
 
     private void hideButtonForUser() {
-        if (!menuController.whoAmI().equals("admin")) {
+        if ((menuController.getClass() == ClientController.class)) {
             showDriversButton.setVisible(false);
             showTicketsButton.setVisible(false);
             addClientButton.setVisible(false);

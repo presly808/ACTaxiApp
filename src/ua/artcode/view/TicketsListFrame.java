@@ -6,6 +6,7 @@ import ua.artcode.model.Ticket;
 import javax.swing.*;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,6 +43,11 @@ public class TicketsListFrame extends JFrame {
 
         scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
+        table.setAutoCreateRowSorter(true);
+        TableRowSorter<TableModel> sorter
+                = new TableRowSorter<TableModel>(table.getModel());
+        table.setRowSorter(sorter);
+
         button = new JButton("Back to Menu");
         button.addActionListener(new ActionListener() {
             @Override
@@ -50,7 +56,6 @@ public class TicketsListFrame extends JFrame {
                 dispose();
             }
         });
-
 
 
         getContentPane().add(scrollPane, new BorderLayout().CENTER);
@@ -75,7 +80,7 @@ public class TicketsListFrame extends JFrame {
         }
 
         public Class<?> getColumnClass(int columnIndex) {
-            return String.class;
+            return getValueAt(0, columnIndex).getClass();
         }
 
         public int getColumnCount() {
