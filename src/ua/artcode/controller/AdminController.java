@@ -80,16 +80,16 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public long getFreeDriver(){
+    public Driver getFreeDriver(){
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
             if(!tmp.getStatus()){
-                return tmp.getiDDriver();
+                return tmp;
             }
 
         }
-        return -1;
+        return null;
     }
 
     @Override
@@ -112,8 +112,15 @@ public class AdminController implements IAdminController {
 
         for(Ticket tmp : appDataContainer.getListTickets()){
             if(tmp.getStatus().equals("NEW")){
-                tmp.setIdDriver(getFreeDriver());
-                TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+
+                Driver driver = getFreeDriver();
+                if(driver.getIdCurrentTicket() == 0){
+                    tmp.setIdDriver(driver.getiDDriver());
+                    TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+                    driver.changeStatus();
+                } else {
+                    return false;
+                }
                 return true;
             }
         }

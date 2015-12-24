@@ -21,12 +21,14 @@ public class ClientController implements IClientController{
         this.appDataContainer = appDataContainer;
     }
 
+    @Override
     public long callTaxi(String fromLocation, String toLocation){
         currentTicket = Registration.addTicket(fromLocation, toLocation, currentClient.getId(), appDataContainer);
         appDataContainer.addTicketToData(currentTicket);
         return currentTicket.getiDTicket();
     }
 
+    @Override
     public Ticket getCurrentTicket(){
         return currentTicket;
     }

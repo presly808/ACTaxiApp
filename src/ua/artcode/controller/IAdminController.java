@@ -24,7 +24,7 @@ public interface IAdminController extends ITaxiController{
 
     Driver getDriverById(long id);
 
-    long getFreeDriver();
+    Driver getFreeDriver();
 
     Ticket getTicketById(long id);
 
