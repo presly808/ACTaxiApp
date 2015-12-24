@@ -34,11 +34,6 @@ public class ClientController implements IClientController{
     }
 
     @Override
-    public String whoAmI(){
-        return me;
-    }
-
-    @Override
     public List<Ticket> getTickets() {
 
         ArrayList<Ticket> allClientsTickets = new ArrayList<>();
