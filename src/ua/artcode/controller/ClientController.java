@@ -42,7 +42,7 @@ public class ClientController implements IClientController{
         ArrayList<Ticket> allClientsTickets = new ArrayList<>();
 
         for(Ticket tmp : appDataContainer.getListTickets()){
-           if(tmp.getiDTicket() == currentClient.getId()){
+           if(tmp.getIdClient() == currentClient.getId()){
                allClientsTickets.add(tmp);
            }
         }
