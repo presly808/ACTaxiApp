@@ -21,6 +21,15 @@ public class Driver implements Serializable{
 
     }
 
+    public Driver(String name, Car car, long iD, boolean isFree){
+
+        this.name = name;
+        this.car = car;
+        this.iD = iD;
+        this.isFree = isFree;
+
+    }
+
     public String getName() {
         return name;
     }
