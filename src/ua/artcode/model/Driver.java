@@ -9,13 +9,15 @@ public class Driver implements Serializable{
     private String name;
     private Car car;
     private boolean isFree = false;
+    private long iDCurrentTicket;
 
-    public Driver(String name, Car car, long iD, boolean isFree) {
+    public Driver(String name, Car car, long iD, boolean isFree, long iDTicket) {
 
         this.name = name;
         this.car = car;
         this.iD = iD;
         this.isFree = isFree;
+        this.iDCurrentTicket = iDTicket;
 
     }
 
@@ -32,7 +34,8 @@ public class Driver implements Serializable{
         return name +
                 ";" + car +
                 ";" + iD +
-                ";" + isFree;
+                ";" + isFree +
+                ";" + iDCurrentTicket;
     }
 
     public boolean isFree() {
@@ -47,5 +50,17 @@ public class Driver implements Serializable{
 
     public boolean takeTicket(){
         return this.isFree = true;
+    }
+
+    public void changeStatus(){
+        isFree = !isFree;
+    }
+
+    public long getIdCurrentTicket(){
+        return iDCurrentTicket;
+    }
+
+    public void dropCurrentIdTicket(){
+        iDCurrentTicket = 0;
     }
 }

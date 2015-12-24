@@ -142,7 +142,7 @@ public class TaxiAppLoader {
             String[] parameters = tmp.split(";");
 
             driversList.add(new Driver(parameters[0], new Car(parameters[1]),
-                    new Long(parameters[2]), new Boolean(parameters[3])));
+                    new Long(parameters[2]), new Boolean(parameters[3]), new Long(parameters[4])));
 
         }
 
