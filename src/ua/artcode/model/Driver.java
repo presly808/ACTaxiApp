@@ -27,6 +27,7 @@ public class Driver implements Serializable{
         this.car = car;
         this.iD = iD;
         this.isFree = isFree;
+        this.iDCurrentTicket = 0;
 
     }
 
@@ -51,7 +52,7 @@ public class Driver implements Serializable{
         return isFree;
     }
 
-    public long getiDDriver() {
+    public long getIdDriver() {
         return iD;
     }
 

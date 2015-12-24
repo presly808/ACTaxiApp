@@ -43,6 +43,7 @@ public class DriverController implements IDriverController{
     @Override
     public void dropCurrentTicket() {
         currentDriver.dropCurrentIdTicket();
+        currentDriver.changeStatus();
     }
 
     @Override
@@ -56,7 +57,7 @@ public class DriverController implements IDriverController{
         ArrayList<Ticket> allDriversTickets = new ArrayList<>();
 
         for(Ticket tmp : appDataContainer.getListTickets()){
-            if(tmp.getIdDriver() == currentDriver.getiDDriver()){
+            if(tmp.getIdDriver() == currentDriver.getIdDriver()){
                 allDriversTickets.add(tmp);
             }
         }

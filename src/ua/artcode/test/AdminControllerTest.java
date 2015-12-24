@@ -33,7 +33,7 @@ public class AdminControllerTest {
     private Driver driver2 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(), true);
     private Driver driver3 = new Driver("Janet", new Car("Golf", 9876, "blue"), ID.genId(), true);
 
-    private Ticket ticket = new Ticket(driver1.getiDDriver(), client1.getId(), "Central Park", "Times square", 17.50, "NEW",
+    private Ticket ticket = new Ticket(driver1.getIdDriver(), client1.getId(), "Central Park", "Times square", 17.50, "NEW",
                 new Date(), new Date(), new Date(), ID.genId());
 
     private AdminController controller;
@@ -109,10 +109,10 @@ public class AdminControllerTest {
 
     @Test
     public void testGetDriverById() throws Exception {
-        Driver actual = controller.getDriverById(driver1.getiDDriver());
+        Driver actual = controller.getDriverById(driver1.getIdDriver());
         assertEquals(driver1, actual);
 
-        Driver actual2 = controller.getDriverById(driver1.getiDDriver() + 1000);
+        Driver actual2 = controller.getDriverById(driver1.getIdDriver() + 1000);
         assertNull(actual2);
     }
 
@@ -124,9 +124,9 @@ public class AdminControllerTest {
 
     @Test
     public void testSetDriverToTicket() throws Exception {
-        assertFalse(controller.setDriverToTicket(client1.getId(), driver1.getiDDriver()));
+        assertFalse(controller.setDriverToTicket(client1.getId(), driver1.getIdDriver()));
 
-        assertTrue(controller.setDriverToTicket(client2.getId(), driver2.getiDDriver()));
+        assertTrue(controller.setDriverToTicket(client2.getId(), driver2.getIdDriver()));
     }
 
     @Test

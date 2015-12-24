@@ -1,12 +1,9 @@
 package ua.artcode.controller;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by dexter on 20.12.15.
@@ -70,7 +67,7 @@ public class AdminController implements IAdminController {
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
-            if(id == tmp.getiDDriver()){
+            if(id == tmp.getIdDriver()){
                 return tmp;
             }
 
@@ -84,7 +81,7 @@ public class AdminController implements IAdminController {
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
-            if(!tmp.getStatus()){
+            if(tmp.getStatus()){
                 return tmp;
             }
 
@@ -111,16 +108,14 @@ public class AdminController implements IAdminController {
     public boolean setDriverToTicket(long clientId, long driverId) {
 
         for(Ticket tmp : appDataContainer.getListTickets()){
-            if(tmp.getStatus().equals("NEW")){
+            if(tmp.getStatus().equals(TicketStatus.NEW)){
 
                 Driver driver = getFreeDriver();
-                if(driver.getIdCurrentTicket() == 0){
-                    tmp.setIdDriver(driver.getiDDriver());
-                    TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
-                    driver.changeStatus();
-                } else {
-                    return false;
-                }
+
+                tmp.setIdDriver(driver.getIdDriver());
+                TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+                driver.changeStatus();
+
                 return true;
             }
         }
