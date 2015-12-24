@@ -3,6 +3,7 @@ package ua.artcode.view;
 
 import ua.artcode.controller.AdminController;
 import ua.artcode.controller.ClientController;
+import ua.artcode.controller.DriverController;
 import ua.artcode.controller.ITaxiController;
 
 import javax.swing.*;
@@ -75,8 +76,8 @@ public class MenuFrame extends JFrame {
             }
         });
 
-        whoAmIlabel = new JLabel(String.format("Signed up as %s", menuController.getClass() == ClientController.class ? "client"
-                : "admin"));
+        whoAmIlabel = new JLabel(String.format("Signed up as %s", menuController.getClass() == ClientController.class ?
+                "client" : menuController.getClass() == DriverController.class ? "driver" : "admin"));
 
         panel.add(whoAmIlabel);
         panel.add(showTicketsButton);
@@ -89,12 +90,21 @@ public class MenuFrame extends JFrame {
 
     private void hideButtonForUser() {
         if ((menuController.getClass() == ClientController.class)) {
+
             showDriversButton.setVisible(false);
-            showTicketsButton.setVisible(false);
             addClientButton.setVisible(false);
             addDriverButton.setVisible(false);
+
+        } else if (((menuController.getClass() == DriverController.class))) {
+
+            showDriversButton.setVisible(false);
+            addClientButton.setVisible(false);
+            addDriverButton.setVisible(false);
+            orderTaxiButton.setVisible(false);
+
         } else {
-            orderTaxiButton.setEnabled(false);
+
+            orderTaxiButton.setVisible(false);
         }
     }
 }

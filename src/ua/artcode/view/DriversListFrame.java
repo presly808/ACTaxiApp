@@ -6,6 +6,7 @@ import ua.artcode.model.Driver;
 import javax.swing.*;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +38,10 @@ public class DriversListFrame extends JFrame {
         MyTableModel model = new MyTableModel(controller.getAllDrivers());
         table = new JTable(model);
 
+        TableRowSorter<TableModel> sorter
+                = new TableRowSorter<TableModel>(table.getModel());
+        table.setRowSorter(sorter);
+
         scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
         button = new JButton("Back to Menu");
@@ -55,6 +60,13 @@ public class DriversListFrame extends JFrame {
 
     public class MyTableModel implements TableModel {
 
+        private static final int DRIVER_ID = 0;
+        private static final int NAME = 1;
+        private static final int CAR_NUMBER = 2;
+        private static final int STATUS = 3;
+
+        private String[] columnNames = {"DriverID", "Name", "Car Number", "isFree"};
+
 
         private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
 
@@ -69,25 +81,18 @@ public class DriversListFrame extends JFrame {
         }
 
         public Class<?> getColumnClass(int columnIndex) {
-            return String.class;
+            if (drivers.isEmpty()) {
+                return Object.class;
+            }
+            return getValueAt(0, columnIndex).getClass();
         }
 
         public int getColumnCount() {
-            return 4;
+            return columnNames.length;
         }
 
         public String getColumnName(int columnIndex) {
-            switch (columnIndex) {
-                case 0:
-                    return "DriverID";
-                case 1:
-                    return "Name";
-                case 2:
-                    return "Car Numder";
-                case 3:
-                    return "Status";
-            }
-            return "";
+            return columnNames[columnIndex];
         }
 
         public int getRowCount() {
@@ -96,18 +101,25 @@ public class DriversListFrame extends JFrame {
 
         public Object getValueAt(int rowIndex, int columnIndex) {
             Driver driver = drivers.get(rowIndex);
+            Object returnedValue = null;
 
             switch (columnIndex) {
-                case 0:
-                    return driver.getId();
-                case 1:
-                    return driver.getLogin();
-                case 2:
-                    return driver.getCar().getNumb();
-                case 3:
-                    return driver.isFree() ? "Free" : "On Duty";
+                case DRIVER_ID:
+                    returnedValue = driver.getId();
+                    break;
+                case NAME:
+                    returnedValue = driver.getLogin();
+                    break;
+                case CAR_NUMBER:
+                    returnedValue = driver.getCar().getNumb();
+                    break;
+                case STATUS:
+                    returnedValue = driver.isFree();//? "Free" : "On Duty";
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid column index");
             }
-            return "";
+            return returnedValue;
         }
 
         public boolean isCellEditable(int rowIndex, int columnIndex) {
