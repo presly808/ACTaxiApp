@@ -87,9 +87,9 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     }
 
     @Override
-    public IPerson searchIPerson(String login, String pass){
+    public Person searchIPerson(String login, String pass){
 
-        IPerson tmp = getAdmin(login);
+        Person tmp = getAdmin(login);
         if (tmp != null){
 
             if(pass.equals(tmp.getPass())){
@@ -109,8 +109,8 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     }
 
     @Override
-    public IPerson getClient(String login) {
-        for(IPerson tmp : clients){
+    public Person getClient(String login) {
+        for(Person tmp : clients){
             if(login.equals(tmp.getLogin())){
                 return tmp;
             }
@@ -119,8 +119,8 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     }
 
     @Override
-    public IPerson getAdmin(String login) {
-        for(IPerson tmp : admins){
+    public Person getAdmin(String login) {
+        for(Person tmp : admins){
             if(login.equals(tmp.getLogin())){
                 return tmp;
             }

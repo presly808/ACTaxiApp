@@ -17,7 +17,7 @@ public interface IAppDataContainer {
     List<Driver> getListDrivers();
     List<Admin> getListAdmins();
     List<Ticket> getListTickets();
-    IPerson searchIPerson(String login, String pass);
-    IPerson getClient(String login);
-    IPerson getAdmin(String login);
+    Person searchIPerson(String login, String pass);
+    Person getClient(String login);
+    Person getAdmin(String login);
 }

@@ -105,7 +105,7 @@ public class DriversListFrame extends JFrame {
                 case 2:
                     return driver.getCar().getNumb();
                 case 3:
-                    return driver.isStatus() ? "Free" : "On Duty";
+                    return driver.isFree() ? "Free" : "On Duty";
             }
             return "";
         }

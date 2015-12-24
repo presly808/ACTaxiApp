@@ -52,6 +52,8 @@ public class TaxiAppLoader {
 
         ArrayList<Admin> adminsList = new ArrayList<>();
 
+        fixTicketsString(adminsStr);
+
         String[] admins = adminsStr.split(",");
         if(admins.length < 1){
             return adminsList;
@@ -87,6 +89,8 @@ public class TaxiAppLoader {
     private static List<Client> parseClientsString(String clientsStr) {
 
         ArrayList<Client> adminsList = new ArrayList<>();
+
+        fixTicketsString(clientsStr);
 
         String[] clients = clientsStr.split(",");
         if(clients.length < 1){
@@ -125,6 +129,8 @@ public class TaxiAppLoader {
     private static List<Driver> parseDriversString(String driversStr) {
 
         ArrayList<Driver> driversList = new ArrayList<>();
+
+        fixTicketsString(driversStr);
 
         String[] drivers = driversStr.split(",");
         if(drivers.length < 1){
@@ -189,9 +195,16 @@ public class TaxiAppLoader {
 
     private static String fixTicketsString(String ticketsStr) {
 
-        ticketsStr = ticketsStr.substring(1, ticketsStr.length()-1);
-
-        return ticketsStr;
+        while(true) {
+            if(ticketsStr.startsWith("[") || ticketsStr.endsWith("]")) {
+                if (ticketsStr.startsWith("[")) {
+                    ticketsStr = ticketsStr.substring(1, ticketsStr.length());
+                }
+                if (ticketsStr.endsWith("]")) {
+                    ticketsStr = ticketsStr.substring(0, ticketsStr.length() - 1);
+                }
+            } else return ticketsStr;
+        }
     }
 
 }

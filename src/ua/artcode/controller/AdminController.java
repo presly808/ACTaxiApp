@@ -56,7 +56,7 @@ public class AdminController implements IAdminController {
 
         for(Client tmp : appDataContainer.getListClients()){
 
-            if(id == tmp.getiD()){
+            if(id == tmp.getId()){
                 return tmp;
             }
 
