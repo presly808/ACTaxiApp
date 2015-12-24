@@ -62,6 +62,17 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
 
     }
 
+    // Constructor for tests
+    public AppDataContainer(List<Ticket> ticketsList, List<Admin> adminsList,
+                            List<Client> clientsList, List<Driver> driversList){
+
+        clients = clientsList;
+        admins = adminsList;
+        tickets = ticketsList;
+        driver = driversList;
+
+    }
+
     @Override
     public void addClientToData(Client client){
 
