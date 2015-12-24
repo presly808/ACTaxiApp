@@ -20,8 +20,6 @@ public interface IAdminController extends ITaxiController{
 
     List<Driver> getAllDrivers();
 
-    List<Ticket> getTickets();
-
     Client getClientById(long id);
 
     Driver getDriverById(long id);

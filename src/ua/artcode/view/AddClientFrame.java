@@ -1,19 +1,18 @@
 package ua.artcode.view;
 
 import org.jdesktop.xswingx.PromptSupport;
-import ua.artcode.controller.Login;
+import ua.artcode.controller.AdminController;
+import ua.artcode.model.Client;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by sensej on 20.12.15.
- */
+
 public class AddClientFrame extends JFrame {
 
-
+    private AdminController adminController;
     private JTextField loginField, phoneField, locationField;
     private JPasswordField passwordField;
     private JButton cancelButton, createAccountButton;
@@ -22,9 +21,9 @@ public class AddClientFrame extends JFrame {
     private JLabel registrationLabel;
 
 
-    public AddClientFrame() {
+    public AddClientFrame(AdminController controller) {
 
-
+        this.adminController = controller;
         setSize(400, 300);
         init();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -66,12 +65,10 @@ public class AddClientFrame extends JFrame {
 
                 if (checkLoginPasswordFilled()) {
 
-                    Login login = new Login();
-
-                    boolean client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+                    Client client = adminController.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
                             locationField.getText(), passwordField.getText());
 
-                    if (client) {
+                    if (client != null) {
                         JOptionPane.showMessageDialog(AddClientFrame.this,
                                 String.format("%s account has been successfully created", loginField.getText()),
                                 "Successful registration",

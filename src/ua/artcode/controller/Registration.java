@@ -12,7 +12,7 @@ public class Registration {
 
     public static boolean addClient(String name, int phone, String location, String pass, AppDataContainer appDataContainer){
 
-        IPerson person = appDataContainer.getClient(name);
+        Person person = appDataContainer.getClient(name);
         if(person != null){
             return false;
         }
@@ -26,7 +26,7 @@ public class Registration {
 
     public static Client addClientO(String name, int phone, String location, String pass, AppDataContainer appDataContainer){
 
-        IPerson person = appDataContainer.getClient(name);
+        Person person = appDataContainer.getClient(name);
         if(person != null){
             return null;
         }
@@ -50,7 +50,7 @@ public class Registration {
     public static Ticket addTicket(String fromLocation, String toLocation, long idClient, AppDataContainer appDataContainer){
 
         Ticket ticket = new Ticket(0, idClient, fromLocation, toLocation, 0, "NEW",
-                null, new Date(), null, ID.genId());
+                new Date(), new Date(), new Date(), ID.genId());
         appDataContainer.addTicketToData(ticket);
         TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
 

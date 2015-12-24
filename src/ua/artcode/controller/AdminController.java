@@ -56,7 +56,7 @@ public class AdminController implements IAdminController {
 
         for(Client tmp : appDataContainer.getListClients()){
 
-            if(id == tmp.getiD()){
+            if(id == tmp.getId()){
                 return tmp;
             }
 
@@ -113,6 +113,7 @@ public class AdminController implements IAdminController {
         for(Ticket tmp : appDataContainer.getListTickets()){
             if(tmp.getStatus().equals("NEW")){
                 tmp.setIdDriver(getFreeDriver());
+                TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
                 return true;
             }
         }
