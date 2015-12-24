@@ -51,11 +51,6 @@ public class DriverController implements IDriverController{
     }
 
     @Override
-    public String whoAmI() {
-        return me;
-    }
-
-    @Override
     public List<Ticket> getTickets() {
 
         ArrayList<Ticket> allDriversTickets = new ArrayList<>();

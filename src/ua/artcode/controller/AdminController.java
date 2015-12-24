@@ -137,10 +137,4 @@ public class AdminController implements IAdminController {
 
         return null;
     }
-
-    @Override
-    public String whoAmI(){
-        return me;
-    }
-
 }
