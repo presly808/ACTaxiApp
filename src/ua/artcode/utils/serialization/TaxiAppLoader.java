@@ -90,7 +90,7 @@ public class TaxiAppLoader {
 
         ArrayList<Client> adminsList = new ArrayList<>();
 
-        fixTicketsString(clientsStr);
+        clientsStr = fixTicketsString(clientsStr);
 
         String[] clients = clientsStr.split(",");
         if(clients.length < 1){
@@ -130,7 +130,7 @@ public class TaxiAppLoader {
 
         ArrayList<Driver> driversList = new ArrayList<>();
 
-        fixTicketsString(driversStr);
+        driversStr = fixTicketsString(driversStr);
 
         String[] drivers = driversStr.split(",");
         if(drivers.length < 1){
