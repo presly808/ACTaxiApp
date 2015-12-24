@@ -3,17 +3,15 @@ package ua.artcode.model;
 
 import java.io.Serializable;
 
-public class Driver implements Serializable{
+public class Driver extends Person implements Serializable{
 
-    private long iD;
-    private String name;
     private Car car;
     private boolean isFree = false;
     private long iDCurrentTicket;
 
     public Driver(String name, Car car, long iD, boolean isFree, long iDTicket) {
 
-        this.name = name;
+        this.login = name;
         this.car = car;
         this.iD = iD;
         this.isFree = isFree;
@@ -23,16 +21,12 @@ public class Driver implements Serializable{
 
     public Driver(String name, Car car, long iD, boolean isFree){
 
-        this.name = name;
+        this.login = name;
         this.car = car;
         this.iD = iD;
         this.isFree = isFree;
         this.iDCurrentTicket = 0;
 
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Car getCar() {
@@ -41,7 +35,7 @@ public class Driver implements Serializable{
 
     @Override
     public String toString() {
-        return name +
+        return login +
                 ";" + car +
                 ";" + iD +
                 ";" + isFree +
@@ -52,14 +46,17 @@ public class Driver implements Serializable{
         return isFree;
     }
 
-    public long getIdDriver() {
-        return iD;
-    }
-
     public boolean getStatus(){ return isFree;}
 
-    public boolean takeTicket(){
-        return this.isFree = true;
+    public boolean takeTicket(long iDCurrentTicket){
+
+        if(!isFree && iDCurrentTicket > 0){
+            return false;
+        }
+
+        this.iDCurrentTicket = iDCurrentTicket;
+
+        return isFree = false;
     }
 
     public void changeStatus(){
@@ -72,5 +69,6 @@ public class Driver implements Serializable{
 
     public void dropCurrentIdTicket(){
         iDCurrentTicket = 0;
+        isFree = true;
     }
 }

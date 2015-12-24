@@ -99,9 +99,9 @@ public class DriversListFrame extends JFrame {
 
             switch (columnIndex) {
                 case 0:
-                    return driver.getIdDriver();
+                    return driver.getId();
                 case 1:
-                    return driver.getName();
+                    return driver.getLogin();
                 case 2:
                     return driver.getCar().getNumb();
                 case 3:

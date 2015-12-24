@@ -16,6 +16,11 @@ public class DriverController implements IDriverController{
     private String me = "driver";
     private AppDataContainer appDataContainer;
 
+    public DriverController(Driver currentDriver, AppDataContainer appDataContainer) {
+        this.appDataContainer = appDataContainer;
+        this.currentDriver = currentDriver;
+    }
+
     @Override
     public Ticket getCurrentTicket() {
 
@@ -43,7 +48,6 @@ public class DriverController implements IDriverController{
     @Override
     public void dropCurrentTicket() {
         currentDriver.dropCurrentIdTicket();
-        currentDriver.changeStatus();
     }
 
     @Override
@@ -57,7 +61,7 @@ public class DriverController implements IDriverController{
         ArrayList<Ticket> allDriversTickets = new ArrayList<>();
 
         for(Ticket tmp : appDataContainer.getListTickets()){
-            if(tmp.getIdDriver() == currentDriver.getIdDriver()){
+            if(tmp.getIdDriver() == currentDriver.getId()){
                 allDriversTickets.add(tmp);
             }
         }

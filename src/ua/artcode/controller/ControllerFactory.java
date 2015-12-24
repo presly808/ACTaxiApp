@@ -1,6 +1,7 @@
 package ua.artcode.controller;
 
 import ua.artcode.model.Client;
+import ua.artcode.model.Driver;
 import ua.artcode.model.Person;
 
 /**
@@ -16,4 +17,7 @@ public class ControllerFactory {
         return new ClientController((Client)client, appDataContainer);
     }
 
+    public static ITaxiController getDriverController(Person person, AppDataContainer appDataContainer) {
+        return new DriverController((Driver)person, appDataContainer);
+    }
 }

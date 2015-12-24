@@ -2,6 +2,7 @@ package ua.artcode.controller;
 
 
 import ua.artcode.model.Admin;
+import ua.artcode.model.Client;
 import ua.artcode.model.Person;
 
 public class Login {
@@ -28,7 +29,9 @@ public class Login {
 
         return person.getClass() == Admin.class ?
                 ControllerFactory.getAdminController(appDataContainer) :
-                ControllerFactory.getClientController(person, appDataContainer);
+                person.getClass() == Client.class ?
+                ControllerFactory.getClientController(person, appDataContainer):
+                ControllerFactory.getDriverController(person, appDataContainer);
     }
 
     //if login have already used, method return false
