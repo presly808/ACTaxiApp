@@ -39,17 +39,17 @@ public class AddClientFrame extends JFrame {
         panel = new JPanel();
         southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
+        loginField = new JTextField(30);
         setField("Login", loginField);
 
+        phoneField = new JTextField(30);
         setField("Phone number", phoneField);
 
-
-        setField("Client's location", locationField);
-
+        locationField = new JTextField(30);
+        setField("Location", locationField);
 
         passwordField = new JPasswordField(30);
-        PromptSupport.setPrompt("Password", passwordField);
-        PromptSupport.setForeground(Color.GRAY, passwordField);
+        setField("Password", passwordField);
 
 
         createAccountButton = new JButton("Add Client");
@@ -82,10 +82,9 @@ public class AddClientFrame extends JFrame {
 
     }
 
-    private void setField(String login, JTextField loginField) {
-        loginField = new JTextField(30);
-        PromptSupport.setPrompt(login, loginField);
-        PromptSupport.setForeground(Color.GRAY, loginField);
+    private void setField(String prompt, JTextField field) {
+        PromptSupport.setPrompt(prompt, field);
+        PromptSupport.setForeground(Color.GRAY, field);
     }
 
     private void addClient() {
@@ -105,14 +104,14 @@ public class AddClientFrame extends JFrame {
                 JOptionPane.showMessageDialog(AddClientFrame.this,
                         "Provided login has been already created",
                         "Existing login error",
-                                JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.ERROR_MESSAGE);
             }
 
         } else {
 
             JOptionPane.showMessageDialog(AddClientFrame.this,
-                    "Login and password fields can't be blank!","Empty fields error",
-                            JOptionPane.OK_OPTION);
+                    "Login and password fields can't be blank!", "Empty fields error",
+                    JOptionPane.OK_OPTION);
 
         }
     }
