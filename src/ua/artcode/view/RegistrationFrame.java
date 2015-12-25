@@ -119,7 +119,7 @@ public class RegistrationFrame extends JFrame {
 
     public boolean checkLoginPasswordFilled() {
 
-        return (loginField.getText().equals("") || (passwordField.getText().equals(""))) ? false : true;
+        return !loginField.getText().equals("") || !passwordField.getText().equals("");
     }
 
 }

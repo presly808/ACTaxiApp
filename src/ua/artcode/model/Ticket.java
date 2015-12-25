@@ -161,5 +161,6 @@ public class Ticket implements Serializable{
         if (requestTime != null ? !requestTime.equals(tmp.requestTime) : tmp.requestTime != null) return false;
 
         return !(arrivalDestinationTime != null ? !arrivalDestinationTime.equals(tmp.arrivalDestinationTime) : tmp.arrivalDestinationTime != null);
+
     }
 }

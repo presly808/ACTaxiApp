@@ -59,7 +59,7 @@ public class DriverController implements IDriverController{
         ArrayList<Ticket> allDriversTickets = new ArrayList<>();
 
         for(Ticket tmp : appDataContainer.getListTickets()){
-            if(tmp.getIdDriver() == currentDriver.getId()){
+            if(tmp.getiDTicket() == currentDriver.getIdCurrentTicket()){
                 allDriversTickets.add(tmp);
             }
         }

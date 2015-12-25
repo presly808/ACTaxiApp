@@ -50,7 +50,8 @@ public class Driver extends Person implements Serializable{
 
         this.iDCurrentTicket = iDCurrentTicket;
 
-        return isFree = false;
+
+        return !(isFree = false);
     }
 
     public void changeStatus(){
