@@ -111,6 +111,9 @@ public class AdminController implements IAdminController {
             if(tmp.getStatus().equals(TicketStatus.NEW)){
 
                 Driver driver = getFreeDriver();
+                if(driver == null){
+                    return false;
+                }
 
                 tmp.setIdDriver(driver.getId());
                 driver.takeTicket(tmp.getiDTicket());

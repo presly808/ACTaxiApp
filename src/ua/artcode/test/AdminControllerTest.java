@@ -19,6 +19,7 @@ public class AdminControllerTest {
 
     private List<Ticket> tickets = new ArrayList<>();
     private List<Driver> drivers = new ArrayList<>();
+    private List<Driver> busyDrivers = new ArrayList<>();
     private List<Client> clients = new ArrayList<>();
     private List<Admin> admins = new ArrayList<>();
 
@@ -32,11 +33,15 @@ public class AdminControllerTest {
     private Driver driver1 = new Driver("Ashton", new Car("BMW", 1234, "pink"), ID.genId(), true);
     private Driver driver2 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(), true);
     private Driver driver3 = new Driver("Janet", new Car("Golf", 9876, "blue"), ID.genId(), true);
+    private Driver driver4 = new Driver("Ashton", new Car("BMW", 1234, "pink"), ID.genId(), false);
+    private Driver driver5 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(), false);
+    private Driver driver6 = new Driver("Janet", new Car("Golf", 9876, "blue"), ID.genId(), false);
 
     private Ticket ticket = new Ticket(driver1.getId(), client1.getId(), "Central Park", "Times square", 17.50, "NEW",
                 new Date(), new Date(), new Date(), ID.genId());
 
     private AdminController controller;
+    private AdminController overLoadController;
 
     @Before
     public void setUp() throws Exception {
@@ -51,9 +56,14 @@ public class AdminControllerTest {
         drivers.add(driver2);
         drivers.add(driver3);
 
+        busyDrivers.add(driver4);
+        busyDrivers.add(driver5);
+        busyDrivers.add(driver6);
+
         tickets.add(ticket);
 
         controller = AdminController.getAdminController(new AppDataContainer(tickets, admins, clients, drivers));
+        overLoadController = AdminController.getAdminController(new AppDataContainer(tickets, admins, clients, busyDrivers));
     }
 
     @Test
@@ -124,7 +134,7 @@ public class AdminControllerTest {
 
     @Test
     public void testSetDriverToTicket() throws Exception {
-        assertFalse(controller.setDriverToTicket(client1.getId(), driver1.getId()));
+        assertFalse(overLoadController.setDriverToTicket(client1.getId(), driver1.getId()));
 
         assertTrue(controller.setDriverToTicket(client2.getId(), driver2.getId()));
     }
