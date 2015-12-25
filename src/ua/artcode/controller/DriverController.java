@@ -2,8 +2,10 @@ package ua.artcode.controller;
 
 import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
+import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,5 +64,26 @@ public class DriverController implements IDriverController{
         }
 
         return allDriversTickets;
+    }
+
+    @Override
+    public Ticket takeATicket(){
+
+        currentTicket.setIdDriver(currentDriver.getId());
+
+        // we need method to calculate time when taxi will arrive to client
+        currentTicket.setArrivalTaxiTime(new Date());
+
+        // we need method to calculate time when taxi will arrive to destination place
+        currentTicket.setArrivalDestinationTime(new Date());
+
+        // we need method to calculate price
+        currentTicket.setPrice(100);
+        TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+
+        // after ArrivalDestinationTime
+        dropCurrentTicket();
+
+        return currentTicket;
     }
 }

@@ -11,5 +11,6 @@ public interface IDriverController extends ITaxiController {
     boolean isFree();
     void changeStatus();
     void dropCurrentTicket();
+    Ticket takeATicket();
 
 }
