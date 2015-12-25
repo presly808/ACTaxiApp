@@ -4,7 +4,9 @@ import org.json.simple.JSONValue;
 import ua.artcode.controller.AppDataContainer;
 
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.ObjectOutputStream;
+import java.io.Writer;
 import java.util.List;
 
 /**
@@ -16,10 +18,9 @@ public class TaxiAppSave {
 
         String jsonString = JSONValue.toJSONString(list);
 
-        try(FileOutputStream out = new FileOutputStream("./resources/db/" + nameFile);
-            ObjectOutputStream oout = new ObjectOutputStream(out)) {
+        try(Writer out = new FileWriter("./resources/db/" + nameFile);) {
 
-            oout.writeObject(jsonString);
+            out.write(jsonString);
 
         } catch (Exception ex) {
             ex.printStackTrace();
