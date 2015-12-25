@@ -45,4 +45,22 @@ public class Client extends Person implements Serializable {
                 ";" + pass +
                 ";" + iD;
     }
+
+    @Override
+    public boolean equals(Object client){
+
+        if(client == null){
+            return false;
+        }
+        if(this == client){
+            return true;
+        }
+        if(client.getClass() != Client.class){
+            return false;
+        }
+        Client tmp = (Client) client;
+
+        return iD == tmp.iD && (login.equals(tmp.login) && pass.equals(tmp.pass))
+                && (phoneNumber == tmp.phoneNumber && location.equals(tmp.location));
+    }
 }

@@ -83,7 +83,7 @@ public class AdminControllerTest {
 
     @Test
     public void testAddDriver() throws Exception {
-        Driver actual = controller.addDriver("driver", new Car("Jeep", 1111, "black"));
+        Driver actual = controller.addDriver("driver", new Car("Jeep", 1111, "black"),"driverPass");
         assertNotNull(actual);
         assertEquals("driver", actual.getLogin());
         assertFalse(actual.isFree());

@@ -1,6 +1,7 @@
 package ua.artcode.model;
 
 
+import java.awt.*;
 import java.io.Serializable;
 
 public class Driver extends Person implements Serializable{
@@ -9,13 +10,14 @@ public class Driver extends Person implements Serializable{
     private boolean isFree = false;
     private long iDCurrentTicket;
 
-    public Driver(String name, Car car, long iD, boolean isFree, long iDTicket) {
+    public Driver(String name, Car car, long iD, boolean isFree, long iDTicket, String pass) {
 
         this.login = name;
         this.car = car;
         this.iD = iD;
         this.isFree = isFree;
         this.iDCurrentTicket = iDTicket;
+        this.pass = pass;
 
     }
 
@@ -26,20 +28,12 @@ public class Driver extends Person implements Serializable{
         this.iD = iD;
         this.isFree = isFree;
         this.iDCurrentTicket = 0;
+        pass = "driver";
 
     }
 
     public Car getCar() {
         return car;
-    }
-
-    @Override
-    public String toString() {
-        return login +
-                ";" + car +
-                ";" + iD +
-                ";" + isFree +
-                ";" + iDCurrentTicket;
     }
 
     public boolean isFree() {
@@ -70,5 +64,34 @@ public class Driver extends Person implements Serializable{
     public void dropCurrentIdTicket(){
         iDCurrentTicket = 0;
         isFree = true;
+    }
+
+    @Override
+    public String toString() {
+        return login +
+                ";" + car +
+                ";" + iD +
+                ";" + isFree +
+                ";" + iDCurrentTicket +
+                ";" + pass;
+    }
+
+    @Override
+    public boolean equals(Object driver){
+
+        if(driver == null){
+            return false;
+        }
+        if(this == driver){
+            return true;
+        }
+        if(driver.getClass() != Driver.class){
+            return false;
+        }
+        Driver tmp = (Driver) driver;
+
+        return (isFree == tmp.isFree && iDCurrentTicket == tmp.iDCurrentTicket) &&
+                ((iD == tmp.iD && car.equals(tmp.car)) &&
+                        (login.equals(tmp.login) && pass.equals(tmp.pass)));
     }
 }

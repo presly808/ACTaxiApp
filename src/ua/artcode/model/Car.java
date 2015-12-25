@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by ivan on 20.12.15.
  */
 public class Car implements Serializable {
+
     private String car;
     private int numb;
     private String color;
@@ -57,4 +58,20 @@ public class Car implements Serializable {
         this.color = color;
     }
 
+    @Override
+    public boolean equals(Object car){
+
+        if(car == null){
+            return false;
+        }
+        if(this == car){
+            return true;
+        }
+        if(car.getClass() != Car.class){
+            return false;
+        }
+        Car tmp = (Car) car;
+
+        return color.equals(tmp.color) && (this.car.equals(tmp.car) && numb == tmp.numb);
+    }
 }

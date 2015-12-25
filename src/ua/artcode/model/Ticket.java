@@ -121,4 +121,45 @@ public class Ticket implements Serializable{
                 ";" + arrivalDestinationTime.getTime() +
                 ";" + iDTicket;
     }
+
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = (int) (idDriver ^ (idDriver >>> 32));
+        result = 31 * result + (int) (idClient ^ (idClient >>> 32));
+        result = 31 * result + (fromLocation != null ? fromLocation.hashCode() : 0);
+        result = 31 * result + (toLocation != null ? toLocation.hashCode() : 0);
+        temp = Double.doubleToLongBits(price);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (arrivalTaxiTime != null ? arrivalTaxiTime.hashCode() : 0);
+        result = 31 * result + (requestTime != null ? requestTime.hashCode() : 0);
+        result = 31 * result + (arrivalDestinationTime != null ? arrivalDestinationTime.hashCode() : 0);
+        result = 31 * result + (int) (iDTicket ^ (iDTicket >>> 32));
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object ticket) {
+        if (this == ticket) return true;
+        if (ticket == null || getClass() != ticket.getClass()) return false;
+
+        Ticket tmp = (Ticket) ticket;
+
+        if (idDriver != tmp.idDriver) return false;
+        if (idClient != tmp.idClient) return false;
+        if (Double.compare(tmp.price, price) != 0) return false;
+        if (iDTicket != tmp.iDTicket) return false;
+        if (fromLocation != null ? !fromLocation.equals(tmp.fromLocation) : tmp.fromLocation != null)
+            return false;
+        if (toLocation != null ? !toLocation.equals(tmp.toLocation) : tmp.toLocation != null) return false;
+        if (status != tmp.status) return false;
+        if (arrivalTaxiTime != null ? !arrivalTaxiTime.equals(tmp.arrivalTaxiTime) : tmp.arrivalTaxiTime != null)
+            return false;
+        if (requestTime != null ? !requestTime.equals(tmp.requestTime) : tmp.requestTime != null) return false;
+
+        return !(arrivalDestinationTime != null ? !arrivalDestinationTime.equals(tmp.arrivalDestinationTime) : tmp.arrivalDestinationTime != null);
+    }
 }

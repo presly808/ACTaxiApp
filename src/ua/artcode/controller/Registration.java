@@ -38,9 +38,9 @@ public class Registration {
         return client;
     }
 
-    public static Driver addDriverO(String name, Car car, AppDataContainer appDataContainer){
+    public static Driver addDriverO(String name, Car car, AppDataContainer appDataContainer, String pass){
 
-        Driver driver = new Driver(name, car, ID.genId(), new Boolean("false"), 0);
+        Driver driver = new Driver(name, car, ID.genId(), new Boolean("false"), 0, pass);
         appDataContainer.addDriverToData(driver);
         TaxiAppSave.save("drivers.json", appDataContainer.getListDrivers());
 

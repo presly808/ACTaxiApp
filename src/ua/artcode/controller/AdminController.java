@@ -28,8 +28,8 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public Driver addDriver(String name, Car car){
-        return Registration.addDriverO(name, car, appDataContainer);
+    public Driver addDriver(String name, Car car, String pass){
+        return Registration.addDriverO(name, car, appDataContainer, pass);
     }
 
     @Override

@@ -21,6 +21,7 @@ public class Admin extends Person implements Serializable {
                 ";" + iD;
     }
 
+    @Override
     public boolean equals(Object admin){
 
         if(admin == null){
@@ -34,6 +35,6 @@ public class Admin extends Person implements Serializable {
         }
         Admin tmp = (Admin) admin;
 
-        return this.login.equals(tmp.login) && (this.pass.equals(tmp.pass) && this.iD == tmp.iD);
+        return login.equals(tmp.login) && (pass.equals(tmp.pass) && iD == tmp.iD);
     }
 }
