@@ -2,6 +2,7 @@ package ua.artcode.controller;
 
 import ua.artcode.model.*;
 import ua.artcode.utils.database_gen.DataBaseListsGen;
+import ua.artcode.utils.serialization.LoadMode;
 import ua.artcode.utils.serialization.TaxiAppLoader;
 
 import java.io.Serializable;
@@ -24,16 +25,15 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
         //tickets = DataBaseListsGen.ticketsListGen(100);
 
         // for load tickets from the fileDB
-        tickets = TaxiAppLoader.loadTicketsList();
+        tickets = TaxiAppLoader.loadList("tickets.json", LoadMode.TICKETS);
 
         ////////////////////////////////////
 
         // for generate drivers
-        driver = DataBaseListsGen.driversListGen(100);
+        driver = DataBaseListsGen.driversListGen(10);
 
         // for load drivers from the fileDB
         //driver = TaxiAppLoader.loadDriversList();
-
 
         ////////////////////////////////////////
 
@@ -41,12 +41,12 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
         //clients = DataBaseListsGen.clientsListGen(100);
 
         // for load clients from the fileDB
-        clients = TaxiAppLoader.loadClientsList();
+        clients = TaxiAppLoader.loadList("clients.json", LoadMode.CLIENTS);
 
         ////////////////////////////////////////
 
         // for generate admins
-        admins = DataBaseListsGen.adminsListGen(100);
+        admins = DataBaseListsGen.adminsListGen(10);
 
         // for load admins from the fileDB
         //admins = TaxiAppLoader.loadAdminsList();

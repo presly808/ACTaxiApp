@@ -33,14 +33,14 @@ public class TaxiAppLoader {
         return temp;
     }
 
-    public static List<Admin> loadAdminsList(){
+    public static List loadList(String nameFile, LoadMode mode){
 
-        String admins = "";
+        String objects = "";
 
-        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/clients.json"))) {
+        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/" + nameFile))) {
             String line = "";
             while((line = bf.readLine()) != null){
-                admins += line + "\n";
+                objects += line + "\n";
             }
 
 
@@ -49,14 +49,17 @@ public class TaxiAppLoader {
             return new ArrayList<>();
         }
 
-        return parseAdminsString(admins);
+        return mode == LoadMode.ADMINS ? parseAdminsString(objects) :
+                mode == LoadMode.CLIENTS ? parseClientsString(objects) :
+                mode == LoadMode.DRIVERS ? parseDriversString(objects) :
+                parseTicketsString(objects);
     }
 
     private static List<Admin> parseAdminsString(String adminsStr){
 
         ArrayList<Admin> adminsList = new ArrayList<>();
+        adminsStr = fixTicketsString(adminsStr);
 
-        fixTicketsString(adminsStr);
 
         String[] admins = adminsStr.split(",");
         if(admins.length < 1){
@@ -73,29 +76,9 @@ public class TaxiAppLoader {
         return adminsList;
     }
 
-    public static List<Client> loadClientsList(){
-
-        String clients = "";
-
-        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/clients.json"))) {
-            String line = "";
-            while((line = bf.readLine()) != null){
-                clients += line + "\n";
-            }
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return new ArrayList<>();
-        }
-
-        return parseClientsString(clients);
-    }
-
     private static List<Client> parseClientsString(String clientsStr) {
 
         ArrayList<Client> adminsList = new ArrayList<>();
-
         clientsStr = fixTicketsString(clientsStr);
 
         String[] clients = clientsStr.split(",");
@@ -115,29 +98,9 @@ public class TaxiAppLoader {
         return adminsList;
     }
 
-    public static List<Driver> loadDriversList(){
-
-        String drivers = "";
-
-        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/clients.json"))) {
-            String line = "";
-            while((line = bf.readLine()) != null){
-                drivers += line + "\n";
-            }
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return new ArrayList<>();
-        }
-
-        return parseDriversString(drivers);
-    }
-
     private static List<Driver> parseDriversString(String driversStr) {
 
         ArrayList<Driver> driversList = new ArrayList<>();
-
         driversStr = fixTicketsString(driversStr);
 
         String[] drivers = driversStr.split(",");
@@ -158,29 +121,9 @@ public class TaxiAppLoader {
 
     }
 
-    public static List<Ticket> loadTicketsList(){
-
-        String tickets = "";
-
-        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/clients.json"))) {
-            String line = "";
-            while((line = bf.readLine()) != null){
-                tickets += line + "\n";
-            }
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return new ArrayList<>();
-        }
-
-        return parseTicketsString(tickets);
-    }
-
     private static List<Ticket> parseTicketsString(String ticketsStr) {
 
         ArrayList<Ticket> ticketsList = new ArrayList<>();
-
         ticketsStr = fixTicketsString(ticketsStr);
 
         String[] tickets = ticketsStr.split(",");
@@ -204,6 +147,10 @@ public class TaxiAppLoader {
     }
 
     private static String fixTicketsString(String ticketsStr) {
+
+        if(ticketsStr.endsWith("\n")){
+            ticketsStr = ticketsStr.substring(0, ticketsStr.length() - 1);
+        }
 
         while(true) {
             if(ticketsStr.startsWith("[") || ticketsStr.endsWith("]")) {
