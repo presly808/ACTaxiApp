@@ -32,7 +32,7 @@ public class ClientControllerTest {
     private Driver driver2 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(), true);
     private Driver driver3 = new Driver("Janet", new Car("Golf", 9876, "blue"), ID.genId(), true);
 
-     private Ticket ticket = new Ticket(driver1.getId(), client.getId(), "Central Park", "Times square", 17.50, "NEW",
+    private Ticket ticket = new Ticket(driver1.getId(), client.getId(), "Central Park", "Times square", 17.50, "NEW",
                 new Date(), new Date(), new Date(), ID.genId());
 
     private ClientController controller;

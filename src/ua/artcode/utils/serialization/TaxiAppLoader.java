@@ -3,7 +3,9 @@ package ua.artcode.utils.serialization;
 import ua.artcode.controller.AppDataContainer;
 import ua.artcode.model.*;
 
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,9 +37,11 @@ public class TaxiAppLoader {
 
         String admins = "";
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./resources/db/admins.json"))) {
-
-            admins = ((String) ois.readObject());
+        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/clients.json"))) {
+            String line = "";
+            while((line = bf.readLine()) != null){
+                admins += line + "\n";
+            }
 
 
         } catch (Exception ex) {
@@ -73,9 +77,11 @@ public class TaxiAppLoader {
 
         String clients = "";
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./resources/db/clients.json"))) {
-
-            clients = ((String) ois.readObject());
+        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/clients.json"))) {
+            String line = "";
+            while((line = bf.readLine()) != null){
+                clients += line + "\n";
+            }
 
 
         } catch (Exception ex) {
@@ -113,9 +119,11 @@ public class TaxiAppLoader {
 
         String drivers = "";
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./resources/db/drivers.json"))) {
-
-            drivers = ((String) ois.readObject());
+        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/clients.json"))) {
+            String line = "";
+            while((line = bf.readLine()) != null){
+                drivers += line + "\n";
+            }
 
 
         } catch (Exception ex) {
@@ -154,9 +162,11 @@ public class TaxiAppLoader {
 
         String tickets = "";
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./resources/db/tickets.json"))) {
-
-            tickets = ((String) ois.readObject());
+        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/clients.json"))) {
+            String line = "";
+            while((line = bf.readLine()) != null){
+                tickets += line + "\n";
+            }
 
 
         } catch (Exception ex) {

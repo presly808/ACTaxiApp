@@ -116,7 +116,7 @@ public class AddClientFrame extends JFrame {
 
     public boolean checkLoginPasswordFilled() {
 
-        return (loginField.getText().equals("") || (passwordField.getText().equals(""))) ? false : true;
+        return (loginField.getText().isEmpty() || (passwordField.getPassword().length == 0));
     }
 
 }
