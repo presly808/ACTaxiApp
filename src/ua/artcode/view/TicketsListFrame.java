@@ -1,6 +1,9 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.AdminController;
+import ua.artcode.controller.ClientController;
+import ua.artcode.controller.DriverController;
+import ua.artcode.controller.ITaxiController;
 import ua.artcode.model.Ticket;
 
 import javax.swing.*;
@@ -21,12 +24,12 @@ import java.util.Set;
  */
 public class TicketsListFrame extends JFrame {
 
-    private AdminController controller;
+    private ITaxiController controller;
     private JTable table;
     private JScrollPane scrollPane;
     private JButton button;
 
-    public TicketsListFrame(AdminController menuController) {
+    public TicketsListFrame(ITaxiController menuController) {
         this.controller = menuController;
         setSize(1000, 300);
         init();
@@ -38,6 +41,8 @@ public class TicketsListFrame extends JFrame {
 
     private void init() {
 
+        setControllerType();
+
         MyTableModel model = new MyTableModel(controller.getTickets());
         table = new JTable(model);
 
@@ -46,6 +51,7 @@ public class TicketsListFrame extends JFrame {
         table.setAutoCreateRowSorter(true);
         TableRowSorter<TableModel> sorter
                 = new TableRowSorter<TableModel>(table.getModel());
+        // sorter.setComparator(9, new TicketsSortByStatus());
         table.setRowSorter(sorter);
 
         button = new JButton("Back to Menu");
@@ -63,13 +69,33 @@ public class TicketsListFrame extends JFrame {
 
     }
 
+    private void setControllerType() {
+
+        controller = controller.getClass() == ClientController.class ?
+                (ClientController) controller : (controller.getClass() == DriverController.class) ? (DriverController) controller
+                : (AdminController) controller;
+    }
+
     public class MyTableModel implements TableModel {
 
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
+        private static final int TICKET_ID = 0;
+        private static final int CLIENT_ID = 1;
+        private static final int DRiVER_ID = 2;
+        private static final int FROM = 3;
+        private static final int TO = 4;
+        private static final int PRICE = 5;
+        private static final int REQUEST_TIME = 6;
+        private static final int ARRIVE_TO_CLIENT = 7;
+        private static final int ARRIVE_TO_PLACE = 8;
+        private static final int STATUS = 9;
+
+        private String[] columnNames = {"TicketID", "ClientID", "DriverID", "From", "To", "Price",
+                "RequestTime", "ArriveToClient", "ArriveToPlace", "Status"};
+        private List<Ticket> tickets;
+        private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy HH:mm");
+
 
         private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
-
-        private List<Ticket> tickets;
 
         public MyTableModel(List<Ticket> tickets) {
             this.tickets = tickets;
@@ -80,68 +106,63 @@ public class TicketsListFrame extends JFrame {
         }
 
         public Class<?> getColumnClass(int columnIndex) {
+            if (tickets.isEmpty()) {
+                return Object.class;
+            }
             return getValueAt(0, columnIndex).getClass();
         }
 
         public int getColumnCount() {
-            return 10;
-        }
-
-        public String getColumnName(int columnIndex) {
-            switch (columnIndex) {
-                case 0:
-                    return "TicketID";
-                case 1:
-                    return "ClientID";
-                case 2:
-                    return "DriverID";
-                case 3:
-                    return "From";
-                case 4:
-                    return "To";
-                case 5:
-                    return "Price";
-                case 6:
-                    return "RequestTime";
-                case 7:
-                    return "ArriveToClient";
-                case 8:
-                    return "ArriveToPlace";
-                case 9:
-                    return "Status";
-            }
-            return "";
+            return columnNames.length;
         }
 
         public int getRowCount() {
             return tickets.size();
         }
 
+        public String getColumnName(int columnIndex) {
+            return columnNames[columnIndex];
+        }
+
         public Object getValueAt(int rowIndex, int columnIndex) {
             Ticket ticket = tickets.get(rowIndex);
+            Object returnedValue = null;
+
             switch (columnIndex) {
-                case 0:
-                    return ticket.getiDTicket();
-                case 1:
-                    return ticket.getIdClient();
-                case 2:
-                    return ticket.getIdDriver();
-                case 3:
-                    return ticket.getFromLocation();
-                case 4:
-                    return ticket.getToLocation();
-                case 5:
-                    return ticket.getPrice();
-                case 6:
-                    return dateFormat.format(ticket.getRequestTime());
-                case 7:
-                    return dateFormat.format(ticket.getArrivalTaxiTime());
-                case 8:
-                    return dateFormat.format(ticket.getArrivalDestinationTime());
-                case 9:
-                    return ticket.getStatus();
+                case TICKET_ID:
+                    returnedValue = ticket.getiDTicket();
+                    break;
+                case CLIENT_ID:
+                    returnedValue = ticket.getIdClient();
+                    break;
+                case DRiVER_ID:
+                    returnedValue = ticket.getIdDriver();
+                    break;
+                case FROM:
+                    returnedValue = ticket.getFromLocation();
+                    break;
+                case TO:
+                    returnedValue = ticket.getToLocation();
+                    break;
+                case PRICE:
+                    returnedValue = ticket.getPrice();
+                    break;
+                case REQUEST_TIME:
+                    returnedValue = dateFormat.format(ticket.getRequestTime());
+                    break;
+                case ARRIVE_TO_CLIENT:
+                    returnedValue = dateFormat.format(ticket.getArrivalTaxiTime());
+                    break;
+                case ARRIVE_TO_PLACE:
+                    returnedValue = dateFormat.format(ticket.getArrivalDestinationTime());
+                    break;
+                case STATUS:
+                    returnedValue = ticket.getStatus();
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid column index");
             }
-            return "";
+            return returnedValue;
         }
 
         public boolean isCellEditable(int rowIndex, int columnIndex) {
