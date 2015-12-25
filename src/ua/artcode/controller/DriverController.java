@@ -2,6 +2,7 @@ package ua.artcode.controller;
 
 import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
+import ua.artcode.model.TicketStatus;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.ArrayList;
@@ -79,9 +80,14 @@ public class DriverController implements IDriverController{
 
         // we need method to calculate price
         currentTicket.setPrice(100);
+
+        currentTicket.setStatus(TicketStatus.IN_PROGRESS);
+
         TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
 
         // after ArrivalDestinationTime
+        currentTicket.setStatus(TicketStatus.IN_PROGRESS);
+        TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
         dropCurrentTicket();
 
         return currentTicket;
