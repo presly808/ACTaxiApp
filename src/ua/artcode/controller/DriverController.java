@@ -86,7 +86,7 @@ public class DriverController implements IDriverController{
         TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
 
         // after ArrivalDestinationTime
-        currentTicket.setStatus(TicketStatus.IN_PROGRESS);
+        currentTicket.setStatus(TicketStatus.DONE);
         TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
         dropCurrentTicket();
 
