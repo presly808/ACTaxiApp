@@ -70,6 +70,8 @@ public class DriverController implements IDriverController{
     @Override
     public Ticket takeATicket(){
 
+        getCurrentTicket();
+
         currentTicket.setIdDriver(currentDriver.getId());
 
         // we need method to calculate time when taxi will arrive to client

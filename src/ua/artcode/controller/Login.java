@@ -1,9 +1,7 @@
 package ua.artcode.controller;
 
 
-import ua.artcode.model.Admin;
-import ua.artcode.model.Client;
-import ua.artcode.model.Person;
+import ua.artcode.model.*;
 
 public class Login {
 
@@ -20,6 +18,7 @@ public class Login {
         //create default admin... he won't be save in "file"..
         // we need this for default enter to adminController
         appDataContainer.addAdminToData(new Admin("admin", "admin", 1));
+        appDataContainer.addDriverToData(new Driver("driver", new Car("car", 123, "blue"), 0, false));
 
         Person person = appDataContainer.searchIPerson(login, pass);
         if(person == null){
