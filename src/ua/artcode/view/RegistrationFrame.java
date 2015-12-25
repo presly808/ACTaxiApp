@@ -41,56 +41,25 @@ public class RegistrationFrame extends JFrame {
         southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
         loginField = new JTextField(30);
-        PromptSupport.setPrompt("Login", loginField);
-        PromptSupport.setForeground(Color.GRAY,loginField);
+        setPrompt("Login", loginField);
 
         phoneField = new JTextField(30);
-        PromptSupport.setPrompt("Phone number", phoneField);
-        PromptSupport.setForeground(Color.GRAY,phoneField);
+        setPrompt("Phone number", phoneField);
 
 
         locationField = new JTextField(30);
-        PromptSupport.setPrompt("Your location", locationField);
-        PromptSupport.setForeground(Color.GRAY,locationField);
+        setPrompt("Location", locationField);
 
 
         passwordField = new JPasswordField(30);
-        PromptSupport.setPrompt("Password", passwordField);
-        PromptSupport.setForeground(Color.GRAY,passwordField);
+        setPrompt("Password", passwordField);
 
 
         createAccountButton = new JButton("Create Account");
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                if (checkLoginPasswordFilled()) {
-
-                    Login login = new Login();
-
-                    boolean client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
-                            locationField.getText(), passwordField.getText());
-
-                    if (client) {
-                        JOptionPane.showMessageDialog(RegistrationFrame.this,
-                                String.format("%s account has been successfully created", loginField.getText()),
-                                "Successful registration",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        RegistrationFrame.this.dispose();
-                    } else {
-
-                        JOptionPane.showMessageDialog(RegistrationFrame.this,
-                                String.format("Provided login has been already created",
-                                        JOptionPane.ERROR_MESSAGE));
-                    }
-
-                } else {
-
-                    JOptionPane.showMessageDialog(RegistrationFrame.this,
-                            String.format("Login and password fields can't be blank!",
-                                    JOptionPane.OK_OPTION));
-
-                }
+                createAccount();
             }
         });
 
@@ -115,11 +84,46 @@ public class RegistrationFrame extends JFrame {
 
     }
 
+    private void setPrompt(String promptText, JTextField field) {
+        PromptSupport.setPrompt(promptText, field);
+        PromptSupport.setForeground(Color.GRAY, field);
+    }
+
+    private void createAccount() {
+        if (!checkLoginPasswordFilled()) {
+
+            Login login = new Login();
+
+            boolean client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+                    locationField.getText(), passwordField.getText());
+
+            if (client) {
+                JOptionPane.showMessageDialog(RegistrationFrame.this,
+                        String.format("%s account has been successfully created", loginField.getText()),
+                        "Successful registration",
+                        JOptionPane.INFORMATION_MESSAGE);
+                RegistrationFrame.this.dispose();
+            } else {
+
+                JOptionPane.showMessageDialog(RegistrationFrame.this,
+                        "Provided login has been already created", "Existing login error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(RegistrationFrame.this,
+                    "Login and password fields can't be blank!", "Blank fields error",
+                    JOptionPane.OK_OPTION);
+
+        }
+    }
+
     // check that login and password data provided by user while creating an account;//
 
     public boolean checkLoginPasswordFilled() {
 
-        return !loginField.getText().equals("") || !passwordField.getText().equals("");
+        return (loginField.getText().isEmpty() || (passwordField.getPassword().length == 0));
     }
 
 }

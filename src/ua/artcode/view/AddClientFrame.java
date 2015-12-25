@@ -39,18 +39,12 @@ public class AddClientFrame extends JFrame {
         panel = new JPanel();
         southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
-        loginField = new JTextField(30);
-        PromptSupport.setPrompt("Login", loginField);
-        PromptSupport.setForeground(Color.GRAY, loginField);
+        setField("Login", loginField);
 
-        phoneField = new JTextField(30);
-        PromptSupport.setPrompt("Phone number", phoneField);
-        PromptSupport.setForeground(Color.GRAY, phoneField);
+        setField("Phone number", phoneField);
 
 
-        locationField = new JTextField(30);
-        PromptSupport.setPrompt("Client's location", locationField);
-        PromptSupport.setForeground(Color.GRAY, locationField);
+        setField("Client's location", locationField);
 
 
         passwordField = new JPasswordField(30);
@@ -63,31 +57,7 @@ public class AddClientFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if (checkLoginPasswordFilled()) {
-
-                    Client client = adminController.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
-                            locationField.getText(), passwordField.getText());
-
-                    if (client != null) {
-                        JOptionPane.showMessageDialog(AddClientFrame.this,
-                                String.format("%s account has been successfully created", loginField.getText()),
-                                "Successful registration",
-                                JOptionPane.INFORMATION_MESSAGE);
-                        AddClientFrame.this.dispose();
-                    } else {
-
-                        JOptionPane.showMessageDialog(AddClientFrame.this,
-                                String.format("Provided login has been already created",
-                                        JOptionPane.ERROR_MESSAGE));
-                    }
-
-                } else {
-
-                    JOptionPane.showMessageDialog(AddClientFrame.this,
-                            String.format("Login and password fields can't be blank!",
-                                    JOptionPane.OK_OPTION));
-
-                }
+                addClient();
             }
         });
 
@@ -110,6 +80,41 @@ public class AddClientFrame extends JFrame {
 
         this.add(panel);
 
+    }
+
+    private void setField(String login, JTextField loginField) {
+        loginField = new JTextField(30);
+        PromptSupport.setPrompt(login, loginField);
+        PromptSupport.setForeground(Color.GRAY, loginField);
+    }
+
+    private void addClient() {
+        if (!checkLoginPasswordFilled()) {
+
+            Client client = adminController.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+                    locationField.getText(), passwordField.getText());
+
+            if (client != null) {
+                JOptionPane.showMessageDialog(AddClientFrame.this,
+                        String.format("%s account has been successfully created", loginField.getText()),
+                        "Successful registration",
+                        JOptionPane.INFORMATION_MESSAGE);
+                AddClientFrame.this.dispose();
+            } else {
+
+                JOptionPane.showMessageDialog(AddClientFrame.this,
+                        "Provided login has been already created",
+                        "Existing login error",
+                                JOptionPane.ERROR_MESSAGE);
+            }
+
+        } else {
+
+            JOptionPane.showMessageDialog(AddClientFrame.this,
+                    "Login and password fields can't be blank!","Empty fields error",
+                            JOptionPane.OK_OPTION);
+
+        }
     }
 
     // check that login and password data provided by user while creating an account;//
