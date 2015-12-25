@@ -30,6 +30,7 @@ public class DriverControllerTest {
     private Ticket ticket = new Ticket(0, client1.getId(), "Central Park", "Times square", 17.50, "NEW",
             new Date(), new Date(), new Date(), ID.genId());
 
+
     private Driver driver1 = new Driver("Ashton", new Car("BMW", 1234, "pink"), ID.genId(), true, ticket.getiDTicket(), "1234");
     private Driver driver2 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(), false);
 
@@ -81,6 +82,7 @@ public class DriverControllerTest {
 
     @Test
     public void testTakeATicket() throws Exception {
+        controller1.getCurrentTicket();
         Ticket actual1 = controller1.takeATicket();
         assertEquals(ticket.getiDTicket(), actual1.getiDTicket());
         assertEquals(TicketStatus.DONE, actual1.getStatus());
