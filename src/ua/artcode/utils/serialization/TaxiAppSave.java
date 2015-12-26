@@ -1,5 +1,6 @@
 package ua.artcode.utils.serialization;
 
+import com.google.gson.Gson;
 import org.json.simple.JSONValue;
 import ua.artcode.controller.AppDataContainer;
 
@@ -16,12 +17,13 @@ public class TaxiAppSave {
 
     public static void save(String nameFile, List list){
 
-        String jsonString = JSONValue.toJSONString(list);
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(list);
 
         try(Writer out = new FileWriter("./resources/db/" + nameFile);) {
 
             out.write(jsonString);
-
+            out.flush();
         } catch (Exception ex) {
             ex.printStackTrace();
         }

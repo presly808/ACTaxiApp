@@ -1,5 +1,6 @@
 package ua.artcode.utils.serialization;
 
+import com.google.gson.Gson;
 import ua.artcode.controller.AppDataContainer;
 import ua.artcode.model.*;
 
@@ -33,7 +34,7 @@ public class TaxiAppLoader {
         return temp;
     }
 
-    public static List loadList(String nameFile, LoadMode mode){
+    public static List loadList1(String nameFile, LoadMode mode){
 
         String objects = "";
 
@@ -53,6 +54,27 @@ public class TaxiAppLoader {
                 mode == LoadMode.CLIENTS ? parseClientsString(objects) :
                 mode == LoadMode.DRIVERS ? parseDriversString(objects) :
                 parseTicketsString(objects);
+    }
+
+    public static List loadList(String nameFile, LoadMode mode){
+
+        String objects = "";
+
+        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/" + nameFile))) {
+            String line = "";
+            while((line = bf.readLine()) != null){
+                objects += line + "\n";
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+
+        Gson gson = new Gson();
+        List list = gson.fromJson(objects, List.class);
+        return list;
     }
 
     private static List<Admin> parseAdminsString(String adminsStr){
