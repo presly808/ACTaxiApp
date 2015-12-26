@@ -25,12 +25,12 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
         //tickets = DataBaseListsGen.ticketsListGen(100);
 
         // for load tickets from the fileDB
-        tickets = TaxiAppLoader.loadList("tickets.json", LoadMode.TICKETS);
+        tickets = TaxiAppLoader.<Ticket>loadList("tickets.json");
 
         ////////////////////////////////////
 
         // for generate drivers
-        driver = DataBaseListsGen.driversListGen(10);
+        driver = DataBaseListsGen.driversListGen(100);
 
         // for load drivers from the fileDB
         //driver = TaxiAppLoader.loadDriversList();
@@ -41,12 +41,12 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
         //clients = DataBaseListsGen.clientsListGen(100);
 
         // for load clients from the fileDB
-        clients = TaxiAppLoader.loadList("clients.json", LoadMode.CLIENTS);
+        clients = TaxiAppLoader.<Client>loadList("clients.json");
 
         ////////////////////////////////////////
 
         // for generate admins
-        admins = DataBaseListsGen.adminsListGen(10);
+        admins = DataBaseListsGen.adminsListGen(100);
 
         // for load admins from the fileDB
         //admins = TaxiAppLoader.loadAdminsList();
