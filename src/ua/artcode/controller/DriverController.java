@@ -73,7 +73,7 @@ public class DriverController implements IDriverController{
         getCurrentTicket();
 
         if(currentTicket == null){
-            throw new HaveNotNewTickets("The driver have not new tickets");
+            throw new HaveNotNewTickets("the driver doesn't have tickets to accept");
         }
 
         currentTicket.setIdDriver(currentDriver.getId());
