@@ -61,7 +61,7 @@ public class TestAppDataContainerJsonSerializer {
     @Test
     public void testSave(){
         String nameFile = "all.json";
-        TaxiAppSave.save(nameFile, appDataContainer);
+        TaxiAppSave.save(appDataContainer);
         Assert.assertTrue(new File("./resources/db/" + nameFile).exists());
     }
 

@@ -17,37 +17,6 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     private List<Admin> admins = new ArrayList<>();
 
     public AppDataContainer(){
-
-        // for generate tickets
-        //tickets = DataBaseListsGen.ticketsListGen(100);
-
-        // for load tickets from the fileDB
-        tickets = TaxiAppLoader.<Ticket>loadList("tickets.json",Ticket.class);
-
-        ////////////////////////////////////
-
-        // for generate drivers
-        driver = DataBaseListsGen.driversListGen(100);
-
-        // for load drivers from the fileDB
-        //driver = TaxiAppLoader.loadDriversList();
-
-        ////////////////////////////////////////
-
-        // for generate clients
-        //clients = DataBaseListsGen.clientsListGen(100);
-
-        // for load clients from the fileDB
-        clients = TaxiAppLoader.<Client>loadList("clients.json",Client.class);
-
-        ////////////////////////////////////////
-
-        // for generate admins
-        admins = DataBaseListsGen.adminsListGen(100);
-
-        // for load admins from the fileDB
-        //admins = TaxiAppLoader.loadAdminsList();
-
     }
 
     public AppDataContainer(AppDataContainer appDataContainer){

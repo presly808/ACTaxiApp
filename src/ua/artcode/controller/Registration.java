@@ -19,7 +19,7 @@ public class Registration {
 
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
-        TaxiAppSave.save("clients.json", appDataContainer.getListClients());
+        TaxiAppSave.save(appDataContainer);
 
         return true;
     }
@@ -33,7 +33,7 @@ public class Registration {
 
         Client client = new Client(name, phone, location, pass, ID.genId());
         appDataContainer.addClientToData(client);
-        TaxiAppSave.save("clients.json", appDataContainer.getListClients());
+        TaxiAppSave.save(appDataContainer);
 
         return client;
     }
@@ -42,7 +42,7 @@ public class Registration {
 
         Driver driver = new Driver(name, car, ID.genId(), new Boolean("false"), 0, pass);
         appDataContainer.addDriverToData(driver);
-        TaxiAppSave.save("drivers.json", appDataContainer.getListDrivers());
+        TaxiAppSave.save(appDataContainer);
 
         return driver;
     }
@@ -52,7 +52,7 @@ public class Registration {
         Ticket ticket = new Ticket(0, idClient, fromLocation, toLocation, 0, "NEW",
                 new Date(), new Date(), new Date(), ID.genId());
         appDataContainer.addTicketToData(ticket);
-        TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+        TaxiAppSave.save(appDataContainer);
 
 
         return ticket;

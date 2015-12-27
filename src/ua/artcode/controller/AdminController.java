@@ -11,7 +11,6 @@ import java.util.List;
 public class AdminController implements IAdminController {
 
     private AppDataContainer appDataContainer;
-    private String me = "admin";
 
     private AdminController(AppDataContainer appDataContainer){
         this.appDataContainer = appDataContainer;
@@ -118,7 +117,7 @@ public class AdminController implements IAdminController {
                 tmp.setIdDriver(driver.getId());
                 driver.takeTicket(tmp.getiDTicket());
 
-                TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+                TaxiAppSave.save(appDataContainer);
 
                 return true;
             }

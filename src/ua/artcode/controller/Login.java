@@ -2,6 +2,7 @@ package ua.artcode.controller;
 
 
 import ua.artcode.model.*;
+import ua.artcode.utils.serialization.TaxiAppLoader;
 
 public class Login {
 
@@ -9,7 +10,7 @@ public class Login {
 
     public Login(){
 
-        appDataContainer = new AppDataContainer();
+        appDataContainer = new AppDataContainer(TaxiAppLoader.loadContainer("db.json"));
 
     }
 

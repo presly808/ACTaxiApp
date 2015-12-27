@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class ClientController implements IClientController{
 
-    private String me = "client";
     private Client currentClient;
     private Ticket currentTicket;
     private AppDataContainer appDataContainer;

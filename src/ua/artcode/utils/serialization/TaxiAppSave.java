@@ -17,6 +17,7 @@ import java.util.List;
  */
 public class TaxiAppSave {
 
+    @Deprecated
     public static<T> void save(String nameFile, List<T> list){
 
 
@@ -33,13 +34,13 @@ public class TaxiAppSave {
         }
     }
 
-    public static<T> void save(String nameFile, AppDataContainer container){
+    public static void save(AppDataContainer container){
 
 
         Gson gson = new Gson();
         String jsonString = gson.toJson(container);
 
-        try(Writer out = new FileWriter("./resources/db/" + nameFile);) {
+        try(Writer out = new FileWriter("./resources/db/db.json")) {
 
             out.write(jsonString);
             out.flush();

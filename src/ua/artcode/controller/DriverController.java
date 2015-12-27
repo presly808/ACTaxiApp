@@ -16,7 +16,6 @@ public class DriverController implements IDriverController{
 
     private Driver currentDriver;
     private Ticket currentTicket;
-    private String me = "driver";
     private AppDataContainer appDataContainer;
 
     public DriverController(Driver currentDriver, AppDataContainer appDataContainer) {
@@ -85,11 +84,11 @@ public class DriverController implements IDriverController{
 
         currentTicket.setStatus(TicketStatus.IN_PROGRESS);
 
-        TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+        TaxiAppSave.save(appDataContainer);
 
         // after ArrivalDestinationTime
         currentTicket.setStatus(TicketStatus.DONE);
-        TaxiAppSave.save("tickets.json", appDataContainer.getListTickets());
+        TaxiAppSave.save(appDataContainer);
         dropCurrentTicket();
 
         return currentTicket;
