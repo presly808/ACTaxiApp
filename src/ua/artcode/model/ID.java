@@ -21,7 +21,7 @@ public class ID {
         return iD;
     }
 
-    public static long genId(){
-        return new ID().getId();
+    public static long genId(int num){
+        return new ID().getId() ^ num;
     }
 }

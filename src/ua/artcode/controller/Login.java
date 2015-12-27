@@ -16,8 +16,7 @@ public class Login {
 
     public ITaxiController login(String login, String pass) {
 
-        //create default admin... he won't be save in "file"..
-        // we need this for default enter to adminController
+        // we need this for default enter to adminController or DriverController
         //appDataContainer.addAdminToData(new Admin("admin", "admin", 1));
         //appDataContainer.addDriverToData(new Driver("driver", new Car("car", 123, "blue"), 0, false));
 

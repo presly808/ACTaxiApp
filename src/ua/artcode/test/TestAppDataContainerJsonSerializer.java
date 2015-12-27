@@ -28,17 +28,17 @@ public class TestAppDataContainerJsonSerializer {
 
     private AppDataContainer appDataContainer;
 
-    private Admin admin = new Admin("superadmin", "superpass", ID.genId());
+    private Admin admin = new Admin("superadmin", "superpass", ID.genId(new Integer("superadmin")));
 
-    private Client client1 = new Client("Max", 111, "New York", "111", ID.genId());
-    private Client client2 = new Client("John", 222, "New Jersey", "222", ID.genId());
+    private Client client1 = new Client("Max", 111, "New York", "111", ID.genId(new Integer("Max")));
+    private Client client2 = new Client("John", 222, "New Jersey", "222", ID.genId(new Integer("Kohn")));
 
     private Ticket ticket = new Ticket(0, client1.getId(), "Central Park", "Times square", 17.50, "NEW",
-            new Date(), new Date(), new Date(), ID.genId());
+            new Date(), new Date(), new Date(), ID.genId(new Integer("Central Park")));
 
 
-    private Driver driver1 = new Driver("Ashton", new Car("BMW", 1234, "pink"), ID.genId(), true, ticket.getiDTicket(), "1234");
-    private Driver driver2 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(), false);
+    private Driver driver1 = new Driver("Ashton", new Car("BMW", 1234, "pink"), ID.genId(new Integer("Ashton")), true, ticket.getiDTicket(), "1234");
+    private Driver driver2 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(new Integer("Reese")), false);
 
 
     @Before
