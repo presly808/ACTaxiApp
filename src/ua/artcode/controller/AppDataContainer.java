@@ -90,43 +90,38 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     @Override
     public Person searchIPerson(String login, String pass){
 
-        Person tmp = getAdmin(login);
-        if (tmp != null){
+        Person tmp = getPerson(login, admins);
+        if (passCheck(pass, tmp)) return tmp;
 
-            if(pass.equals(tmp.getPass())){
-                return tmp;
-            } //else message "unknown pass"
-        }
-        tmp = getClient(login);
-        if (tmp != null){
+        tmp = getPerson(login, clients);
+        if (passCheck(pass, tmp)) return tmp;
 
-            if(pass.equals(tmp.getPass())){
-                return tmp;
-            } //else message "unknown pass"
-        }
+        tmp = getPerson(login, driver);
+        if (passCheck(pass, tmp)) return tmp;
 
         // message "unknown login"
         return null;
     }
 
+    private boolean passCheck(String pass, Person tmp) {
+
+        if (tmp != null){
+
+            if(pass.equals(tmp.getPass())){
+                return true;
+            } //else message "unknown pass"
+        }
+        return false;
+    }
+
     @Override
-    public Person getClient(String login) {
-        for(Person tmp : clients){
-            if(login.equals(tmp.getLogin())){
-                return tmp;
+    public Person getPerson(String login, List list) {
+        for(Object tmp : list){
+            Person person = (Person) tmp;
+            if(login.equals(person.getLogin())){
+                return person;
             }
         }
         return null;
     }
-
-    @Override
-    public Person getAdmin(String login) {
-        for(Person tmp : admins){
-            if(login.equals(tmp.getLogin())){
-                return tmp;
-            }
-        }
-        return null;
-    }
-
 }

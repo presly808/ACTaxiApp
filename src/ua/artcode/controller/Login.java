@@ -18,8 +18,8 @@ public class Login {
 
         //create default admin... he won't be save in "file"..
         // we need this for default enter to adminController
-        appDataContainer.addAdminToData(new Admin("admin", "admin", 1));
-        appDataContainer.addDriverToData(new Driver("driver", new Car("car", 123, "blue"), 0, false));
+        //appDataContainer.addAdminToData(new Admin("admin", "admin", 1));
+        //appDataContainer.addDriverToData(new Driver("driver", new Car("car", 123, "blue"), 0, false));
 
         Person person = appDataContainer.searchIPerson(login, pass);
         if(person == null){

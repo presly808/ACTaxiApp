@@ -38,29 +38,6 @@ public class TaxiAppLoader {
         return temp;
     }
 
-    public static<T> List<T> loadList(String nameFile, Class<T> type){
-
-        String objects = "";
-
-        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/" + nameFile))) {
-            String line = "";
-            while((line = bf.readLine()) != null){
-                objects += line + "\n";
-            }
-
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return new ArrayList<>();
-        }
-
-        Type listOfTestObject = new TypeToken<List<T>>(){}.getType();
-        Gson gson = new Gson();
-        List<T> list = gson.fromJson(objects, listOfTestObject);
-
-        return list;
-    }
-
     public static AppDataContainer loadContainer(String nameFile){
 
         String objects = "";

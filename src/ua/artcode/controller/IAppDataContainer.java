@@ -18,6 +18,5 @@ public interface IAppDataContainer {
     List<Admin> getListAdmins();
     List<Ticket> getListTickets();
     Person searchIPerson(String login, String pass);
-    Person getClient(String login);
-    Person getAdmin(String login);
+    Person getPerson(String login, List<Person> list);
 }

@@ -12,7 +12,7 @@ public class Registration {
 
     public static boolean addClient(String name, int phone, String location, String pass, AppDataContainer appDataContainer){
 
-        Person person = appDataContainer.getClient(name);
+        Person person = appDataContainer.getPerson(name, appDataContainer.getListClients());
         if(person != null){
             return false;
         }
@@ -26,7 +26,7 @@ public class Registration {
 
     public static Client addClientO(String name, int phone, String location, String pass, AppDataContainer appDataContainer){
 
-        Person person = appDataContainer.getClient(name);
+        Person person = appDataContainer.getPerson(name, appDataContainer.getListClients());
         if(person != null){
             return null;
         }
