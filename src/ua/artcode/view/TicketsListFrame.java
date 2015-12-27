@@ -27,7 +27,9 @@ public class TicketsListFrame extends JFrame {
     private ITaxiController controller;
     private JTable table;
     private JScrollPane scrollPane;
-    private JButton button;
+    private JPanel southButtonPanel;
+    private JButton rejectTicketButton, acceptTicketButton, menuButton;
+    private DriverController driverController;
 
     public TicketsListFrame(ITaxiController menuController) {
         this.controller = menuController;
@@ -49,13 +51,13 @@ public class TicketsListFrame extends JFrame {
         scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
         table.setAutoCreateRowSorter(true);
-        TableRowSorter<TableModel> sorter
-                = new TableRowSorter<TableModel>(table.getModel());
-        // sorter.setComparator(9, new TicketsSortByStatus());
-        table.setRowSorter(sorter);
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
 
-        button = new JButton("Back to Menu");
-        button.addActionListener(new ActionListener() {
+        table.setRowSorter(sorter);
+        southButtonPanel = new JPanel(new GridLayout(1, 3));
+
+        menuButton = new JButton("Back to Menu");
+        menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new MenuFrame(controller);
@@ -64,9 +66,43 @@ public class TicketsListFrame extends JFrame {
         });
 
 
-        getContentPane().add(scrollPane, new BorderLayout().CENTER);
-        getContentPane().add(button, new BorderLayout().SOUTH);
+        acceptTicketButton = new JButton("Accept  Ticket");
+        acceptTicketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                driverController.takeATicket();
+            }
+        });
 
+        rejectTicketButton = new JButton("Reject Ticket");
+        rejectTicketButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                driverController.dropCurrentTicket();
+            }
+        });
+
+        provideDriverSetting();
+
+        southButtonPanel.add(menuButton);
+        southButtonPanel.add(acceptTicketButton);
+        southButtonPanel.add(rejectTicketButton);
+
+        getContentPane().add(scrollPane, new BorderLayout().CENTER);
+        getContentPane().add(southButtonPanel, new BorderLayout().SOUTH);
+
+    }
+
+    private void provideDriverSetting() {
+
+        if (controller.getClass() == DriverController.class) {
+
+            driverController = (DriverController) controller;
+        } else {
+
+            acceptTicketButton.setVisible(false);
+            rejectTicketButton.setVisible(false);
+        }
     }
 
     private void setControllerType() {
