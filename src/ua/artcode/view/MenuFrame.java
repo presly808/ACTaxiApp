@@ -13,13 +13,8 @@ import java.awt.event.ActionListener;
 public class MenuFrame extends JFrame {
     private ITaxiController menuController;
     private JPanel panel;
-    private JButton showTicketsButton;
-    private JButton showDriversButton;
-    private JLabel label;
-    private JButton addDriverButton;
-    private JButton addClientButton;
+    private JButton showTicketsButton,showDriversButton,addDriverButton,addClientButton,orderTaxiButton;
     private JLabel whoAmIlabel;
-    private JButton orderTaxiButton;
 
     public MenuFrame(ITaxiController menuController) {
         this.menuController = menuController;
@@ -36,15 +31,13 @@ public class MenuFrame extends JFrame {
     private void init() {
 
         panel = new JPanel();
-        label = new JLabel("ADMIN PANEL");
-
 
         showTicketsButton = new JButton("Show tickets");
         showTicketsButton.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new TicketsListFrame((AdminController) menuController);
+                new TicketsListFrame( menuController);
                 MenuFrame.this.dispose();
             }
         });
