@@ -90,10 +90,10 @@ public class TaxiAppLoaderTest {
     @Test
     public void loadListTest(){
 
-        List<Ticket> actualTickets = TaxiAppLoader.<Ticket>loadList("testTickets.json");
-        List<Admin> actualAdmins = TaxiAppLoader.<Admin>loadList("testAdmins.json");
-        List<Client> actualClients = TaxiAppLoader.<Client>loadList("testClients.json");
-        List<Driver> actualDrivers = TaxiAppLoader.<Driver>loadList("testDrivers.json");
+        List<Ticket> actualTickets = TaxiAppLoader.loadList("testTickets.json", Ticket.class);
+        List<Admin> actualAdmins = TaxiAppLoader.loadList("testAdmins.json", Admin.class);
+        List<Client> actualClients = TaxiAppLoader.loadList("testClients.json", Client.class);
+        List<Driver> actualDrivers = TaxiAppLoader.loadList("testDrivers.json", Driver.class);
 
         assertFalse(actualTickets.isEmpty());
         assertTrue(actualTickets.contains(ticket));

@@ -9,9 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by dexter on 20.12.15.
- */
+
 public class AppDataContainer implements Serializable, IAppDataContainer {
 
     private List<Ticket> tickets = new ArrayList<>();
@@ -25,7 +23,7 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
         //tickets = DataBaseListsGen.ticketsListGen(100);
 
         // for load tickets from the fileDB
-        tickets = TaxiAppLoader.<Ticket>loadList("tickets.json");
+        tickets = TaxiAppLoader.<Ticket>loadList("tickets.json",Ticket.class);
 
         ////////////////////////////////////
 
@@ -41,7 +39,7 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
         //clients = DataBaseListsGen.clientsListGen(100);
 
         // for load clients from the fileDB
-        clients = TaxiAppLoader.<Client>loadList("clients.json");
+        clients = TaxiAppLoader.<Client>loadList("clients.json",Client.class);
 
         ////////////////////////////////////////
 

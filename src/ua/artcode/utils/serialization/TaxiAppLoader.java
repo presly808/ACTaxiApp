@@ -1,6 +1,7 @@
 package ua.artcode.utils.serialization;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import ua.artcode.controller.AppDataContainer;
 import ua.artcode.model.*;
 
@@ -8,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.ObjectInputStream;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.List;
  * Created by dexter on 20.12.15.
  */
 public class TaxiAppLoader {
+
+
 
     @Deprecated
     public static AppDataContainer load(String nameFile) {
@@ -34,7 +38,7 @@ public class TaxiAppLoader {
         return temp;
     }
 
-    public static<T> List loadList(String nameFile){
+    public static<T> List<T> loadList(String nameFile, Class<T> type){
 
         String objects = "";
 
@@ -47,13 +51,36 @@ public class TaxiAppLoader {
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            return new ArrayList<T>();
+            return new ArrayList<>();
         }
 
+        Type listOfTestObject = new TypeToken<List<T>>(){}.getType();
         Gson gson = new Gson();
-        List<T> list = gson.<ArrayList<T>>fromJson(objects, ArrayList.class);
+        List<T> list = gson.fromJson(objects, listOfTestObject);
 
         return list;
+    }
+
+    public static AppDataContainer loadContainer(String nameFile){
+
+        String objects = "";
+
+        try (BufferedReader bf = new BufferedReader(new FileReader("./resources/db/" + nameFile))) {
+            String line = "";
+            while((line = bf.readLine()) != null){
+                objects += line + "\n";
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return new AppDataContainer();
+        }
+
+
+        Gson gson = new Gson();
+
+        return gson.fromJson(objects, AppDataContainer.class);
     }
 }
 
