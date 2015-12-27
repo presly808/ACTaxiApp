@@ -4,6 +4,7 @@ import ua.artcode.controller.AdminController;
 import ua.artcode.controller.ClientController;
 import ua.artcode.controller.DriverController;
 import ua.artcode.controller.ITaxiController;
+import ua.artcode.exception.HaveNotNewTickets;
 import ua.artcode.model.Ticket;
 
 import javax.swing.*;
@@ -70,7 +71,20 @@ public class TicketsListFrame extends JFrame {
         acceptTicketButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                driverController.takeATicket();
+                try {
+                    Ticket acceptedTicket = driverController.takeATicket();
+
+                    JOptionPane.showMessageDialog(TicketsListFrame.this,
+                            String.format("The new ticket with %d id has been accepted", acceptedTicket.getiDTicket()),
+                            "Information message",
+                            JOptionPane.INFORMATION_MESSAGE);
+
+                } catch (HaveNotNewTickets haveNotNewTickets) {
+                    JOptionPane.showMessageDialog(TicketsListFrame.this,
+                            haveNotNewTickets.getMessage(),
+                            "No Tickets",
+                            JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
