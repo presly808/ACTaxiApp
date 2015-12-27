@@ -16,6 +16,8 @@ public interface IAdminController extends ITaxiController{
 
     Driver addDriver(String name, Car car, String pass);
 
+    Driver removeDriver(long id);
+
     List<Client> getAllClients();
 
     List<Driver> getAllDrivers();

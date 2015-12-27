@@ -17,7 +17,7 @@ public class Registration {
             return false;
         }
 
-        Client client = new Client(name, phone, location, pass, ID.genId(new Integer(name)));
+        Client client = new Client(name, phone, location, pass, ID.genId(name.hashCode()));
         appDataContainer.addClientToData(client);
         TaxiAppSave.save(appDataContainer);
 
@@ -31,7 +31,7 @@ public class Registration {
             return null;
         }
 
-        Client client = new Client(name, phone, location, pass, ID.genId(new Integer(name)));
+        Client client = new Client(name, phone, location, pass, ID.genId(name.hashCode()));
         appDataContainer.addClientToData(client);
         TaxiAppSave.save(appDataContainer);
 
@@ -40,7 +40,7 @@ public class Registration {
 
     public static Driver addDriverO(String name, Car car, AppDataContainer appDataContainer, String pass){
 
-        Driver driver = new Driver(name, car, ID.genId(new Integer(name)), new Boolean("false"), 0, pass);
+        Driver driver = new Driver(name, car, ID.genId(name.hashCode()), new Boolean("false"), 0, pass);
         appDataContainer.addDriverToData(driver);
         TaxiAppSave.save(appDataContainer);
 
@@ -50,7 +50,7 @@ public class Registration {
     public static Ticket addTicket(String fromLocation, String toLocation, long idClient, AppDataContainer appDataContainer){
 
         Ticket ticket = new Ticket(0, idClient, fromLocation, toLocation, 0, "NEW",
-                new Date(), new Date(), new Date(), ID.genId(new Integer(fromLocation)));
+                new Date(), new Date(), new Date(), ID.genId(fromLocation.hashCode()));
         appDataContainer.addTicketToData(ticket);
         TaxiAppSave.save(appDataContainer);
 

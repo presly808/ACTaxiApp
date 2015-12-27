@@ -32,6 +32,18 @@ public class AdminController implements IAdminController {
     }
 
     @Override
+    public Driver removeDriver(long id) {
+//// TODO: 27.12.15  
+        for(Driver tmp : appDataContainer.getListDrivers()){
+            if(tmp.getId() == id){
+                
+            }
+        }
+        
+        return null;
+    }
+
+    @Override
     public List<Client> getAllClients() {
         return appDataContainer.getListClients();
     }
