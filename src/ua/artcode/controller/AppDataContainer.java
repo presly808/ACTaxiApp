@@ -2,7 +2,6 @@ package ua.artcode.controller;
 
 import ua.artcode.model.*;
 import ua.artcode.utils.database_gen.DataBaseListsGen;
-import ua.artcode.utils.serialization.LoadMode;
 import ua.artcode.utils.serialization.TaxiAppLoader;
 
 import java.io.Serializable;
