@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
@@ -32,15 +33,17 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public Driver removeDriver(long id) {
-//// TODO: 27.12.15  
+    public Driver removeDriver(long id) throws NotFindInDataBaseException {
+
         for(Driver tmp : appDataContainer.getListDrivers()){
             if(tmp.getId() == id){
-                
+                if(appDataContainer.getListDrivers().remove(tmp)){
+                    return tmp;
+                }
             }
         }
-        
-        return null;
+
+        throw  new NotFindInDataBaseException("didn't find Driver");
     }
 
     @Override
@@ -60,21 +63,19 @@ public class AdminController implements IAdminController {
 
     @Override
     // return null if didn't find client
-    public Client getClientById(long id) {
+    public Client getClientById(long id) throws NotFindInDataBaseException {
 
         for(Client tmp : appDataContainer.getListClients()){
-
-            if(id == tmp.getId()){
+            if(tmp.getId() == id){
                 return tmp;
             }
-
         }
 
-        return null;
+        throw  new NotFindInDataBaseException("didn't find Client");
     }
 
     @Override
-    public Driver getDriverById(long id) {
+    public Driver getDriverById(long id) throws NotFindInDataBaseException {
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
@@ -84,11 +85,11 @@ public class AdminController implements IAdminController {
 
         }
 
-        return null;
+        throw  new NotFindInDataBaseException("didn't find Driver");
     }
 
     @Override
-    public Driver getFreeDriver(){
+    public Driver getFreeDriver() throws NotFindInDataBaseException {
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
@@ -97,11 +98,12 @@ public class AdminController implements IAdminController {
             }
 
         }
-        return null;
+
+        throw  new NotFindInDataBaseException("didn't find Driver");
     }
 
     @Override
-    public Ticket getTicketById(long id) {
+    public Ticket getTicketById(long id) throws NotFindInDataBaseException {
 
         for(Ticket tmp : appDataContainer.getListTickets()){
 
@@ -111,7 +113,7 @@ public class AdminController implements IAdminController {
 
         }
 
-        return null;
+        throw  new NotFindInDataBaseException("didn't find Ticket");
     }
 
     @Override
@@ -121,8 +123,10 @@ public class AdminController implements IAdminController {
         for(Ticket tmp : appDataContainer.getListTickets()){
             if(tmp.getStatus().equals(TicketStatus.NEW)){
 
-                Driver driver = getFreeDriver();
-                if(driver == null){
+                Driver driver = null;
+                try {
+                    driver = getFreeDriver();
+                } catch (NotFindInDataBaseException notFindPerson) {
                     return false;
                 }
 
@@ -139,7 +143,7 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public Ticket findTicketByClientId(long id) {
+    public Ticket findTicketByClientId(long id) throws NotFindInDataBaseException {
 
         for(Ticket tmp : appDataContainer.getListTickets()){
 
@@ -149,6 +153,6 @@ public class AdminController implements IAdminController {
 
         }
 
-        return null;
+        throw  new NotFindInDataBaseException("didn't find Ticket");
     }
 }

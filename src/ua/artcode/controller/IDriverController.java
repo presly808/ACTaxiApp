@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.HaveNotNewTickets;
 import ua.artcode.model.Ticket;
 
 /**
@@ -11,6 +12,6 @@ public interface IDriverController extends ITaxiController {
     boolean isFree();
     void changeStatus();
     void dropCurrentTicket();
-    Ticket takeATicket();
+    Ticket takeATicket() throws HaveNotNewTickets;
 
 }

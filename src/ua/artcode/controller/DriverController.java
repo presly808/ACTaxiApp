@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.HaveNotNewTickets;
 import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
 import ua.artcode.model.TicketStatus;
@@ -58,7 +59,7 @@ public class DriverController implements IDriverController{
         ArrayList<Ticket> allDriversTickets = new ArrayList<>();
 
         for(Ticket tmp : appDataContainer.getListTickets()){
-            if(tmp.getiDTicket() == currentDriver.getIdCurrentTicket()){
+            if(tmp.getIdDriver() == currentDriver.getId()){
                 allDriversTickets.add(tmp);
             }
         }
@@ -67,9 +68,13 @@ public class DriverController implements IDriverController{
     }
 
     @Override
-    public Ticket takeATicket(){
+    public Ticket takeATicket() throws HaveNotNewTickets {
 
         getCurrentTicket();
+
+        if(currentTicket == null){
+            throw new HaveNotNewTickets("The driver have not new tickets");
+        }
 
         currentTicket.setIdDriver(currentDriver.getId());
 
