@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.ClientHaveAlreadyHadATicket;
 import ua.artcode.model.Ticket;
 
 /**
@@ -7,7 +8,7 @@ import ua.artcode.model.Ticket;
  */
 public interface IClientController extends ITaxiController {
 
-    long callTaxi(String fromLocation, String toLocation);
+    long callTaxi(String fromLocation, String toLocation) throws ClientHaveAlreadyHadATicket;
     Ticket getCurrentTicket();
 
 
