@@ -1,7 +1,6 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.AdminController;
-import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.Driver;
 
 import javax.swing.*;
@@ -53,13 +52,8 @@ public class DriversListFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 int row = table.getSelectedRow();
-                if (row > 0) {
-                    try {
-                        controller.removeDriver((Long) model.getValueAt(row,row));
-                    } catch (NotFindInDataBaseException e1) {
-                        e1.printStackTrace();
-                    }
-                    model.fireTableRowsDeleted(row, row);
+                if (row >= 0) {
+                    model.remove(row);
                 }
             }
         });
@@ -147,7 +141,7 @@ public class DriversListFrame extends JFrame {
         }
 
         public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return true;
+            return false;
         }
 
         public void removeTableModelListener(TableModelListener listener) {
@@ -156,6 +150,12 @@ public class DriversListFrame extends JFrame {
 
         public void setValueAt(Object value, int rowIndex, int columnIndex) {
 
+        }
+
+        public void remove(int row) {
+
+            drivers.remove(row);
+            fireTableRowsDeleted(row, row);
         }
 
     }
