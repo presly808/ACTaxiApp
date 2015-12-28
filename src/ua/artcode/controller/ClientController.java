@@ -67,4 +67,10 @@ public class ClientController implements IClientController{
         return allClientsTickets;
     }
 
+    @Override
+    public void rejectTaxi(){
+        currentTicket.setStatus(TicketStatus.REJECTED);
+        currentTicket = null;
+    }
+
 }

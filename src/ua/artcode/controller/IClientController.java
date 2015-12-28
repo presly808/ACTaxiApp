@@ -10,7 +10,6 @@ public interface IClientController extends ITaxiController {
 
     long callTaxi(String fromLocation, String toLocation) throws ClientHaveAlreadyHadATicket;
     Ticket getCurrentTicket();
-
-
+    void rejectTaxi();
 
 }
