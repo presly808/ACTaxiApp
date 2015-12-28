@@ -53,8 +53,11 @@ public class DriversListFrame extends JFrame {
 
                 int row = table.getSelectedRow();
                 if (row >= 0) {
-                    model.remove(row);
+                    table.removeRowSelectionInterval(row,row); // delete from table
+                    model.deleteFromModel(row);
                 }
+
+                repaint();
             }
         });
 
@@ -152,10 +155,10 @@ public class DriversListFrame extends JFrame {
 
         }
 
-        public void remove(int row) {
+        public void deleteFromModel(int row) {
 
             drivers.remove(row);
-            fireTableRowsDeleted(row, row);
+
         }
 
     }
