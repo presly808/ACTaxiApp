@@ -1,10 +1,12 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.AdminController;
+import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.Driver;
 
 import javax.swing.*;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
@@ -21,7 +23,7 @@ public class DriversListFrame extends JFrame {
     private AdminController controller;
     private JTable table;
     private JScrollPane scrollPane;
-    private JButton button;
+    private JButton backToMenubutton, deleteDriverButton;
 
     public DriversListFrame(AdminController menuController) {
         this.controller = menuController;
@@ -44,21 +46,43 @@ public class DriversListFrame extends JFrame {
 
         scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
-        button = new JButton("Back to Menu");
-        button.addActionListener(new ActionListener() {
+
+        deleteDriverButton = new JButton("Fire driver");
+        deleteDriverButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                int row = table.getSelectedRow();
+                if (row > 0) {
+                    try {
+                        controller.removeDriver((Long) model.getValueAt(row,row));
+                    } catch (NotFindInDataBaseException e1) {
+                        e1.printStackTrace();
+                    }
+                    model.fireTableRowsDeleted(row, row);
+                }
+            }
+        });
+
+
+        backToMenubutton = new JButton("Back to Menu");
+        backToMenubutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new MenuFrame(controller);
                 dispose();
             }
         });
-
+        JPanel panel = new JPanel(new GridLayout(1, 2));
+        panel.add(backToMenubutton);
+        panel.add(deleteDriverButton);
         getContentPane().add(scrollPane, new BorderLayout().CENTER);
-        getContentPane().add(button, new BorderLayout().SOUTH);
+        getContentPane().add(panel, new BorderLayout().SOUTH);
+
 
     }
 
-    public class MyTableModel implements TableModel {
+    public class MyTableModel extends AbstractTableModel {
 
         private static final int DRIVER_ID = 0;
         private static final int NAME = 1;
@@ -123,7 +147,7 @@ public class DriversListFrame extends JFrame {
         }
 
         public boolean isCellEditable(int rowIndex, int columnIndex) {
-            return false;
+            return true;
         }
 
         public void removeTableModelListener(TableModelListener listener) {
