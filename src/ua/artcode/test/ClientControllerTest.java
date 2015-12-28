@@ -17,32 +17,14 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by zhabenya on 24.12.15.
  */
-public class ClientControllerTest {
-
-    private List<Ticket> tickets = new ArrayList<>();
-    private List<Driver> drivers = new ArrayList<>();
-    private List<Client> clients = new ArrayList<>();
-    private List<Admin> admins = new ArrayList<>();
-
-    private Admin admin = new Admin("superadmin", "superpass", ID.genId(new Integer("superadmin")));
-
-    private Client client = new Client("Max", 111, "New York", "111", ID.genId(new Integer("Max")));
-
-    private Driver driver1 = new Driver("Ashton", new Car("BMW", 1234, "pink"), ID.genId(new Integer("Ashton")), true);
-    private Driver driver2 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(new Integer("Reese")), true);
-    private Driver driver3 = new Driver("Janet", new Car("Golf", 9876, "blue"), ID.genId(new Integer("Golf")), true);
-
-    private Ticket ticket = new Ticket(driver1.getId(), client.getId(), "Central Park", "Times square", 17.50, "NEW",
-                new Date(), new Date(), new Date(), ID.genId(new Integer("Central Park")));
-
-    private ClientController controller;
+public class ClientControllerTest extends TestClass{
 
     @Before
     public void setUp() throws Exception {
 
         admins.add(admin);
 
-        clients.add(client);
+        clients.add(client1);
 
         drivers.add(driver1);
         drivers.add(driver2);
@@ -50,22 +32,22 @@ public class ClientControllerTest {
 
         tickets.add(ticket);
 
-        controller = new ClientController(client, new AppDataContainer(tickets, admins, clients, drivers));
+        clientController = new ClientController(client1, new AppDataContainer(tickets, admins, clients, drivers));
     }
 
     @Test
     public void testCallTaxi() throws Exception {
-        long ticketId = controller.callTaxi("Central Park", "Times square");
+        long ticketId = clientController.callTaxi("Central Park", "Times square");
         assertNotNull(ticketId);
-        assertEquals(ticketId, controller.getCurrentTicket().getiDTicket());
-        assertEquals("Central Park", controller.getCurrentTicket().getFromLocation());
-        assertEquals("Times square", controller.getCurrentTicket().getToLocation());
-        assertEquals(client.getId(), controller.getCurrentTicket().getIdClient());
+        assertEquals(ticketId, clientController.getCurrentTicket().getiDTicket());
+        assertEquals("Central Park", clientController.getCurrentTicket().getFromLocation());
+        assertEquals("Times square", clientController.getCurrentTicket().getToLocation());
+        assertEquals(client1.getId(), clientController.getCurrentTicket().getIdClient());
     }
 
     @Test
     public void testGetTickets() throws Exception {
-        List<Ticket> actual = controller.getTickets();
+        List<Ticket> actual = clientController.getTickets();
         assertNotNull(actual);
         assertTrue(actual.contains(ticket));
     }

@@ -19,27 +19,7 @@ import java.util.List;
 /**
  * Created by serhii on 27.12.15.
  */
-public class TestAppDataContainerJsonSerializer {
-
-    private List<Ticket> tickets = new ArrayList<>();
-    private List<Driver> drivers = new ArrayList<>();
-    private List<Client> clients = new ArrayList<>();
-    private List<Admin> admins = new ArrayList<>();
-
-    private AppDataContainer appDataContainer;
-
-    private Admin admin = new Admin("superadmin", "superpass", ID.genId(new Integer("superadmin")));
-
-    private Client client1 = new Client("Max", 111, "New York", "111", ID.genId(new Integer("Max")));
-    private Client client2 = new Client("John", 222, "New Jersey", "222", ID.genId(new Integer("Kohn")));
-
-    private Ticket ticket = new Ticket(0, client1.getId(), "Central Park", "Times square", 17.50, "NEW",
-            new Date(), new Date(), new Date(), ID.genId(new Integer("Central Park")));
-
-
-    private Driver driver1 = new Driver("Ashton", new Car("BMW", 1234, "pink"), ID.genId(new Integer("Ashton")), true, ticket.getiDTicket(), "1234");
-    private Driver driver2 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId(new Integer("Reese")), false);
-
+public class TestAppDataContainerJsonSerializer extends TestClass{
 
     @Before
     public void setUp() throws Exception {
@@ -65,7 +45,6 @@ public class TestAppDataContainerJsonSerializer {
         Assert.assertTrue(new File("./resources/db/" + nameFile).exists());
     }
 
-
     @Test
     public void testLoad(){
         String nameFile = "all.json";
@@ -74,7 +53,4 @@ public class TestAppDataContainerJsonSerializer {
         clients.add(new Client("Log2", 2323, "Kiev", "2342", 2323));
         Assert.assertNotNull(container);
     }
-
-
-
 }
