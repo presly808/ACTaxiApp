@@ -22,15 +22,15 @@ public class Ticket implements Serializable{
                   double price, String status, Date arrivalTaxiTime, Date requestTime,
                   Date arrivalDestinationTime, long iDTicket) {
 
-        this.idDriver = idDriver;
-        this.idClient = idClient;
+        this.idDriver = Math.abs(idDriver);
+        this.idClient = Math.abs(idClient);
         this.fromLocation = fromLocation;
         this.toLocation = toLocation;
         this.price = price;
         this.arrivalTaxiTime = arrivalTaxiTime;
         this.requestTime = requestTime;
         this.arrivalDestinationTime = arrivalDestinationTime;
-        this.iDTicket = iDTicket;
+        this.iDTicket = Math.abs(iDTicket);
 
         if(status.equals("NEW")){
             this.status = TicketStatus.NEW;

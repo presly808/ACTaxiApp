@@ -14,7 +14,7 @@ public class Driver extends Person implements Serializable{
 
         this.login = name;
         this.car = car;
-        this.iD = iD;
+        this.iD = Math.abs(iD);
         this.isFree = isFree;
         this.iDCurrentTicket = iDTicket;
         this.pass = pass;

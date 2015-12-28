@@ -3,17 +3,12 @@ package ua.artcode.test;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import ua.artcode.controller.AdminController;
 import ua.artcode.controller.AppDataContainer;
-import ua.artcode.controller.ClientController;
-import ua.artcode.controller.DriverController;
 import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppLoader;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

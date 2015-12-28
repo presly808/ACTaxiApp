@@ -38,7 +38,7 @@ public class ClientController implements IClientController{
 
         currentTicket = ticketInit();
         if(currentTicket != null){
-            throw new ClientHaveAlreadyHadATicket("Client have already ordered taxi..Maybe he want to reject order?");
+            throw new ClientHaveAlreadyHadATicket("Client has already ordered the taxi..Maybe he wants to reject the order?");
         }
 
         currentTicket = Registration.addTicket(fromLocation, toLocation, currentClient.getId(), appDataContainer);
