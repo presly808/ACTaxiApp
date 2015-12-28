@@ -2,6 +2,7 @@ package ua.artcode.view;
 
 import org.jdesktop.xswingx.PromptSupport;
 import ua.artcode.controller.ClientController;
+import ua.artcode.exception.ClientHaveAlreadyHadATicket;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,12 +55,22 @@ public class OrderTaxiFrame extends JFrame {
 
                 if (checkFieldsFilled()) {
 
-                    long ticketId = controller.callTaxi(fromLocation.getText(), toLocation.getText());
+                    long ticketId = 0;
 
-                    JOptionPane.showMessageDialog(OrderTaxiFrame.this,
-                            String.format("Taxi has been ordered, your ticket number is %d", ticketId),
-                            "Successful order",
-                            JOptionPane.INFORMATION_MESSAGE);
+                    try {
+                        ticketId = controller.callTaxi(fromLocation.getText(), toLocation.getText());
+                        JOptionPane.showMessageDialog(OrderTaxiFrame.this,
+                                String.format("Taxi has been ordered, your ticket number is %d", ticketId),
+                                "Successful order",
+                                JOptionPane.OK_OPTION);
+
+                    } catch (ClientHaveAlreadyHadATicket clientHaveAlreadyHadATicket) {
+                        JOptionPane.showMessageDialog(OrderTaxiFrame.this,
+                                clientHaveAlreadyHadATicket.getMessage(),
+                                "Multiple tickets error",
+                                JOptionPane.WARNING_MESSAGE);
+
+                    }
 
 
                 } else {
