@@ -16,7 +16,7 @@ public class Client extends Person implements Serializable {
         this.phoneNumber = phoneNumber;
         this.location = location;
         this.pass = pass;
-        this.iD = iDClient;
+        this.iD = Math.abs(iDClient);
 
     }
 

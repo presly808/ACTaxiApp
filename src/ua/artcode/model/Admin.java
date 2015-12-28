@@ -10,7 +10,7 @@ public class Admin extends Person implements Serializable {
 
         this.login = login;
         this.pass = pass;
-        this.iD = iD;
+        this.iD = Math.abs(iD);
 
     }
 

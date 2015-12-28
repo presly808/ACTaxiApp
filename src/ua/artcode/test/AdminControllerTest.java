@@ -6,8 +6,6 @@ import ua.artcode.controller.AdminController;
 import ua.artcode.controller.AppDataContainer;
 import ua.artcode.model.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
