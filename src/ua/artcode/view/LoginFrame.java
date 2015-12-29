@@ -99,6 +99,7 @@ public class LoginFrame extends JFrame {
         panel.add(label);
         panel.add(loginField);
         panel.add(passwordField);
+        getRootPane().setDefaultButton(loginButton);
         this.add(panel);
 
     }
