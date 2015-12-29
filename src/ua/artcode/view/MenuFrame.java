@@ -69,6 +69,15 @@ public class MenuFrame extends JFrame {
             }
         });
 
+        addDriverButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddDriverFrame((AdminController) menuController);
+            }
+        });
+
+
+
         whoAmIlabel = new JLabel(String.format("Signed in as %s", menuController.getClass() == ClientController.class ?
                 "client" : menuController.getClass() == DriverController.class ? "driver" : "admin"));
 
