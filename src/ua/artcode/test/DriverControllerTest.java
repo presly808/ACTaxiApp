@@ -25,16 +25,18 @@ public class DriverControllerTest extends TestClass{
         drivers.add(driver1);
         drivers.add(driver2);
 
-        ticketsNew.add(ticketDone);
+        ticketsNew.add(ticketNew);
 
         driverController1 = new DriverController(driver1, new AppDataContainer(ticketsNew, admins, clients, drivers));
-        driverController2 = new DriverController(driver2, new AppDataContainer(ticketsNew, admins, clients, drivers));
+        driverController2 = new DriverController(driver4, new AppDataContainer(ticketsNew, admins, clients, drivers));
     }
 
     @Test
     public void testGetCurrentTicket() throws Exception {
+
+        driver1.takeTicket(ticketNew.getiDTicket());
         assertNotNull(driverController1.getCurrentTicket());
-        assertEquals(ticketDone, driverController1.getCurrentTicket());
+        assertEquals(ticketNew, driverController1.getCurrentTicket());
 
         assertNull(driverController2.getCurrentTicket());
     }
@@ -45,14 +47,14 @@ public class DriverControllerTest extends TestClass{
         assertFalse(driver1.getStatus());
 
         driverController2.changeStatus();
-        assertTrue(driver2.getStatus());
+        assertTrue(driver4.getStatus());
     }
 
     @Test
     public void testGetTickets() throws Exception {
         List<Ticket> actual1 = driverController1.getTickets();
         assertFalse(actual1.isEmpty());
-        assertTrue(actual1.contains(ticketDone));
+        assertTrue(actual1.contains(ticketNew));
 
         List<Ticket> actual2 = driverController2.getTickets();
         assertTrue(actual2.isEmpty());
@@ -60,12 +62,18 @@ public class DriverControllerTest extends TestClass{
 
     @Test
     public void testTakeATicket() throws Exception {
-        driverController1.getCurrentTicket();
+
+        driver1.takeTicket(ticketNew.getiDTicket());
         Ticket actual1 = driverController1.takeATicket();
-        assertEquals(ticketDone.getiDTicket(), actual1.getiDTicket());
+        assertEquals(ticketNew.getiDTicket(), actual1.getiDTicket());
         assertEquals(TicketStatus.DONE, actual1.getStatus());
         assertTrue(driver1.isFree());
     }
 
+    @Test
+    public void testDropCurrentTicket(){
 
+
+
+    }
 }
