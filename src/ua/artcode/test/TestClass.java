@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class TestClass {
 
-    protected List<Ticket> tickets = new ArrayList<>();
+    protected List<Ticket> ticketsDone = new ArrayList<>();
+    protected List<Ticket> ticketsNew = new ArrayList<>();
     protected List<Driver> drivers = new ArrayList<>();
     protected List<Driver> busyDrivers = new ArrayList<>();
     protected List<Client> clients = new ArrayList<>();
@@ -35,12 +36,16 @@ public class TestClass {
     protected Driver driver5 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId("Lexus".hashCode()), false);
     protected Driver driver6 = new Driver("Janet", new Car("Golf", 9876, "blue"), ID.genId("Golf".hashCode()), false);
 
-    protected Ticket ticket = new Ticket(driver1.getId(), client1.getId(), "Central Park", "Times square", 17.50, "NEW",
+    protected Ticket ticketDone = new Ticket(driver1.getId(), client1.getId(), "Central Park", "Times square", 17.50, "DONE",
                 new Date(), new Date(), new Date(), ID.genId("Central Park".hashCode()));
+
+    protected Ticket ticketNew = new Ticket(driver1.getId(), client1.getId(), "Central Park", "Times square", 17.50, "NEW",
+            new Date(), new Date(), new Date(), ID.genId("Central Park".hashCode()));
 
     protected AdminController adminController;
     protected AdminController overLoadController;
     protected ClientController clientController;
+    protected ClientController clientController2;
     protected DriverController driverController1;
     protected DriverController driverController2;
 

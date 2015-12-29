@@ -1,6 +1,7 @@
 package ua.artcode.controller;
 
 import ua.artcode.exception.ClientHaveAlreadyHadATicket;
+import ua.artcode.exception.NoTicketsException;
 import ua.artcode.model.Client;
 import ua.artcode.model.Ticket;
 import ua.artcode.model.TicketStatus;
@@ -20,9 +21,11 @@ public class ClientController implements IClientController{
     public ClientController(Client currentClient, AppDataContainer appDataContainer) {
         this.currentClient = currentClient;
         this.appDataContainer = appDataContainer;
+        currentTicket = setTicket();
     }
 
-    private Ticket ticketInit() {
+    private Ticket setTicket() {
+
         for(Ticket tmp : appDataContainer.getListTickets()){
             if(tmp.getIdClient() == currentClient.getId()){
                 if(tmp.getStatus() == TicketStatus.NEW){
@@ -36,7 +39,7 @@ public class ClientController implements IClientController{
     @Override
     public long callTaxi(String fromLocation, String toLocation) throws ClientHaveAlreadyHadATicket {
 
-        currentTicket = ticketInit();
+        currentTicket = setTicket();
         if(currentTicket != null){
             throw new ClientHaveAlreadyHadATicket("Client has already ordered the taxi..Maybe he wants to reject the order?");
         }
@@ -49,8 +52,12 @@ public class ClientController implements IClientController{
     }
 
     @Override
-    public Ticket getCurrentTicket(){
-        return currentTicket;
+    public Ticket getCurrentTicket() throws NoTicketsException {
+
+        if(currentTicket != null){
+            return currentTicket;
+        }
+        throw new NoTicketsException("Client has not called taxi");
     }
 
     @Override
@@ -68,7 +75,10 @@ public class ClientController implements IClientController{
     }
 
     @Override
-    public void rejectTaxi(){
+    public void rejectTaxi() throws NoTicketsException {
+        if(currentTicket == null){
+            throw new NoTicketsException("Client has not called taxi");
+        }
         currentTicket.setStatus(TicketStatus.REJECTED);
         currentTicket = null;
     }

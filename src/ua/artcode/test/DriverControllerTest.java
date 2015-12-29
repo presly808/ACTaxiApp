@@ -25,16 +25,16 @@ public class DriverControllerTest extends TestClass{
         drivers.add(driver1);
         drivers.add(driver2);
 
-        tickets.add(ticket);
+        ticketsNew.add(ticketDone);
 
-        driverController1 = new DriverController(driver1, new AppDataContainer(tickets, admins, clients, drivers));
-        driverController2 = new DriverController(driver2, new AppDataContainer(tickets, admins, clients, drivers));
+        driverController1 = new DriverController(driver1, new AppDataContainer(ticketsNew, admins, clients, drivers));
+        driverController2 = new DriverController(driver2, new AppDataContainer(ticketsNew, admins, clients, drivers));
     }
 
     @Test
     public void testGetCurrentTicket() throws Exception {
         assertNotNull(driverController1.getCurrentTicket());
-        assertEquals(ticket, driverController1.getCurrentTicket());
+        assertEquals(ticketDone, driverController1.getCurrentTicket());
 
         assertNull(driverController2.getCurrentTicket());
     }
@@ -52,7 +52,7 @@ public class DriverControllerTest extends TestClass{
     public void testGetTickets() throws Exception {
         List<Ticket> actual1 = driverController1.getTickets();
         assertFalse(actual1.isEmpty());
-        assertTrue(actual1.contains(ticket));
+        assertTrue(actual1.contains(ticketDone));
 
         List<Ticket> actual2 = driverController2.getTickets();
         assertTrue(actual2.isEmpty());
@@ -62,7 +62,7 @@ public class DriverControllerTest extends TestClass{
     public void testTakeATicket() throws Exception {
         driverController1.getCurrentTicket();
         Ticket actual1 = driverController1.takeATicket();
-        assertEquals(ticket.getiDTicket(), actual1.getiDTicket());
+        assertEquals(ticketDone.getiDTicket(), actual1.getiDTicket());
         assertEquals(TicketStatus.DONE, actual1.getStatus());
         assertTrue(driver1.isFree());
     }

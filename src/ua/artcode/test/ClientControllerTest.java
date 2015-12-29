@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ua.artcode.controller.AppDataContainer;
 import ua.artcode.controller.ClientController;
+import ua.artcode.exception.NoTicketsException;
 import ua.artcode.model.*;
 
 import java.util.List;
@@ -28,9 +29,11 @@ public class ClientControllerTest extends TestClass{
         drivers.add(driver2);
         drivers.add(driver3);
 
-        tickets.add(ticket);
+        ticketsDone.add(ticketDone);
+        ticketsNew.add(ticketNew);
 
-        clientController = new ClientController(client1, new AppDataContainer(tickets, admins, clients, drivers));
+        clientController = new ClientController(client1, new AppDataContainer(ticketsDone, admins, clients, drivers));
+        clientController2 = new ClientController(client1, new AppDataContainer(ticketsNew, admins, clients, drivers));
     }
 
     @Test
@@ -47,6 +50,30 @@ public class ClientControllerTest extends TestClass{
     public void testGetTickets() throws Exception {
         List<Ticket> actual = clientController.getTickets();
         assertNotNull(actual);
-        assertTrue(actual.contains(ticket));
+        assertTrue(actual.contains(ticketDone));
+    }
+
+    @Test
+    public void testGetCurrentTaxi() throws Exception{
+
+        Ticket ticket = clientController2.getCurrentTicket();
+        assertNotNull(ticket);
+        assertEquals("Central Park", clientController2.getCurrentTicket().getFromLocation());
+        assertEquals("Times square", clientController2.getCurrentTicket().getToLocation());
+        assertEquals(client1.getId(), clientController2.getCurrentTicket().getIdClient());
+
+    }
+
+    @Test
+    public void testRejectTaxi() throws Exception{
+
+        clientController2.rejectTaxi();
+        try{
+            Ticket ticket = clientController2.getCurrentTicket();
+            assertEquals(null , ticket);
+        }catch (NoTicketsException e){
+            //everything OK
+        }
+
     }
 }

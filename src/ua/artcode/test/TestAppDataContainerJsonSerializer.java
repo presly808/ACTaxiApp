@@ -27,9 +27,9 @@ public class TestAppDataContainerJsonSerializer extends TestClass{
         drivers.add(driver1);
         drivers.add(driver2);
 
-        tickets.add(ticket);
+        ticketsNew.add(ticketDone);
 
-        appDataContainer = new AppDataContainer(tickets, admins, clients, drivers);
+        appDataContainer = new AppDataContainer(ticketsNew, admins, clients, drivers);
 
     }
 

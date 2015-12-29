@@ -17,8 +17,8 @@ public class Login {
     public ITaxiController login(String login, String pass) {
 
         // we need this for default enter to adminController or DriverController
-        //appDataContainer.addAdminToData(new Admin("admin", "admin", 1));
-        //appDataContainer.addDriverToData(new Driver("driver", new Car("car", 123, "blue"), 0, false));
+        appDataContainer.addAdminToData(new Admin("admin", "admin", -1));
+        appDataContainer.addDriverToData(new Driver("driver", new Car("car", 123, "blue"), -1, false));
 
         Person person = appDataContainer.searchIPerson(login, pass);
         if(person == null){
