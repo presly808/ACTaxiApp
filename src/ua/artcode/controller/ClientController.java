@@ -77,7 +77,7 @@ public class ClientController implements IClientController{
     @Override
     public void rejectTaxi() throws NoTicketsException {
         if(currentTicket == null){
-            throw new NoTicketsException("Client has not called taxi");
+            throw new NoTicketsException("You've already canceled the order");
         }
         currentTicket.setStatus(TicketStatus.REJECTED);
         currentTicket = null;

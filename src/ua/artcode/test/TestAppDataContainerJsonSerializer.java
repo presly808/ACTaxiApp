@@ -35,15 +35,13 @@ public class TestAppDataContainerJsonSerializer extends TestClass{
 
     @Test
     public void testSave(){
-        String nameFile = "all.json";
         TaxiAppSave.save(appDataContainer);
-        Assert.assertTrue(new File("./resources/db/" + nameFile).exists());
+        Assert.assertTrue(new File("./resources/db/db.json").exists());
     }
 
     @Test
     public void testLoad(){
-        String nameFile = "all.json";
-        AppDataContainer container = TaxiAppLoader.loadContainer(nameFile);
+        AppDataContainer container = TaxiAppLoader.loadContainer("db.json");
         List<Client> clients = container.getListClients();
         clients.add(new Client("Log2", 2323, "Kiev", "2342", 2323));
         Assert.assertNotNull(container);
