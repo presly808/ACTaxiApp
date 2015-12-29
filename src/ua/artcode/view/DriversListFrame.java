@@ -86,7 +86,8 @@ public class DriversListFrame extends JFrame {
         private static final int CAR_NUMBER = 2;
         private static final int STATUS = 3;
 
-        private String[] columnNames = {"DriverID", "Name", "Car Number", "isFree"};
+        protected String[] columnNames = {"DriverID", "Name", "Car Number", "isFree"};
+        protected Class[] types = new Class[]{Long.class, String.class, Integer.class, Boolean.class};
 
 
         private Set<TableModelListener> listeners = new HashSet<TableModelListener>();
@@ -102,10 +103,7 @@ public class DriversListFrame extends JFrame {
         }
 
         public Class<?> getColumnClass(int columnIndex) {
-            if (drivers.isEmpty()) {
-                return Object.class;
-            }
-            return getValueAt(0, columnIndex).getClass();
+            return types[columnIndex];
         }
 
         public int getColumnCount() {

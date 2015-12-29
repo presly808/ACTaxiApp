@@ -62,13 +62,15 @@ public class OrderTaxiFrame extends JFrame {
                         JOptionPane.showMessageDialog(OrderTaxiFrame.this,
                                 String.format("Taxi has been ordered, your ticket number is %d", ticketId),
                                 "Successful order",
-                                JOptionPane.OK_OPTION);
+                                JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
 
                     } catch (ClientHaveAlreadyHadATicket clientHaveAlreadyHadATicket) {
                         JOptionPane.showMessageDialog(OrderTaxiFrame.this,
                                 clientHaveAlreadyHadATicket.getMessage(),
                                 "Multiple tickets error",
                                 JOptionPane.WARNING_MESSAGE);
+                        dispose();
 
                     }
 

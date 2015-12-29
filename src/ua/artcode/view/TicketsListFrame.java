@@ -5,6 +5,7 @@ import ua.artcode.controller.ClientController;
 import ua.artcode.controller.DriverController;
 import ua.artcode.controller.ITaxiController;
 import ua.artcode.exception.HaveNotNewTickets;
+import ua.artcode.exception.NoTicketsException;
 import ua.artcode.model.Ticket;
 
 import javax.swing.*;
@@ -29,8 +30,9 @@ public class TicketsListFrame extends JFrame {
     private JTable table;
     private JScrollPane scrollPane;
     private JPanel southButtonPanel;
-    private JButton rejectTicketButton, acceptTicketButton, menuButton;
+    private JButton rejectTicketButton, acceptTicketButton, menuButton, cancelOrderButton;
     private DriverController driverController;
+    private ClientController clientController;
 
     public TicketsListFrame(ITaxiController menuController) {
         this.controller = menuController;
@@ -96,29 +98,57 @@ public class TicketsListFrame extends JFrame {
             }
         });
 
+        cancelOrderButton = new JButton("Cancel order");
+        cancelOrderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    clientController.rejectTaxi();
+                    repaint();
+                } catch (NoTicketsException noTicketsException) {
+                    JOptionPane.showMessageDialog(TicketsListFrame.this,
+                            noTicketsException.getMessage(),
+                            "No Tickets",
+                            JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
 
 
-        provideDriverSetting();
+        setButtonsVisibility();
 
         southButtonPanel.add(menuButton);
+        southButtonPanel.add(cancelOrderButton);
         southButtonPanel.add(acceptTicketButton);
         southButtonPanel.add(rejectTicketButton);
+
 
         getContentPane().add(scrollPane, new BorderLayout().CENTER);
         getContentPane().add(southButtonPanel, new BorderLayout().SOUTH);
 
     }
 
-    private void provideDriverSetting() {
+    private void setButtonsVisibility() {
 
         if (controller.getClass() == DriverController.class) {
 
             driverController = (DriverController) controller;
+            cancelOrderButton.setVisible(false);
+
+        } else if (controller.getClass() == ClientController.class) {
+
+            clientController = (ClientController) controller;
+            acceptTicketButton.setVisible(false);
+            rejectTicketButton.setVisible(false);
+
         } else {
 
             acceptTicketButton.setVisible(false);
             rejectTicketButton.setVisible(false);
+            cancelOrderButton.setVisible(false);
         }
+
+
     }
 
     private void setControllerType() {
