@@ -3,6 +3,7 @@ package ua.artcode.controller;
 
 import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.*;
+import ua.artcode.utils.database_gen.DataBaseListsGen;
 import ua.artcode.utils.serialization.TaxiAppLoader;
 
 public class Login {
@@ -11,7 +12,12 @@ public class Login {
 
     public Login(){
 
-        appDataContainer = new AppDataContainer(TaxiAppLoader.loadContainer("db.json"));
+        // load db from file
+        //appDataContainer = new AppDataContainer(TaxiAppLoader.loadContainer("db.json"));
+
+        // generate db
+        appDataContainer = new AppDataContainer(DataBaseListsGen.ticketsListGen(100), DataBaseListsGen.adminsListGen(100),
+                DataBaseListsGen.clientsListGen(100), DataBaseListsGen.driversListGen(100));
 
     }
 
