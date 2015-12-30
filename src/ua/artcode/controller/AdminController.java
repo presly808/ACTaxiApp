@@ -12,6 +12,7 @@ import java.util.List;
 public class AdminController implements IAdminController {
 
     private AppDataContainer appDataContainer;
+    private long ticketId = -1;
 
     private AdminController(AppDataContainer appDataContainer){
         this.appDataContainer = appDataContainer;
@@ -163,5 +164,13 @@ public class AdminController implements IAdminController {
         appDataContainer.getListDrivers().remove(driver);
         TaxiAppSave.save(appDataContainer);
 
+    }
+
+    public void setTicketId(long ticketId){
+        this.ticketId = ticketId;
+    }
+
+    public void dropIdTicket(){
+        ticketId = -1;
     }
 }
