@@ -69,12 +69,7 @@ public class Driver extends Person implements Serializable{
 
     @Override
     public String toString() {
-        return login +
-                ";" + car +
-                ";" + iD +
-                ";" + isFree +
-                ";" + iDCurrentTicket +
-                ";" + pass;
+        return login + " - ID:" + iD + " - Car" + car + "\n";
     }
 
     @Override

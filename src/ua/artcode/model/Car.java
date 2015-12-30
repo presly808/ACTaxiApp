@@ -29,9 +29,9 @@ public class Car implements Serializable {
 
     @Override
     public String toString() {
-        return car +
-                "|" + numb +
-                "|" + color;
+        return "["+car +
+                ", " + numb +
+                ", " + color+"]";
     }
 
     public String getCar() {
