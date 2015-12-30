@@ -5,6 +5,7 @@ import ua.artcode.exception.NoTicketsException;
 import ua.artcode.model.Client;
 import ua.artcode.model.Ticket;
 import ua.artcode.model.TicketStatus;
+import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,6 +81,7 @@ public class ClientController implements IClientController{
             throw new NoTicketsException("You've already canceled the order");
         }
         currentTicket.setStatus(TicketStatus.REJECTED);
+        TaxiAppSave.save(appDataContainer);
         currentTicket = null;
     }
 
