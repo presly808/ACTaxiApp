@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.*;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface IAppDataContainer {
     void addClientToData(Client client);
     void addDriverToData(Driver driver);
     void addTicketToData(Ticket ticket);
-    void addAdminToData(Admin admin);
+    void addAdminToData(Admin admin) throws LoginHasAlreadyUsed;
     List<Client> getListClients();
     List<Driver> getListDrivers();
     List<Admin> getListAdmins();

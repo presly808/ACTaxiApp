@@ -1,8 +1,10 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.*;
 import ua.artcode.utils.database_gen.DataBaseListsGen;
 import ua.artcode.utils.serialization.TaxiAppLoader;
+import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -61,10 +63,15 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     }
 
     @Override
-    public void addAdminToData(Admin admin){
+    public void addAdminToData(Admin admin) throws LoginHasAlreadyUsed {
 
+        for(Admin tmp : admins){
+            if(tmp.getLogin() == admin.getLogin()){
+                throw new LoginHasAlreadyUsed("This Admins Login has already used");
+            }
+        }
         this.admins.add(admin);
-
+        TaxiAppSave.save(this);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ua.artcode.controller;
 
 
+import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppLoader;
 
@@ -16,9 +17,9 @@ public class Login {
 
     public ITaxiController login(String login, String pass) {
 
-        // we need this for default enter to adminController or DriverController
-        //appDataContainer.addAdminToData(new Admin("admin", "admin", -1));
-        //appDataContainer.addDriverToData(new Driver("driver", new Car("car", 123, "blue"), -1, false));
+        if(login.equals("admin") && pass.equals("admin")){
+            return ControllerFactory.getAdminController(appDataContainer);
+        }
 
         Person person = appDataContainer.searchIPerson(login, pass);
         if(person == null){
