@@ -46,8 +46,6 @@ public class ClientController implements IClientController{
         }
 
         currentTicket = Registration.addTicket(fromLocation, toLocation, currentClient.getId(), appDataContainer);
-        appDataContainer.addTicketToData(currentTicket);
-
 
         return currentTicket.getiDTicket();
     }
