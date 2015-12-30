@@ -36,10 +36,10 @@ public class TestClass {
     protected Driver driver5 = new Driver("Reese", new Car("Lexus", 2345, "green"), ID.genId("Lexus".hashCode()), false);
     protected Driver driver6 = new Driver("Janet", new Car("Golf", 9876, "blue"), ID.genId("Golf".hashCode()), false);
 
-    protected Ticket ticketDone = new Ticket(driver1.getId(), client1.getId(), "Central Park", "Times square", 17.50, "DONE",
+    protected Ticket ticketDone = new Ticket(driver1.getId(), client1.getId(), "Central Park", "Times square", 17.50, TicketStatus.DONE,
                 new Date(), new Date(), new Date(), ID.genId("Central Park".hashCode()));
 
-    protected Ticket ticketNew = new Ticket(driver1.getId(), client1.getId(), "Central Park", "Times square", 17.50, "NEW",
+    protected Ticket ticketNew = new Ticket(driver1.getId(), client1.getId(), "Central Park", "Times square", 17.50, TicketStatus.NEW,
             new Date(), new Date(), new Date(), ID.genId("Central Park".hashCode()));
 
     protected AdminController adminController;

@@ -53,7 +53,7 @@ public class Registration {
 
     public static Ticket addTicket(String fromLocation, String toLocation, long idClient, AppDataContainer appDataContainer){
 
-        Ticket ticket = new Ticket(0, idClient, fromLocation, toLocation, 0, "NEW",
+        Ticket ticket = new Ticket(0, idClient, fromLocation, toLocation, 0, TicketStatus.NEW,
                 new Date(), new Date(), new Date(), ID.genId(fromLocation.hashCode()));
         appDataContainer.addTicketToData(ticket);
         TaxiAppSave.save(appDataContainer);
