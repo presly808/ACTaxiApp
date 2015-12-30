@@ -56,7 +56,7 @@ public class AddDriverFrame extends JFrame {
         setField("Car color", carColorField);
 
 
-        createAccountButton = new JButton("Add Client");
+        createAccountButton = new JButton("Add Driver");
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -109,7 +109,7 @@ public class OrderTaxiFrame extends JFrame {
 
     public boolean checkFieldsFilled() {
 
-        return (fromLocation.getText().equals("") || (toLocation.getText().equals(""))) ? false : true;
+        return !(fromLocation.getText().equals("") || toLocation.getText().equals(""));
     }
 
 }
