@@ -105,7 +105,13 @@ public class AdminController implements IAdminController {
 
         }
 
-        return (String[])freeDrivers.toArray();
+        String[] stringFreeDrivers = new String[freeDrivers.size()];
+        int i = 0;
+        for(String str : freeDrivers){
+            stringFreeDrivers[i++] = str;
+        }
+
+        return stringFreeDrivers;
     }
 
     @Override
