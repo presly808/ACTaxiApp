@@ -108,6 +108,7 @@ public class TicketsListFrame extends JFrame {
                     adminController.setTicketId(adminController.getTickets().get(row).getiDTicket());
                     new FreeDriversListFrame(adminController);
                 }
+                repaint();
             }
         });
 
