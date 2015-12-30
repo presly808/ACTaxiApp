@@ -7,6 +7,7 @@ import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by dexter on 20.12.15.
@@ -93,25 +94,19 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public String[] getFreeDrivers() {
+    public Vector<Driver> getFreeDrivers() {
 
-        List<String> freeDrivers = new ArrayList<>();
+        Vector<Driver> freeDrivers = new Vector<>();
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
             if(tmp.getStatus()){
-                freeDrivers.add(Long.toString(tmp.getId()));
+                freeDrivers.add(tmp);
             }
 
         }
 
-        String[] stringFreeDrivers = new String[freeDrivers.size()];
-        int i = 0;
-        for(String str : freeDrivers){
-            stringFreeDrivers[i++] = str;
-        }
-
-        return stringFreeDrivers;
+        return freeDrivers;
     }
 
     @Override

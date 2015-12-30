@@ -3,10 +3,12 @@ package ua.artcode.view;
 import ua.artcode.controller.AdminController;
 import ua.artcode.exception.BusyDriverExeption;
 import ua.artcode.exception.NotFindInDataBaseException;
+import ua.artcode.model.Driver;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Vector;
 
 
 class FreeDriversListFrame extends JFrame  {
@@ -15,7 +17,7 @@ class FreeDriversListFrame extends JFrame  {
     private JList listbox;
     private JButton cancelButton, assignDriverButton;
     private JPanel southButtonsPanel;
-    private String[] data;
+    private Vector<Driver> data;
 
 
     public FreeDriversListFrame(AdminController controler) {
@@ -44,7 +46,7 @@ class FreeDriversListFrame extends JFrame  {
                 if (e.getClickCount() == 2) {
                     int index = listbox.locationToIndex(e.getPoint());
                     try {
-                        adminController.setDriverToTicket(adminController.getTicketId(),Long.valueOf(data[index]));
+                        adminController.setDriverToTicket(adminController.getTicketId(),data.get(index).getId());
                     } catch (NotFindInDataBaseException e1) {
                         e1.printStackTrace();
                     } catch (BusyDriverExeption busyDriverExeption) {

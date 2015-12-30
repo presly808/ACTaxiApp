@@ -8,6 +8,7 @@ import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
 
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by dexter on 20.12.15.
@@ -28,7 +29,7 @@ public interface IAdminController extends ITaxiController{
 
     Driver getDriverById(long id) throws NotFindInDataBaseException;
 
-    String[] getFreeDrivers() throws NotFindInDataBaseException;
+    Vector<Driver> getFreeDrivers() throws NotFindInDataBaseException;
 
     Ticket getTicketById(long id) throws NotFindInDataBaseException;
 
