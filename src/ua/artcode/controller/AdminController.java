@@ -156,4 +156,12 @@ public class AdminController implements IAdminController {
 
         throw  new NotFindInDataBaseException("didn't find Ticket");
     }
+
+    public void deleteDriver(long idDriver) throws NotFindInDataBaseException {
+
+        Driver driver = getDriverById(idDriver);
+        appDataContainer.getListDrivers().remove(driver);
+        TaxiAppSave.save(appDataContainer);
+
+    }
 }

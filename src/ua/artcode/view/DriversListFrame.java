@@ -1,6 +1,7 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.AdminController;
+import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.Driver;
 
 import javax.swing.*;
@@ -155,7 +156,14 @@ public class DriversListFrame extends JFrame {
 
         public void deleteFromModel(int row) {
 
-            drivers.remove(row);
+            try {
+                controller.deleteDriver(drivers.get(row).getId());
+            } catch (NotFindInDataBaseException e) {
+                JOptionPane.showMessageDialog(DriversListFrame.this,
+                        e.getMessage(),
+                        "This driver has been deleted",
+                        JOptionPane.WARNING_MESSAGE);
+            }
 
         }
 
