@@ -44,7 +44,7 @@ public class Registration {
     public static Driver addDriverO(String name, Car car, AppDataContainer appDataContainer,
                                     String pass) {
 
-        Driver driver = new Driver(name, car, ID.genId(name.hashCode()), new Boolean("false"), 0, pass);
+        Driver driver = new Driver(name, car, ID.genId(name.hashCode()), new Boolean("true"), 0, pass);
         appDataContainer.addDriverToData(driver);
         TaxiAppSave.save(appDataContainer);
 
