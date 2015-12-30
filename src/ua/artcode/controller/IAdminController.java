@@ -28,7 +28,7 @@ public interface IAdminController extends ITaxiController{
 
     Driver getDriverById(long id) throws NotFindInDataBaseException;
 
-    List<Driver> getFreeDrivers() throws NotFindInDataBaseException;
+    String[] getFreeDrivers() throws NotFindInDataBaseException;
 
     Ticket getTicketById(long id) throws NotFindInDataBaseException;
 

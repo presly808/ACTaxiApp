@@ -93,20 +93,18 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public List<Driver> getFreeDrivers() throws NotFindInDataBaseException {
+    public String[] getFreeDrivers() {
 
-        List<Driver> freeDrivers = new ArrayList<>();
+        String[] freeDrivers = new String[appDataContainer.getListDrivers().size()];
 
-        for(Driver tmp : appDataContainer.getListDrivers()){
+        for(int i = 0; i < appDataContainer.getListDrivers().size(); ++i){
 
-            if(tmp.getStatus()){
-                freeDrivers.add(tmp);
+            if(appDataContainer.getListDrivers().get(i).getStatus()){
+                freeDrivers[i] = Long.toString(appDataContainer.getListDrivers().get(i).getId());
             }
 
         }
-        if(freeDrivers.isEmpty()){
-            throw  new NotFindInDataBaseException("didn't find free Drivers");
-        }
+
         return freeDrivers;
     }
 

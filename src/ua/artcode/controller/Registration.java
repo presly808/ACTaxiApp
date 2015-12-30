@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
@@ -10,7 +11,8 @@ import java.util.Date;
  */
 public class Registration {
 
-    public static boolean addClient(String name, int phone, String location, String pass, AppDataContainer appDataContainer){
+    public static boolean addClient(String name, int phone, String location,
+                                    String pass, AppDataContainer appDataContainer)  {
 
         Person person = appDataContainer.getPerson(name, appDataContainer.getListClients());
         if(person != null){
@@ -24,7 +26,8 @@ public class Registration {
         return true;
     }
 
-    public static Client addClientO(String name, int phone, String location, String pass, AppDataContainer appDataContainer){
+    public static Client addClientO(String name, int phone, String location,
+                                    String pass, AppDataContainer appDataContainer) {
 
         Person person = appDataContainer.getPerson(name, appDataContainer.getListClients());
         if(person != null){
@@ -38,7 +41,8 @@ public class Registration {
         return client;
     }
 
-    public static Driver addDriverO(String name, Car car, AppDataContainer appDataContainer, String pass){
+    public static Driver addDriverO(String name, Car car, AppDataContainer appDataContainer,
+                                    String pass) {
 
         Driver driver = new Driver(name, car, ID.genId(name.hashCode()), new Boolean("false"), 0, pass);
         appDataContainer.addDriverToData(driver);
