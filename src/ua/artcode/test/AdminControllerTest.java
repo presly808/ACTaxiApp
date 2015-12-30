@@ -118,9 +118,10 @@ public class AdminControllerTest extends TestClass{
 
     @Test
     public void testSetDriverToTicket() throws Exception {
-        assertFalse(overLoadController.setDriverToTicket(client1.getId(), driver1.getId()));
 
-        assertTrue(adminController.setDriverToTicket(client2.getId(), driver2.getId()));
+        adminController.setDriverToTicket(ticketNew.getiDTicket(), driver2.getId());
+        assertEquals(ticketNew.getStatus(), TicketStatus.PROCESSED);
+        assertEquals(driver2.getIdCurrentTicket(), ticketNew.getiDTicket());
     }
 
     @Test

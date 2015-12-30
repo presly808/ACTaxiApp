@@ -1,9 +1,11 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.BusyDriverExeption;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.*;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +14,7 @@ import java.util.List;
 public class AdminController implements IAdminController {
 
     private AppDataContainer appDataContainer;
+    //default mean -1. When admin choose ticket this field will init.. and then this field will become -1;
     private long ticketId = -1;
 
     private AdminController(AppDataContainer appDataContainer){
@@ -90,17 +93,21 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public Driver getFreeDriver() throws NotFindInDataBaseException {
+    public List<Driver> getFreeDrivers() throws NotFindInDataBaseException {
+
+        List<Driver> freeDrivers = new ArrayList<>();
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
             if(tmp.getStatus()){
-                return tmp;
+                freeDrivers.add(tmp);
             }
 
         }
-
-        throw  new NotFindInDataBaseException("didn't find Driver");
+        if(freeDrivers.isEmpty()){
+            throw  new NotFindInDataBaseException("didn't find free Drivers");
+        }
+        return freeDrivers;
     }
 
     @Override
@@ -118,30 +125,18 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    // I think maybe this method have to return Ticket... not boolean? What do you think?
-    public boolean setDriverToTicket(long clientId, long driverId) {
+    public void setDriverToTicket(long ticketId, long driverId) throws NotFindInDataBaseException, BusyDriverExeption {
 
-        for(Ticket tmp : appDataContainer.getListTickets()){
-            if(tmp.getStatus().equals(TicketStatus.NEW)){
+        Ticket ticket = getTicketById(ticketId);
+        Driver driver = getDriverById(driverId);
 
-                Driver driver = null;
-                try {
-                    driver = getFreeDriver();
-                } catch (NotFindInDataBaseException notFindPerson) {
-                    return false;
-                }
-
-                tmp.setIdDriver(driver.getId());
-                tmp.setStatus(TicketStatus.PROCESSED);
-                driver.takeTicket(tmp.getiDTicket());
-
-                TaxiAppSave.save(appDataContainer);
-
-                return true;
-            }
+        if(driver.takeTicket(ticket.getiDTicket())){
+            throw new BusyDriverExeption("Driver has already taken a ticket");
         }
+        ticket.setIdDriver(driverId);
+        ticket.setStatus(TicketStatus.PROCESSED);
+        TaxiAppSave.save(appDataContainer);
 
-        return false;
     }
 
     @Override

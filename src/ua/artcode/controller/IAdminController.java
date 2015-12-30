@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.BusyDriverExeption;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.Car;
 import ua.artcode.model.Client;
@@ -27,11 +28,11 @@ public interface IAdminController extends ITaxiController{
 
     Driver getDriverById(long id) throws NotFindInDataBaseException;
 
-    Driver getFreeDriver() throws NotFindInDataBaseException;
+    List<Driver> getFreeDrivers() throws NotFindInDataBaseException;
 
     Ticket getTicketById(long id) throws NotFindInDataBaseException;
 
-    boolean setDriverToTicket(long clientId, long driverId);
+    void setDriverToTicket(long clientId, long driverId) throws NotFindInDataBaseException, BusyDriverExeption;
 
     Ticket findTicketByClientId(long id) throws NotFindInDataBaseException;
 
