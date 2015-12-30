@@ -134,7 +134,7 @@ public class AdminController implements IAdminController {
         Ticket ticket = getTicketById(ticketId);
         Driver driver = getDriverById(driverId);
 
-        if(driver.takeTicket(ticket.getiDTicket())){
+        if(!driver.takeTicket(ticket.getiDTicket())){
             throw new BusyDriverExeption("Driver has already taken a ticket");
         }
         ticket.setIdDriver(driverId);
