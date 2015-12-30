@@ -166,4 +166,8 @@ public class AdminController implements IAdminController {
     public void dropIdTicket(){
         ticketId = -1;
     }
+
+    public long getTicketId(){
+        return ticketId;
+    }
 }
