@@ -40,6 +40,8 @@ public class Ticket implements Serializable{
             this.status = TicketStatus.IN_PROGRESS;
         } else if(status.equals("REJECTED")){
             this.status = TicketStatus.REJECTED;
+        } else if(status.equals("REJECTED")){
+            this.status = TicketStatus.PROCESSED;
         }
 
     }

@@ -131,6 +131,7 @@ public class AdminController implements IAdminController {
                 }
 
                 tmp.setIdDriver(driver.getId());
+                tmp.setStatus(TicketStatus.PROCESSED);
                 driver.takeTicket(tmp.getiDTicket());
 
                 TaxiAppSave.save(appDataContainer);
