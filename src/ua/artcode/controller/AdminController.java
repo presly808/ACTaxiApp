@@ -95,17 +95,17 @@ public class AdminController implements IAdminController {
     @Override
     public String[] getFreeDrivers() {
 
-        String[] freeDrivers = new String[appDataContainer.getListDrivers().size()];
+        List<String> freeDrivers = new ArrayList<>();
 
-        for(int i = 0; i < appDataContainer.getListDrivers().size(); ++i){
+        for(Driver tmp : appDataContainer.getListDrivers()){
 
-            if(appDataContainer.getListDrivers().get(i).getStatus()){
-                freeDrivers[i] = Long.toString(appDataContainer.getListDrivers().get(i).getId());
+            if(tmp.getStatus()){
+                freeDrivers.add(Long.toString(tmp.getId()));
             }
 
         }
 
-        return freeDrivers;
+        return (String[])freeDrivers.toArray();
     }
 
     @Override

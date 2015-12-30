@@ -1,10 +1,8 @@
 package ua.artcode.controller;
 
 
-import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.*;
 import ua.artcode.utils.database_gen.DataBaseListsGen;
-import ua.artcode.utils.serialization.TaxiAppLoader;
 
 public class Login {
 
