@@ -61,7 +61,7 @@ public class AddDriverFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                addClient();
+                addDriver();
             }
         });
 
@@ -91,7 +91,7 @@ public class AddDriverFrame extends JFrame {
         PromptSupport.setForeground(Color.GRAY, field);
     }
 
-    private void addClient() {
+    private void addDriver() {
         if (!checkLoginPasswordFilled()) {
 
             Driver driver = adminController.addDriver(loginField.getText(), new Car(carModelNumber.getText(),

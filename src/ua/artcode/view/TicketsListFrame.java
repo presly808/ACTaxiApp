@@ -30,9 +30,10 @@ public class TicketsListFrame extends JFrame {
     private JTable table;
     private JScrollPane scrollPane;
     private JPanel southButtonPanel;
-    private JButton rejectTicketButton, acceptTicketButton, menuButton, cancelOrderButton;
+    private JButton rejectTicketButton, acceptTicketButton, menuButton, cancelOrderButton, assignTicket;
     private DriverController driverController;
     private ClientController clientController;
+    private AdminController adminController;
 
     public TicketsListFrame(ITaxiController menuController) {
         this.controller = menuController;
@@ -57,7 +58,7 @@ public class TicketsListFrame extends JFrame {
         TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
 
         table.setRowSorter(sorter);
-        southButtonPanel = new JPanel(new GridLayout(1, 3));
+        southButtonPanel = new JPanel(new GridLayout(1, 4));
 
         menuButton = new JButton("Back to Menu");
         menuButton.addActionListener(new ActionListener() {
@@ -98,6 +99,18 @@ public class TicketsListFrame extends JFrame {
             }
         });
 
+        assignTicket = new JButton("Assign Ticket");
+        assignTicket.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = table.getSelectedRow();
+                if (row >= 0) {
+                    adminController.setTicketId(adminController.getTickets().get(row).getiDTicket());
+                    new FreeDriversListFrame(adminController);
+                }
+            }
+        });
+
         cancelOrderButton = new JButton("Cancel order");
         cancelOrderButton.addActionListener(new ActionListener() {
             @Override
@@ -116,7 +129,7 @@ public class TicketsListFrame extends JFrame {
 
 
         setButtonsVisibility();
-
+        southButtonPanel.add(assignTicket);
         southButtonPanel.add(menuButton);
         southButtonPanel.add(cancelOrderButton);
         southButtonPanel.add(acceptTicketButton);
@@ -134,15 +147,18 @@ public class TicketsListFrame extends JFrame {
 
             driverController = (DriverController) controller;
             cancelOrderButton.setVisible(false);
+            assignTicket.setVisible(false);
 
         } else if (controller.getClass() == ClientController.class) {
 
             clientController = (ClientController) controller;
             acceptTicketButton.setVisible(false);
             rejectTicketButton.setVisible(false);
+            assignTicket.setVisible(false);
 
         } else {
 
+            adminController = (AdminController) controller;
             acceptTicketButton.setVisible(false);
             rejectTicketButton.setVisible(false);
             cancelOrderButton.setVisible(false);
