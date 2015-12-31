@@ -4,9 +4,11 @@ import org.jdesktop.xswingx.PromptSupport;
 import ua.artcode.controller.Login;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 /**
  * Created by sensej on 20.12.15.
@@ -44,7 +46,14 @@ public class RegistrationFrame extends JFrame {
         loginField = new JTextField(30);
         setPrompt("Login", loginField);
 
-        phoneField = new JTextField(30);
+        MaskFormatter formatter = null;
+        try {
+            formatter = new MaskFormatter("+38(0##)-####-###");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        phoneField = new JFormattedTextField(formatter);
+        phoneField.setColumns(30);
         setPrompt("Phone number", phoneField);
 
 
