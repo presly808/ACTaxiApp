@@ -8,23 +8,13 @@ import java.io.Serializable;
 public class Car implements Serializable {
 
     private String car;
-    private int numb;
+    private String numb;
     private String color;
 
-    public Car(String car, int numb, String color) {
+    public Car(String car, String numb, String color) {
         this.car = car;
         this.numb = numb;
         this.color = color;
-    }
-
-    public Car(String carInit){
-
-        String[] parameters = car.split("|");
-
-        car = parameters[0];
-        numb = new Integer(parameters[1]);
-        color = parameters[2];
-
     }
 
     @Override
@@ -42,11 +32,11 @@ public class Car implements Serializable {
         this.car = car;
     }
 
-    public int getNumb() {
+    public String getNumb() {
         return numb;
     }
 
-    public void setNumb(int numb) {
+    public void setNumb(String numb) {
         this.numb = numb;
     }
 
