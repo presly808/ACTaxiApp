@@ -30,6 +30,7 @@ public class OrderTaxiFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Taxi App");
         setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 

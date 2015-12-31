@@ -39,9 +39,10 @@ public class TicketsListFrame extends JFrame {
         this.controller = menuController;
         setSize(1000, 300);
         init();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Taxi App");
         setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
