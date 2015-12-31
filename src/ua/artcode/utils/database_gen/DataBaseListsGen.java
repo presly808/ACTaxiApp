@@ -43,7 +43,7 @@ public class DataBaseListsGen {
 
         for (int i = 0; i < size; i++) {
 
-            drivers.add(new Driver("" + i, new Car("" + i, i, "" + i), i, false, 0, ""+1));
+            drivers.add(new Driver("" + i, new Car("" + i, ""+i, "" + i), i, false, 0, ""+1));
 
         }
 

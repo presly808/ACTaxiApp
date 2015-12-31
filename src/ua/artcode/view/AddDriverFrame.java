@@ -95,7 +95,7 @@ public class AddDriverFrame extends JFrame {
         if (!checkLoginPasswordFilled()) {
 
             Driver driver = adminController.addDriver(loginField.getText(), new Car(carModelNumber.getText(),
-                    Integer.valueOf(carNumberField.getText()), carColorField.getText()), passwordField.getText());
+                    carNumberField.getText(), carColorField.getText()), passwordField.getText());
 
             if (driver != null) {
                 JOptionPane.showMessageDialog(AddDriverFrame.this,

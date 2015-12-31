@@ -13,7 +13,7 @@ public class TestGoogleApi {
 
     @Test
     public void findLocation(){
-        Location location = googleMapsAPI.findLocation("Україна", "Київ", "Бульва Лесі Українки", "5");
+        Location location = googleMapsAPI.findLocation("Україна Київ Бульва Лесі Українки 5");
         Assert.assertNotNull(location);
     }
 
