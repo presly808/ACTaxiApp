@@ -54,4 +54,15 @@ public class Location {
     public void setPlaceId(String placeId) {
         this.placeId = placeId;
     }
+
+
+    public static double getDistance(String fromLocation, String toLocation) {
+
+        GoogleMapsAPIImpl googleMapsAPI = new GoogleMapsAPIImpl();
+        Location pointA = googleMapsAPI.findLocation("Україна Київ " + fromLocation);
+        Location pointB = googleMapsAPI.findLocation("Україна Київ " + toLocation);
+
+        return googleMapsAPI.getDistance(pointA, pointB);
+    }
+
 }

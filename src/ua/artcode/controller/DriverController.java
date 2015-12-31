@@ -94,8 +94,14 @@ public class DriverController implements IDriverController{
         // after ArrivalDestinationTime
         currentTicket.setStatus(TicketStatus.DONE);
         TaxiAppSave.save(appDataContainer);
+        changeLocation(currentTicket.getToLocation());
         dropCurrentTicket();
 
         return currentTicket;
+    }
+
+    @Override
+    public void changeLocation(String location){
+        currentDriver.setCurrentLocation(location);
     }
 }

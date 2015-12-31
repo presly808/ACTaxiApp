@@ -1,9 +1,7 @@
 package ua.artcode.controller;
 
-import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.*;
 import ua.artcode.utils.accounts.Calculator;
-import ua.artcode.utils.geolocation.GoogleMapsAPI;
 import ua.artcode.utils.geolocation.GoogleMapsAPIImpl;
 import ua.artcode.utils.geolocation.Location;
 import ua.artcode.utils.serialization.TaxiAppSave;
@@ -57,11 +55,7 @@ public class Registration {
 
     public static Ticket addTicket(String fromLocation, String toLocation, long idClient, AppDataContainer appDataContainer){
 
-        GoogleMapsAPIImpl googleMapsAPI = new GoogleMapsAPIImpl();
-        Location pointA = googleMapsAPI.findLocation("Україна Київ " + fromLocation);
-        Location pointB = googleMapsAPI.findLocation("Україна Київ " + toLocation);
-
-        double distance = googleMapsAPI.getDistance(pointA, pointB);
+        double distance = Location.getDistance(fromLocation, toLocation);
 
         Ticket ticket = new Ticket(0, idClient, fromLocation, toLocation, Calculator.getCost(distance),
                 TicketStatus.NEW, new Date(), new Date(), new Date(),
@@ -70,8 +64,6 @@ public class Registration {
         appDataContainer.addTicketToData(ticket);
         TaxiAppSave.save(appDataContainer);
 
-
         return ticket;
     }
-
 }

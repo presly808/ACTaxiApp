@@ -3,6 +3,7 @@ package ua.artcode.controller;
 import ua.artcode.exception.BusyDriverExeption;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.*;
+import ua.artcode.utils.geolocation.Location;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.ArrayList;
@@ -96,15 +97,28 @@ public class AdminController implements IAdminController {
     @Override
     public Vector<Driver> getFreeDrivers() {
 
+        Ticket ticket = null;
+        try {
+            ticket = getTicketById(ticketId);
+        } catch (NotFindInDataBaseException e) {
+            e.printStackTrace();
+        }
+
         Vector<Driver> freeDrivers = new Vector<>();
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
             if(tmp.getStatus()){
+
+                tmp.setDistanceToClient(Location.getDistance(tmp.getCurrentLocation().getFormattedAddress(),
+                        ticket.getFromLocation()));
                 freeDrivers.add(tmp);
             }
 
         }
+
+        freeDrivers.sort((Driver a1, Driver a2) -> a1.getDistanceToClient() < a2.getDistanceToClient() ? -1
+                : a1.getDistanceToClient() > a2.getDistanceToClient() ? -1 : 0);
 
         return freeDrivers;
     }
