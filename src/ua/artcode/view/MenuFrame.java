@@ -22,7 +22,7 @@ public class MenuFrame extends JFrame {
         hideButtonForUser();
         setTitle("Taxi App");
         setSize(200, 100);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         setVisible(true);
         pack();

@@ -29,7 +29,7 @@ public class DriversListFrame extends JFrame {
         this.controller = menuController;
         setSize(700, 300);
         init();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Taxi App");
         setResizable(false);
         setVisible(true);

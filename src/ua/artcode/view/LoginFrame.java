@@ -25,7 +25,7 @@ public class LoginFrame extends JFrame {
 
         setSize(400, 200);
         init();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Taxi App");
         setResizable(false);
         setInFrameCenter();
