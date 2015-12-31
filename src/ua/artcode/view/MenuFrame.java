@@ -24,6 +24,7 @@ public class MenuFrame extends JFrame {
         setSize(200, 100);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
         pack();
     }

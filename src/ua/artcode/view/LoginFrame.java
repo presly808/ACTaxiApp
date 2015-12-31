@@ -28,22 +28,10 @@ public class LoginFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Taxi App");
         setResizable(false);
-        setInFrameCenter();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
-    private void setInFrameCenter() {
-
-        Toolkit tk = Toolkit.getDefaultToolkit();
-
-        Dimension dim = tk.getScreenSize();
-
-        int xPos = (dim.width / 2) - (this.getWidth() / 2);
-        int yPos = (dim.height / 2) - (this.getHeight() / 2);
-
-        setLocation(xPos, yPos);
-
-    }
 
     private void init() {
 

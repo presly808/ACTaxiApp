@@ -29,6 +29,7 @@ class FreeDriversListFrame extends JFrame {
         init();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Taxi App");
+        setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
     }
