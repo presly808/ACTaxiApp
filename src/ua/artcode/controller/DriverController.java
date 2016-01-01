@@ -85,10 +85,8 @@ public class DriverController implements IDriverController{
         currentTicket.setArrivalDestinationTime(new Date());
 
         // we need method to calculate price
-        currentTicket.setPrice(100);
 
         currentTicket.setStatus(TicketStatus.IN_PROGRESS);
-
         TaxiAppSave.save(appDataContainer);
 
         // after ArrivalDestinationTime

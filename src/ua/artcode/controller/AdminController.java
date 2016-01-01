@@ -1,6 +1,7 @@
 package ua.artcode.controller;
 
 import ua.artcode.exception.BusyDriverExeption;
+import ua.artcode.exception.NoTicketsException;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.*;
 import ua.artcode.utils.geolocation.Location;
@@ -95,14 +96,9 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public Vector<Driver> getFreeDrivers() {
+    public Vector<Driver> getFreeDrivers() throws NotFindInDataBaseException {
 
-        Ticket ticket = null;
-        try {
-            ticket = getTicketById(ticketId);
-        } catch (NotFindInDataBaseException e) {
-            e.printStackTrace();
-        }
+        Ticket ticket = getTicketById(ticketId);
 
         Vector<Driver> freeDrivers = new Vector<>();
 
