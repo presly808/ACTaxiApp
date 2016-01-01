@@ -7,6 +7,7 @@ import ua.artcode.controller.ITaxiController;
 import ua.artcode.exception.HaveNotNewTickets;
 import ua.artcode.exception.NoTicketsException;
 import ua.artcode.model.Ticket;
+import ua.artcode.model.TicketStatus;
 
 import javax.swing.*;
 import javax.swing.event.TableModelListener;
@@ -100,18 +101,28 @@ public class TicketsListFrame extends JFrame {
             }
         });
 
+
         assignTicket = new JButton("Assign Ticket");
+
+
         assignTicket.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = table.getSelectedRow();
-                if (row >= 0) {
+
+                if (row >= 0 && adminController.getTickets().get(row).getStatus() == TicketStatus.NEW) {
                     adminController.setTicketId(adminController.getTickets().get(row).getiDTicket());
                     new FreeDriversListFrame(adminController);
+
+                } else {
+                    JOptionPane.showMessageDialog(TicketsListFrame.this,
+                            "The ticket has been already processed",
+                            "Processed ticket",
+                            JOptionPane.WARNING_MESSAGE);
                 }
-                repaint();
             }
         });
+
 
         cancelOrderButton = new JButton("Cancel order");
         cancelOrderButton.addActionListener(new ActionListener() {

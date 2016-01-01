@@ -38,7 +38,15 @@ class FreeDriversListFrame extends JFrame {
     private void init() {
 
 
-        data = adminController.getFreeDrivers();
+        try {
+            data = adminController.getFreeDrivers();
+        } catch (NotFindInDataBaseException e) {
+            JOptionPane.showMessageDialog(FreeDriversListFrame.this,
+                    "All drivers are busy at the moment",
+                    "No free drivers error",
+                    JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+        }
         listbox = new JList(data);
         listbox.setLayoutOrientation(JList.VERTICAL);
         listbox.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
