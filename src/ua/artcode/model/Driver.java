@@ -71,6 +71,7 @@ public class Driver extends Person implements Serializable{
 
     public void dropCurrentIdTicket(){
         iDCurrentTicket = 0;
+        distanceToClient = 0;
         isFree = true;
     }
 

@@ -14,5 +14,6 @@ public interface IDriverController extends ITaxiController {
     void dropCurrentTicket();
     Ticket takeATicket() throws HaveNotNewTickets;
     void changeLocation(String location);
+    void finishTrip();
 
 }

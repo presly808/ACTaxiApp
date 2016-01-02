@@ -4,6 +4,8 @@ import ua.artcode.exception.HaveNotNewTickets;
 import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
 import ua.artcode.model.TicketStatus;
+import ua.artcode.utils.accounts.Calculator;
+import ua.artcode.utils.geolocation.Location;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
 import java.util.ArrayList;
@@ -78,24 +80,24 @@ public class DriverController implements IDriverController{
 
         currentTicket.setIdDriver(currentDriver.getId());
 
-        // we need method to calculate time when taxi will arrive to client
-        currentTicket.setArrivalTaxiTime(new Date());
+        currentTicket.setArrivalTaxiTime(Calculator.getTimeArrival(currentDriver.getDistanceToClient()));
 
-        // we need method to calculate time when taxi will arrive to destination place
-        currentTicket.setArrivalDestinationTime(new Date());
-
-        // we need method to calculate price
+        currentTicket.setArrivalDestinationTime(Calculator.getTimeArrival(
+                Location.getDistance(currentTicket.getFromLocation(), currentTicket.getToLocation())));
 
         currentTicket.setStatus(TicketStatus.IN_PROGRESS);
         TaxiAppSave.save(appDataContainer);
 
-        // after ArrivalDestinationTime
+        return currentTicket;
+    }
+
+    // after ArrivalDestinationTime
+    public void finishTrip() {
         currentTicket.setStatus(TicketStatus.DONE);
-        TaxiAppSave.save(appDataContainer);
+        currentTicket.setArrivalDestinationTime(new Date());
         changeLocation(currentTicket.getToLocation());
         dropCurrentTicket();
-
-        return currentTicket;
+        TaxiAppSave.save(appDataContainer);
     }
 
     @Override
