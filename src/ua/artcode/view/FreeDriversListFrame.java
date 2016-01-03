@@ -1,7 +1,7 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.AdminController;
-import ua.artcode.exception.BusyDriverExeption;
+import ua.artcode.exception.BusyDriverException;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.Driver;
 
@@ -68,8 +68,8 @@ class FreeDriversListFrame extends JFrame {
                         adminController.setDriverToTicket(adminController.getTicketId(), data.get(index).getId());
                     } catch (NotFindInDataBaseException e1) {
                         e1.printStackTrace();
-                    } catch (BusyDriverExeption busyDriverExeption) {
-                        busyDriverExeption.printStackTrace();
+                    } catch (BusyDriverException busyDriverException) {
+                        busyDriverException.printStackTrace();
                     }
                     dispose();
                 }

@@ -1,6 +1,7 @@
 package ua.artcode.view;
 
 import ua.artcode.controller.AdminController;
+import ua.artcode.exception.BusyDriverException;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.Driver;
 
@@ -56,8 +57,15 @@ public class DriversListFrame extends JFrame {
                 int row = table.getSelectedRow();
 
                 if (row != -1) {
-                    table.removeRowSelectionInterval(row,row); // delete from table
-                    model.deleteFromModel(row);
+                    try {
+                        table.removeRowSelectionInterval(row,row); // delete from table
+                        model.deleteFromModel(row);
+                    } catch (BusyDriverException e2) {
+                        JOptionPane.showMessageDialog(DriversListFrame.this,
+                                e2.getMessage(),
+                                "oops",
+                                JOptionPane.WARNING_MESSAGE);
+                    }
                 }else{
                     JOptionPane.showMessageDialog(DriversListFrame.this,
                             "chose the driver",
@@ -106,26 +114,32 @@ public class DriversListFrame extends JFrame {
             this.drivers = drivers;
         }
 
+        @Override
         public void addTableModelListener(TableModelListener listener) {
             listeners.add(listener);
         }
 
+        @Override
         public Class<?> getColumnClass(int columnIndex) {
             return types[columnIndex];
         }
 
+        @Override
         public int getColumnCount() {
             return columnNames.length;
         }
 
+        @Override
         public String getColumnName(int columnIndex) {
             return columnNames[columnIndex];
         }
 
+        @Override
         public int getRowCount() {
             return drivers.size();
         }
 
+        @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             Driver driver = drivers.get(rowIndex);
             Object returnedValue = null;
@@ -149,19 +163,22 @@ public class DriversListFrame extends JFrame {
             return returnedValue;
         }
 
+        @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
             return false;
         }
 
+        @Override
         public void removeTableModelListener(TableModelListener listener) {
             listeners.remove(listener);
         }
 
+        @Override
         public void setValueAt(Object value, int rowIndex, int columnIndex) {
 
         }
 
-        public void deleteFromModel(int row) {
+        public void deleteFromModel(int row) throws BusyDriverException {
 
             try {
                 controller.deleteDriver(drivers.get(row).getId());

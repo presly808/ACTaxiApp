@@ -1,13 +1,11 @@
 package ua.artcode.controller;
 
-import ua.artcode.exception.BusyDriverExeption;
-import ua.artcode.exception.NoTicketsException;
+import ua.artcode.exception.BusyDriverException;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.*;
 import ua.artcode.utils.geolocation.Location;
 import ua.artcode.utils.serialization.TaxiAppSave;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -134,13 +132,13 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public void setDriverToTicket(long ticketId, long driverId) throws NotFindInDataBaseException, BusyDriverExeption {
+    public void setDriverToTicket(long ticketId, long driverId) throws NotFindInDataBaseException, BusyDriverException {
 
         Ticket ticket = getTicketById(ticketId);
         Driver driver = getDriverById(driverId);
 
         if(!driver.takeTicket(ticket.getiDTicket())){
-            throw new BusyDriverExeption("Driver has already taken a ticket");
+            throw new BusyDriverException("Driver has already taken a ticket");
         }
         ticket.setIdDriver(driverId);
         ticket.setStatus(TicketStatus.PROCESSED);
@@ -162,9 +160,12 @@ public class AdminController implements IAdminController {
         throw  new NotFindInDataBaseException("didn't find Ticket");
     }
 
-    public void deleteDriver(long idDriver) throws NotFindInDataBaseException {
+    public void deleteDriver(long idDriver) throws NotFindInDataBaseException, BusyDriverException {
 
         Driver driver = getDriverById(idDriver);
+        if(driver.getIdCurrentTicket() != 0){
+            throw new BusyDriverException("The drive is performing his job");
+        }
         appDataContainer.getListDrivers().remove(driver);
         TaxiAppSave.save(appDataContainer);
 
