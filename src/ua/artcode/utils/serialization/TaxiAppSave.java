@@ -36,7 +36,6 @@ public class TaxiAppSave {
 
     public static void save(AppDataContainer container){
 
-
         Gson gson = new Gson();
         String jsonString = gson.toJson(container);
 

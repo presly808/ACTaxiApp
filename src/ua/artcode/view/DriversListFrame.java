@@ -54,9 +54,15 @@ public class DriversListFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 int row = table.getSelectedRow();
-                if (row >= 0) {
+
+                if (row != -1) {
                     table.removeRowSelectionInterval(row,row); // delete from table
                     model.deleteFromModel(row);
+                }else{
+                    JOptionPane.showMessageDialog(DriversListFrame.this,
+                            "chose the driver",
+                            "oops",
+                            JOptionPane.WARNING_MESSAGE);
                 }
 
                 repaint();
