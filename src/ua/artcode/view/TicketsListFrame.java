@@ -212,10 +212,12 @@ public class TicketsListFrame extends JFrame {
             this.tickets = tickets;
         }
 
+        @Override
         public void addTableModelListener(TableModelListener listener) {
             listeners.add(listener);
         }
 
+        @Override
         public Class<?> getColumnClass(int columnIndex) {
             if (tickets.isEmpty()) {
                 return Object.class;
@@ -223,18 +225,22 @@ public class TicketsListFrame extends JFrame {
             return getValueAt(0, columnIndex).getClass();
         }
 
+        @Override
         public int getColumnCount() {
             return columnNames.length;
         }
 
+        @Override
         public int getRowCount() {
             return tickets.size();
         }
 
+        @Override
         public String getColumnName(int columnIndex) {
             return columnNames[columnIndex];
         }
 
+        @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
             Ticket ticket = tickets.get(rowIndex);
             Object returnedValue = null;
@@ -276,14 +282,17 @@ public class TicketsListFrame extends JFrame {
             return returnedValue;
         }
 
+        @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
             return false;
         }
 
+        @Override
         public void removeTableModelListener(TableModelListener listener) {
             listeners.remove(listener);
         }
 
+        @Override
         public void setValueAt(Object value, int rowIndex, int columnIndex) {
 
         }

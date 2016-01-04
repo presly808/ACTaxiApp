@@ -14,16 +14,17 @@ import java.util.Vector;
  */
 public class AdminController implements IAdminController {
 
+    private static final AdminController controller = new AdminController();
     private AppDataContainer appDataContainer;
     //default mean -1. When admin choose ticket this field will init.. and then this field will become -1;
     private long ticketId = -1;
 
-    private AdminController(AppDataContainer appDataContainer){
-        this.appDataContainer = appDataContainer;
+    private AdminController(){
     }
 
     public static AdminController getAdminController(AppDataContainer appDataContainer) {
-        return new AdminController(appDataContainer);
+        controller.appDataContainer = appDataContainer;
+        return controller;
     }
 
     // return null if db have same login
