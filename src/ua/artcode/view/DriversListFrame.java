@@ -82,7 +82,6 @@ public class DriversListFrame extends JFrame {
         backToMenubutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MenuFrame(controller);
                 dispose();
             }
         });

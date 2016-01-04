@@ -66,7 +66,6 @@ public class TicketsListFrame extends JFrame {
         menuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MenuFrame(controller);
                 dispose();
             }
         });

@@ -16,15 +16,15 @@ import java.util.Vector;
 class FreeDriversListFrame extends JFrame {
 
     private AdminController adminController;
-    private JList listbox;
+    private JList listBox;
     private Vector<Driver> data;
     private JLabel label;
     private JScrollPane scrollPane;
 
 
-    public FreeDriversListFrame(AdminController controler) {
+    public FreeDriversListFrame(AdminController controller) {
 
-        adminController = controler;
+        adminController = controller;
         setSize(400, 400);
         init();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -47,11 +47,11 @@ class FreeDriversListFrame extends JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
             dispose();
         }
-        listbox = new JList(data);
-        listbox.setLayoutOrientation(JList.VERTICAL);
-        listbox.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
+        listBox = new JList(data);
+        listBox.setLayoutOrientation(JList.VERTICAL);
+        listBox.setSelectionMode(DefaultListSelectionModel.SINGLE_SELECTION);
 
-        scrollPane = new JScrollPane(listbox);
+        scrollPane = new JScrollPane(listBox);
         scrollPane.setPreferredSize(new Dimension(200, 200));
 
         label = new JLabel("List of free drivers");
@@ -60,10 +60,11 @@ class FreeDriversListFrame extends JFrame {
         label.setBorder(border);
         label.setHorizontalAlignment(JLabel.CENTER);
 
-        listbox.addMouseListener(new MouseAdapter() {
+        listBox.addMouseListener(new MouseAdapter() {
+            @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    int index = listbox.locationToIndex(e.getPoint());
+                    int index = listBox.locationToIndex(e.getPoint());
                     try {
                         adminController.setDriverToTicket(adminController.getTicketId(), data.get(index).getId());
                     } catch (NotFindInDataBaseException e1) {
