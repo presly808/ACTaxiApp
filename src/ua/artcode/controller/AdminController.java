@@ -190,4 +190,8 @@ public class AdminController implements IAdminController {
     public long getTicketId(){
         return ticketId;
     }
+
+    public AppDataContainer getAppDataContainer(){
+        return appDataContainer;
+    }
 }
