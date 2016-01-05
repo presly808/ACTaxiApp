@@ -3,7 +3,6 @@ package ua.artcode.view;
 import org.jdesktop.xswingx.PromptSupport;
 import ua.artcode.controller.AdminController;
 import ua.artcode.exception.LoginHasAlreadyUsed;
-import ua.artcode.model.Client;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class AddClientFrame extends JFrame {
+public class AddAdminFrame extends JFrame {
 
     private AdminController adminController;
-    private JTextField loginField, phoneField, locationField;
+    private JTextField loginField;
     private JPasswordField passwordField;
     private JButton cancelButton, createAccountButton;
     private JPanel southButtonsPanel;
@@ -22,7 +21,7 @@ public class AddClientFrame extends JFrame {
     private JLabel registrationLabel;
 
 
-    public AddClientFrame(AdminController controller) {
+    public AddAdminFrame(AdminController controller) {
 
         this.adminController = controller;
         setSize(400, 300);
@@ -37,29 +36,23 @@ public class AddClientFrame extends JFrame {
 
 
     private void init() {
-        registrationLabel = new JLabel("Add a new Client form");
+        registrationLabel = new JLabel("Add a new Admin form");
         panel = new JPanel();
         southButtonsPanel = new JPanel(new GridLayout(1, 2));
 
         loginField = new JTextField(30);
         setField("Login", loginField);
 
-        phoneField = new JTextField(30);
-        setField("Phone number", phoneField);
-
-        locationField = new JTextField(30);
-        setField("Location", locationField);
-
         passwordField = new JPasswordField(30);
         setField("Password", passwordField);
 
 
-        createAccountButton = new JButton("Add Client");
+        createAccountButton = new JButton("Add Admin");
         createAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                addClient();
+                addAdmin();
             }
         });
 
@@ -67,7 +60,7 @@ public class AddClientFrame extends JFrame {
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AddClientFrame.this.dispose();
+                AddAdminFrame.this.dispose();
             }
         });
         southButtonsPanel.add(createAccountButton);
@@ -77,8 +70,6 @@ public class AddClientFrame extends JFrame {
         panel.add(registrationLabel);
         panel.add(loginField);
         panel.add(passwordField);
-        panel.add(locationField);
-        panel.add(phoneField);
 
         this.add(panel);
 
@@ -89,24 +80,23 @@ public class AddClientFrame extends JFrame {
         PromptSupport.setForeground(Color.GRAY, field);
     }
 
-    private void addClient() {
+    private void addAdmin() {
         if (!checkLoginPasswordFilled()) {
 
             try {
 
-                adminController.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
-                        locationField.getText(), passwordField.getText());
+                adminController.addAdmin(loginField.getText(), passwordField.getText());
 
-                JOptionPane.showMessageDialog(AddClientFrame.this,
-                        String.format("%s account has been successfully created", loginField.getText()),
-                        "Successful registration",
+                JOptionPane.showMessageDialog(AddAdminFrame.this,
+                        String.format("%s admin account has been successfully created", loginField.getText()),
+                        "Admin registration",
                         JOptionPane.INFORMATION_MESSAGE);
 
-                AddClientFrame.this.dispose();
+                AddAdminFrame.this.dispose();
 
             } catch (LoginHasAlreadyUsed loginHasAlreadyUsed) {
 
-                JOptionPane.showMessageDialog(AddClientFrame.this,
+                JOptionPane.showMessageDialog(AddAdminFrame.this,
                         "Provided login has been already created",
                         "Existing login error",
                         JOptionPane.ERROR_MESSAGE);
@@ -115,14 +105,12 @@ public class AddClientFrame extends JFrame {
 
         } else {
 
-            JOptionPane.showMessageDialog(AddClientFrame.this,
+            JOptionPane.showMessageDialog(AddAdminFrame.this,
                     "Login and password fields can't be blank!", "Empty fields error",
                     JOptionPane.OK_OPTION);
 
         }
     }
-
-    // check that login and password data provided by user while creating an account;//
 
     public boolean checkLoginPasswordFilled() {
 

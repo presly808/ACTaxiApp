@@ -22,11 +22,11 @@ public class RegistrationFrame extends JFrame {
     private JPanel southButtonsPanel;
     private JPanel panel;
     private JLabel registrationLabel;
+    private Login login;
 
+    public RegistrationFrame(Login login) {
 
-    public RegistrationFrame() {
-
-
+        this.login = login;
         setSize(400, 300);
         init();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -101,8 +101,6 @@ public class RegistrationFrame extends JFrame {
 
     private void createAccount() {
         if (!checkLoginPasswordFilled()) {
-
-            Login login = new Login();
 
             boolean client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
                     locationField.getText(), passwordField.getText());

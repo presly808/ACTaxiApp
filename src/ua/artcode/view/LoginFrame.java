@@ -20,6 +20,7 @@ public class LoginFrame extends JFrame {
     private JLabel label;
     private JPanel southButtonsPanel;
     private JPanel panel;
+    private Login login;
 
     public LoginFrame() {
 
@@ -59,7 +60,7 @@ public class LoginFrame extends JFrame {
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new RegistrationFrame();
+                new RegistrationFrame(login);
             }
         });
 
@@ -67,7 +68,7 @@ public class LoginFrame extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Login login = new Login();
+                login = new Login();
 
                 ITaxiController controller = login.login(loginField.getText(), passwordField.getText());
                 if (controller != null) {

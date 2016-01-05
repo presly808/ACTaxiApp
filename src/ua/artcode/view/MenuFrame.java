@@ -1,10 +1,7 @@
 package ua.artcode.view;
 
 
-import ua.artcode.controller.AdminController;
-import ua.artcode.controller.ClientController;
-import ua.artcode.controller.DriverController;
-import ua.artcode.controller.ITaxiController;
+import ua.artcode.controller.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,8 +10,9 @@ import java.awt.event.ActionListener;
 public class MenuFrame extends JFrame {
     private ITaxiController menuController;
     private JPanel panel;
-    private JButton showTicketsButton,showDriversButton,addDriverButton,addClientButton,orderTaxiButton;
+    private JButton showTicketsButton, showDriversButton, addDriverButton, addClientButton, orderTaxiButton;
     private JLabel whoAmIlabel;
+    private JButton addAdminButton;
 
     public MenuFrame(ITaxiController menuController) {
         this.menuController = menuController;
@@ -38,7 +36,7 @@ public class MenuFrame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                new TicketsListFrame( menuController);
+                new TicketsListFrame(menuController);
             }
         });
 
@@ -51,6 +49,7 @@ public class MenuFrame extends JFrame {
         });
 
         addClientButton = new JButton("Add Client");
+        addAdminButton = new JButton("Add Admin");
         addDriverButton = new JButton("Add Driver");
         orderTaxiButton = new JButton("Order Taxi");
 
@@ -64,7 +63,7 @@ public class MenuFrame extends JFrame {
         addClientButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddClientFrame((AdminController) menuController);
+                new RegistrationFrame(new Login(((AdminController) menuController).getAppDataContainer()));
             }
         });
 
@@ -75,7 +74,12 @@ public class MenuFrame extends JFrame {
             }
         });
 
-
+        addAdminButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new AddAdminFrame((AdminController) menuController);
+            }
+        });
 
         whoAmIlabel = new JLabel(String.format("Signed in as %s", menuController.getClass() == ClientController.class ?
                 "client" : menuController.getClass() == DriverController.class ? "driver" : "admin"));
@@ -86,6 +90,7 @@ public class MenuFrame extends JFrame {
         panel.add(addClientButton);
         panel.add(addDriverButton);
         panel.add(orderTaxiButton);
+        panel.add(addAdminButton);
         getContentPane().add(panel);
     }
 
@@ -95,6 +100,7 @@ public class MenuFrame extends JFrame {
             showDriversButton.setVisible(false);
             addClientButton.setVisible(false);
             addDriverButton.setVisible(false);
+            addAdminButton.setVisible(false);
 
         } else if (((menuController.getClass() == DriverController.class))) {
 
@@ -102,6 +108,7 @@ public class MenuFrame extends JFrame {
             addClientButton.setVisible(false);
             addDriverButton.setVisible(false);
             orderTaxiButton.setVisible(false);
+            addAdminButton.setVisible(false);
 
         } else {
 
