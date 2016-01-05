@@ -2,6 +2,7 @@ package ua.artcode.view;
 
 import org.jdesktop.xswingx.PromptSupport;
 import ua.artcode.controller.AdminController;
+import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.Client;
 
 import javax.swing.*;
@@ -91,21 +92,25 @@ public class AddClientFrame extends JFrame {
     private void addClient() {
         if (!checkLoginPasswordFilled()) {
 
-            Client client = adminController.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
-                    locationField.getText(), passwordField.getText());
+            try {
 
-            if (client != null) {
+                adminController.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+                        locationField.getText(), passwordField.getText());
+
                 JOptionPane.showMessageDialog(AddClientFrame.this,
                         String.format("%s account has been successfully created", loginField.getText()),
                         "Successful registration",
                         JOptionPane.INFORMATION_MESSAGE);
+
                 AddClientFrame.this.dispose();
-            } else {
+
+            } catch (LoginHasAlreadyUsed loginHasAlreadyUsed) {
 
                 JOptionPane.showMessageDialog(AddClientFrame.this,
                         "Provided login has been already created",
                         "Existing login error",
                         JOptionPane.ERROR_MESSAGE);
+
             }
 
         } else {

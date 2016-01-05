@@ -1,6 +1,7 @@
 package ua.artcode.controller;
 
 import ua.artcode.exception.BusyDriverException;
+import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.Car;
 import ua.artcode.model.Client;
@@ -15,7 +16,7 @@ import java.util.Vector;
  */
 public interface IAdminController extends ITaxiController{
 
-    Client addClient(String name, int phone, String location, String pass );
+    Client addClient(String name, int phone, String location, String pass ) throws LoginHasAlreadyUsed;
 
     Driver addDriver(String name, Car car, String pass);
 

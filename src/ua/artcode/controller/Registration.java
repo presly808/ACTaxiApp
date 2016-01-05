@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.model.*;
 import ua.artcode.utils.accounts.Calculator;
 import ua.artcode.utils.geolocation.GoogleMapsAPIImpl;
@@ -29,11 +30,11 @@ public class Registration {
     }
 
     public static Client addClientO(String name, int phone, String location,
-                                    String pass, AppDataContainer appDataContainer) {
+                                    String pass, AppDataContainer appDataContainer) throws LoginHasAlreadyUsed {
 
         Person person = appDataContainer.getPerson(name, appDataContainer.getListClients());
         if(person != null){
-            return null;
+            throw new LoginHasAlreadyUsed("This Client Login has already used");
         }
 
         Client client = new Client(name, phone, location, pass, ID.genId(name.hashCode()));
@@ -65,5 +66,18 @@ public class Registration {
         TaxiAppSave.save(appDataContainer);
 
         return ticket;
+    }
+
+    public static Admin addAdmin(String name, String pass, AppDataContainer appDataContainer) throws LoginHasAlreadyUsed {
+
+        Person person = appDataContainer.getPerson(name, appDataContainer.getListClients());
+        if(person != null){
+            throw new LoginHasAlreadyUsed("This Admins Login has already used");
+        }
+
+        Admin admin = new Admin(name, pass, ID.genId(name.hashCode()));
+        appDataContainer.addAdminToData(admin);
+        TaxiAppSave.save(appDataContainer);
+        return admin;
     }
 }

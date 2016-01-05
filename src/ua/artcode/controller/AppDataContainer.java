@@ -63,13 +63,7 @@ public class AppDataContainer implements Serializable, IAppDataContainer {
     }
 
     @Override
-    public void addAdminToData(Admin admin) throws LoginHasAlreadyUsed {
-
-        for(Admin tmp : admins){
-            if(tmp.getLogin() == admin.getLogin()){
-                throw new LoginHasAlreadyUsed("This Admins Login has already used");
-            }
-        }
+    public void addAdminToData(Admin admin) {
         this.admins.add(admin);
         TaxiAppSave.save(this);
     }

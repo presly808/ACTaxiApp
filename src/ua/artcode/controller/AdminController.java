@@ -1,6 +1,7 @@
 package ua.artcode.controller;
 
 import ua.artcode.exception.BusyDriverException;
+import ua.artcode.exception.LoginHasAlreadyUsed;
 import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.*;
 import ua.artcode.utils.geolocation.Location;
@@ -29,13 +30,17 @@ public class AdminController implements IAdminController {
 
     // return null if db have same login
     @Override
-    public Client addClient(String name, int phone, String location, String pass ){
+    public Client addClient(String name, int phone, String location, String pass ) throws LoginHasAlreadyUsed {
         return Registration.addClientO(name, phone, location, pass, appDataContainer);
     }
 
     @Override
     public Driver addDriver(String name, Car car, String pass){
         return Registration.addDriverO(name, car, appDataContainer, pass);
+    }
+
+    public Admin addAdmin(String name, String pass) throws LoginHasAlreadyUsed {
+        return Registration.addAdmin(name, pass, appDataContainer);
     }
 
     @Override
@@ -115,6 +120,8 @@ public class AdminController implements IAdminController {
         freeDrivers.sort((Driver a1, Driver a2) -> a1.getDistanceToClient() < a2.getDistanceToClient() ? -1
                 : a1.getDistanceToClient() > a2.getDistanceToClient() ? -1 : 0);
 
+        dropIdTicket();
+
         return freeDrivers;
     }
 
@@ -176,7 +183,7 @@ public class AdminController implements IAdminController {
         this.ticketId = ticketId;
     }
 
-    public void dropIdTicket(){
+    private void dropIdTicket(){
         ticketId = -1;
     }
 
