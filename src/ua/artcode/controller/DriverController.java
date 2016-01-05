@@ -92,6 +92,7 @@ public class DriverController implements IDriverController{
     }
 
     // after ArrivalDestinationTime
+    @Override
     public void finishTrip() {
         currentTicket.setStatus(TicketStatus.DONE);
         currentTicket.setArrivalDestinationTime(new Date());
@@ -102,6 +103,12 @@ public class DriverController implements IDriverController{
 
     @Override
     public void changeLocation(String location){
+        currentDriver.setCurrentLocation(location);
+    }
+
+    // Only street and house number
+    @Override
+    public void setLocation(String location){
         currentDriver.setCurrentLocation(location);
     }
 }
