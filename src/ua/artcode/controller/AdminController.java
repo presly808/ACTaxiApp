@@ -28,7 +28,6 @@ public class AdminController implements IAdminController {
         return controller;
     }
 
-    // return null if db have same login
     @Override
     public Client addClient(String name, int phone, String location, String pass ) throws LoginHasAlreadyUsed {
         return Registration.addClientO(name, phone, location, pass, appDataContainer);
@@ -39,6 +38,7 @@ public class AdminController implements IAdminController {
         return Registration.addDriverO(name, car, appDataContainer, pass);
     }
 
+    @Override
     public Admin addAdmin(String name, String pass) throws LoginHasAlreadyUsed {
         return Registration.addAdmin(name, pass, appDataContainer);
     }

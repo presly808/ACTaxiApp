@@ -20,6 +20,10 @@ public class Login {
 
     }
 
+    public Login(AppDataContainer appDataContainer){
+        this.appDataContainer = appDataContainer;
+    }
+
     public ITaxiController login(String login, String pass) {
 
         if(login.equals("admin") && pass.equals("admin")){
