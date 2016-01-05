@@ -24,10 +24,10 @@ public class TestClass {
 
     protected Admin admin = new Admin("superadmin", "superpass", ID.genId("superadmin".hashCode()));
 
-    protected Client client1 = new Client("Max", 111, "New York", "111", ID.genId("Max".hashCode()));
-    protected Client client2 = new Client("John", 222, "New Jersey", "222", ID.genId("John".hashCode()));
-    protected Client client3 = new Client("Allie", 333, "New Jersey", "333", ID.genId("Alice".hashCode()));
-    protected Client client4 = new Client("Ben", 444, "Brooklyn", "444", ID.genId("Ben".hashCode()));
+    protected Client client1 = new Client("Max", "111", "New York", "111", ID.genId("Max".hashCode()));
+    protected Client client2 = new Client("John", "222", "New Jersey", "222", ID.genId("John".hashCode()));
+    protected Client client3 = new Client("Allie", "333", "New Jersey", "333", ID.genId("Alice".hashCode()));
+    protected Client client4 = new Client("Ben", "444", "Brooklyn", "444", ID.genId("Ben".hashCode()));
 
     protected Driver driver1 = new Driver("Ashton", new Car("BMW", "1234", "pink"), ID.genId("Ashton".hashCode()), true);
     protected Driver driver2 = new Driver("Reese", new Car("Lexus", "2345", "green"), ID.genId("Reese".hashCode()), true);

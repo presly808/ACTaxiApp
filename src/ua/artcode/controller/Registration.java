@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class Registration {
 
-    public static boolean addClient(String name, int phone, String location,
+    public static boolean addClient(String name, String phone, String location,
                                     String pass, AppDataContainer appDataContainer)  {
 
         Person person = appDataContainer.getPerson(name, appDataContainer.getListClients());
@@ -29,7 +29,7 @@ public class Registration {
         return true;
     }
 
-    public static Client addClientO(String name, int phone, String location,
+    public static Client addClientO(String name, String phone, String location,
                                     String pass, AppDataContainer appDataContainer) throws LoginHasAlreadyUsed {
 
         Person person = appDataContainer.getPerson(name, appDataContainer.getListClients());

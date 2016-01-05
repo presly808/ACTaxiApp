@@ -101,8 +101,7 @@ public class RegistrationFrame extends JFrame {
 
     private void createAccount() {
         if (!checkLoginPasswordFilled()) {
-
-            boolean client = login.addClient(loginField.getText(), Integer.parseInt(phoneField.getText()),
+            boolean client = login.addClient(loginField.getText(), phoneField.getText(),
                     locationField.getText(), passwordField.getText());
 
             if (client) {

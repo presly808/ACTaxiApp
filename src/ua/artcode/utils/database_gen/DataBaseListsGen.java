@@ -17,7 +17,7 @@ public class DataBaseListsGen {
 
         for (int i = 0; i < size; i++) {
 
-            clients.add(new Client("" + i, i, "" + i, "client", i));
+            clients.add(new Client("" + i, ""+i, "" + i, "client", i));
 
         }
 

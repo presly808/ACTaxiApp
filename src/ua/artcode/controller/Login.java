@@ -44,7 +44,7 @@ public class Login {
     }
 
     //if login have already used, method return false
-    public boolean addClient(String name, int phone, String location, String pass ){
+    public boolean addClient(String name, String phone, String location, String pass ){
         return Registration.addClient(name, phone, location, pass, appDataContainer);
     }
 }

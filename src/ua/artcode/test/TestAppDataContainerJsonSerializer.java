@@ -43,7 +43,7 @@ public class TestAppDataContainerJsonSerializer extends TestClass{
     public void testLoad(){
         AppDataContainer container = TaxiAppLoader.loadContainer("db.json");
         List<Client> clients = container.getListClients();
-        clients.add(new Client("Log2", 2323, "Kiev", "2342", 2323));
+        clients.add(new Client("Log2", "2323", "Kiev", "2342", 2323));
         Assert.assertNotNull(container);
     }
 }

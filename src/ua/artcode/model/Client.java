@@ -7,10 +7,10 @@ import java.io.Serializable;
  */
 public class Client extends Person implements Serializable {
 
-    private int phoneNumber;
+    private String  phoneNumber;
     private String location;
 
-    public Client(String login, int phoneNumber, String location , String pass, long iDClient) {
+    public Client(String login, String phoneNumber, String location , String pass, long iDClient) {
 
         this.login = login;
         this.phoneNumber = phoneNumber;
@@ -20,8 +20,7 @@ public class Client extends Person implements Serializable {
 
     }
 
-    public int getPhoneNumber() {
-
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -29,7 +28,7 @@ public class Client extends Person implements Serializable {
         return location;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

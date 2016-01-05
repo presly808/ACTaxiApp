@@ -58,13 +58,6 @@ public class AdminControllerTest extends TestClass{
     }
 
     @Test
-    public void testAddClient() throws Exception {
-        Client actual = adminController.addClient("i", 111, "1", "11");
-        assertNotNull(actual);
-        assertEquals("i", actual.getLogin());
-    }
-
-    @Test
     public void testAddDriver() throws Exception {
         Driver actual = adminController.addDriver("driver", new Car("Jeep", "МЕ 4556 ВС", "black"),"driverPass");
         assertNotNull(actual);

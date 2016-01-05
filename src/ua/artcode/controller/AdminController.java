@@ -29,11 +29,6 @@ public class AdminController implements IAdminController {
     }
 
     @Override
-    public Client addClient(String name, int phone, String location, String pass ) throws LoginHasAlreadyUsed {
-        return Registration.addClientO(name, phone, location, pass, appDataContainer);
-    }
-
-    @Override
     public Driver addDriver(String name, Car car, String pass){
         return Registration.addDriverO(name, car, appDataContainer, pass);
     }

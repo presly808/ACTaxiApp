@@ -13,8 +13,6 @@ import java.util.Vector;
  */
 public interface IAdminController extends ITaxiController{
 
-    Client addClient(String name, int phone, String location, String pass ) throws LoginHasAlreadyUsed;
-
     Driver addDriver(String name, Car car, String pass);
 
     Admin addAdmin(String name, String pass) throws LoginHasAlreadyUsed;
