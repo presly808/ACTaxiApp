@@ -2,7 +2,9 @@ package ua.artcode.controller;
 
 import ua.artcode.exception.ClientHaveAlreadyHadATicket;
 import ua.artcode.exception.NoTicketsException;
+import ua.artcode.exception.NotFindInDataBaseException;
 import ua.artcode.model.Client;
+import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
 import ua.artcode.model.TicketStatus;
 import ua.artcode.utils.serialization.TaxiAppSave;
@@ -79,8 +81,26 @@ public class ClientController implements IClientController{
             throw new NoTicketsException("You've already canceled the order");
         }
         currentTicket.setStatus(TicketStatus.REJECTED);
+        try {
+            Driver driver = findDiverByTicket(currentTicket);
+            driver.dropCurrentIdTicket();
+        } catch (NotFindInDataBaseException e) {
+            e.printStackTrace();
+        }
         TaxiAppSave.save(appDataContainer);
         currentTicket = null;
+    }
+
+    private Driver findDiverByTicket(Ticket ticket) throws NotFindInDataBaseException {
+
+        for(Driver tmp : appDataContainer.getListDrivers()){
+            if(tmp.getId() == ticket.getIdDriver()){
+                return tmp;
+            }
+        }
+        throw new NotFindInDataBaseException("did not find a driver / maybe ticket \n" +
+                                             "wasn't in PROCESSED or IN_PROGRESS\n" +
+                                             "and didn't have a diver");
     }
 
 }

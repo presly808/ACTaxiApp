@@ -8,6 +8,7 @@ import ua.artcode.exception.HaveNotNewTickets;
 import ua.artcode.exception.NoTicketsException;
 import ua.artcode.model.Ticket;
 import ua.artcode.model.TicketStatus;
+import ua.artcode.utils.table_utils.MyCellRenderer;
 
 import javax.swing.*;
 import javax.swing.event.TableModelListener;
@@ -20,6 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -38,7 +40,7 @@ public class TicketsListFrame extends JFrame {
 
     public TicketsListFrame(ITaxiController menuController) {
         this.controller = menuController;
-        setSize(1000, 300);
+        setSize(1500, 300);
         init();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Taxi App");
@@ -53,6 +55,9 @@ public class TicketsListFrame extends JFrame {
 
         MyTableModel model = new MyTableModel(controller.getTickets());
         table = new JTable(model);
+
+        //for leveling...not work
+        table.setDefaultRenderer(Objects.class, new MyCellRenderer());
 
         scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
