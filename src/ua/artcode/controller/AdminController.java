@@ -115,8 +115,6 @@ public class AdminController implements IAdminController {
         freeDrivers.sort((Driver a1, Driver a2) -> a1.getDistanceToClient() < a2.getDistanceToClient() ? -1
                 : a1.getDistanceToClient() > a2.getDistanceToClient() ? -1 : 0);
 
-        dropIdTicket();
-
         return freeDrivers;
     }
 
@@ -145,6 +143,7 @@ public class AdminController implements IAdminController {
         }
         ticket.setIdDriver(driverId);
         ticket.setStatus(TicketStatus.PROCESSED);
+        dropIdTicket();
         TaxiAppSave.save(appDataContainer);
 
     }

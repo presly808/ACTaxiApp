@@ -57,7 +57,7 @@ public class TicketsListFrame extends JFrame {
         table = new JTable(model);
 
         //for leveling...not work
-        table.setDefaultRenderer(Objects.class, new MyCellRenderer());
+        table.setDefaultRenderer(TicketStatus.class, new MyCellRenderer());
 
         scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
