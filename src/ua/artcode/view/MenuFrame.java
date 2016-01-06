@@ -2,17 +2,21 @@ package ua.artcode.view;
 
 
 import ua.artcode.controller.*;
+import ua.artcode.exception.BusyDriverException;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MenuFrame extends JFrame {
     private ITaxiController menuController;
+    private DriverController driverController;
     private JPanel panel;
     private JButton showTicketsButton, showDriversButton, addDriverButton, addClientButton, orderTaxiButton;
     private JLabel whoAmIlabel;
     private JButton addAdminButton;
+    private JButton changeStatus;
 
     public MenuFrame(ITaxiController menuController) {
         this.menuController = menuController;
@@ -31,16 +35,42 @@ public class MenuFrame extends JFrame {
 
         panel = new JPanel();
 
-        showTicketsButton = new JButton("Show tickets");
-        showTicketsButton.addActionListener(new ActionListener() {
+        //buttons
 
+        showTicketsButton = new JButton("Show tickets");
+        showDriversButton = new JButton("Show drivers");
+        addClientButton = new JButton("Add Client");
+        addAdminButton = new JButton("Add Admin");
+        addDriverButton = new JButton("Add Driver");
+        orderTaxiButton = new JButton("Order Taxi");
+        changeStatus = new JButton("Change Status");
+
+
+        // listeners
+
+        changeStatus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new TicketsListFrame(menuController);
+                try {
+
+                    driverController.changeStatus();
+                    if (driverController.isFree() == true) {
+                        changeStatus.setText("Start working");
+                        changeStatus.setBackground(Color.YELLOW);
+                    }else {
+                        changeStatus.setText("Take a day off");
+                        changeStatus.setBackground(Color.GREEN);
+                    }
+
+                } catch (BusyDriverException e1) {
+                    JOptionPane.showMessageDialog(MenuFrame.this,
+                            e1.getMessage(),
+                            "Busy driver error",
+                            JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
-        showDriversButton = new JButton("Show drivers");
         showDriversButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,10 +78,13 @@ public class MenuFrame extends JFrame {
             }
         });
 
-        addClientButton = new JButton("Add Client");
-        addAdminButton = new JButton("Add Admin");
-        addDriverButton = new JButton("Add Driver");
-        orderTaxiButton = new JButton("Order Taxi");
+        showTicketsButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new TicketsListFrame(menuController);
+            }
+        });
 
         orderTaxiButton.addActionListener(new ActionListener() {
             @Override
@@ -91,6 +124,7 @@ public class MenuFrame extends JFrame {
         panel.add(addDriverButton);
         panel.add(orderTaxiButton);
         panel.add(addAdminButton);
+        panel.add(changeStatus);
         getContentPane().add(panel);
     }
 
@@ -101,8 +135,10 @@ public class MenuFrame extends JFrame {
             addClientButton.setVisible(false);
             addDriverButton.setVisible(false);
             addAdminButton.setVisible(false);
+            changeStatus.setVisible(false);
 
         } else if (((menuController.getClass() == DriverController.class))) {
+            driverController = (DriverController) menuController;
 
             showDriversButton.setVisible(false);
             addClientButton.setVisible(false);
@@ -113,6 +149,7 @@ public class MenuFrame extends JFrame {
         } else {
 
             orderTaxiButton.setVisible(false);
+            changeStatus.setVisible(false);
         }
     }
 }

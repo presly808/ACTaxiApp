@@ -103,7 +103,7 @@ public class AdminController implements IAdminController {
 
         for(Driver tmp : appDataContainer.getListDrivers()){
 
-            if(tmp.getStatus()){
+            if(tmp.isFree()){
 
                 tmp.setDistanceToClient(Location.getDistance(tmp.getCurrentLocation().getFormattedAddress(),
                         ticket.getFromLocation()));
