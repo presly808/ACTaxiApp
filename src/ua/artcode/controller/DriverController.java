@@ -1,5 +1,6 @@
 package ua.artcode.controller;
 
+import ua.artcode.exception.BusyDriverException;
 import ua.artcode.exception.HaveNotNewTickets;
 import ua.artcode.model.Driver;
 import ua.artcode.model.Ticket;
@@ -46,8 +47,13 @@ public class DriverController implements IDriverController{
     }
 
     @Override
-    public void changeStatus() {
-        currentDriver.changeStatus();
+    public void changeStatus() throws BusyDriverException {
+        if(currentDriver.getIdCurrentTicket() == 0){
+            currentDriver.changeStatus();
+        }
+        throw new BusyDriverException("You can't change your status, \n" +
+                "because you has already had a ticket.\n" +
+                "Drop the ticket or do your work");
     }
 
     @Override

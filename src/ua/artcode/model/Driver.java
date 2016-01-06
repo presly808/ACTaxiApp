@@ -47,8 +47,6 @@ public class Driver extends Person implements Serializable{
         return isFree;
     }
 
-    public boolean getStatus(){ return isFree;}
-
     public boolean takeTicket(long iDCurrentTicket){
 
         if(!isFree && iDCurrentTicket > 0){

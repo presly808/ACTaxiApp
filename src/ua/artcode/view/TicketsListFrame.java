@@ -56,7 +56,6 @@ public class TicketsListFrame extends JFrame {
         MyTableModel model = new MyTableModel(controller.getTickets());
         table = new JTable(model);
 
-        //for leveling...not work
         table.setDefaultRenderer(TicketStatus.class, new MyCellRenderer());
 
         scrollPane = new JScrollPane(table);

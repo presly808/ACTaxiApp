@@ -44,10 +44,10 @@ public class DriverControllerTest extends TestClass{
     @Test
     public void testChangeStatus() throws Exception {
         driverController1.changeStatus();
-        assertFalse(driver1.getStatus());
+        assertFalse(driver1.isFree());
 
         driverController2.changeStatus();
-        assertTrue(driver4.getStatus());
+        assertTrue(driver4.isFree());
     }
 
     @Test
