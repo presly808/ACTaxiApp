@@ -21,7 +21,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -274,7 +273,8 @@ public class TicketsListFrame extends JFrame {
                     returnedValue = dateFormat.format(ticket.getArrivalTaxiTime());
                     break;
                 case ARRIVE_TO_PLACE:
-                    returnedValue = dateFormat.format(ticket.getArrivalDestinationTime());
+                    returnedValue = ticket.getStatus() != TicketStatus.REJECTED ?
+                            dateFormat.format(ticket.getArrivalDestinationTime()) :"-";
                     break;
                 case STATUS:
                     returnedValue = ticket.getStatus();
