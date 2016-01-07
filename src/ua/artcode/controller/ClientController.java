@@ -31,7 +31,9 @@ public class ClientController implements IClientController{
 
         for(Ticket tmp : appDataContainer.getListTickets()){
             if(tmp.getIdClient() == currentClient.getId()){
-                if(tmp.getStatus() == TicketStatus.NEW){
+                if(tmp.getStatus() == TicketStatus.NEW ||
+                        tmp.getStatus() == TicketStatus.PROCESSED ||
+                        tmp.getStatus() == TicketStatus.IN_PROGRESS){
                     return tmp;
                 }
             }
