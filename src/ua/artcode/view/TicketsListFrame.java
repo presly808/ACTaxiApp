@@ -81,6 +81,7 @@ public class TicketsListFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     Ticket acceptedTicket = driverController.takeATicket();
+                    table.repaint();
 
                     JOptionPane.showMessageDialog(TicketsListFrame.this,
                             String.format("The new ticket with %d id has been accepted", acceptedTicket.getiDTicket()),
