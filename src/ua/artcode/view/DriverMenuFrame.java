@@ -55,26 +55,27 @@ public class DriverMenuFrame extends JFrame {
 
         // listeners
 
-        changeStatusButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        changeStatusButton.addActionListener((e) -> {
                 try {
-
                     controller.changeStatus();
                     repaintChangeStatusButton();
-
                 } catch (BusyDriverException e1) {
                     JOptionPane.showMessageDialog(DriverMenuFrame.this,
                             e1.getMessage(),
                             "Busy driver error",
                             JOptionPane.WARNING_MESSAGE);
                 }
-            }
         });
 
         showTicketsButton.addActionListener(e -> new TicketsListFrame(controller));
         doneWithTicketButton.addActionListener(e -> controller.finishTrip());
-        setLocationButton.addActionListener(e -> controller.setLocation(locationField.getText()));
+        setLocationButton.addActionListener(e ->
+        {
+            controller.setLocation(locationField.getText());
+            JOptionPane.showMessageDialog(DriverMenuFrame.this, "Location has been changed",
+                    "SetLocation", JOptionPane.WARNING_MESSAGE);
+            locationField.setText("");
+        });
 
         label = new JLabel("Signed in as driver");
         northPanel.add(locationField);

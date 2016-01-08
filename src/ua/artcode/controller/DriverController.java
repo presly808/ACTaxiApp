@@ -103,6 +103,7 @@ public class DriverController implements IDriverController{
     // after ArrivalDestinationTime
     @Override
     public void finishTrip() {
+        if(currentTicket == null) return;
         currentTicket.setStatus(TicketStatus.DONE);
         currentTicket.setArrivalDestinationTime(new Date());
         changeLocation(currentTicket.getToLocation());
