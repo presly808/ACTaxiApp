@@ -1,15 +1,8 @@
 package ua.artcode.view;
 
-import ua.artcode.controller.AdminController;
 import ua.artcode.controller.ClientController;
-import ua.artcode.controller.DriverController;
-import ua.artcode.controller.Login;
-import ua.artcode.exception.BusyDriverException;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by dexter on 08.01.16.

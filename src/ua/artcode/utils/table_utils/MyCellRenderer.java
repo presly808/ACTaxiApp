@@ -21,25 +21,30 @@ public class MyCellRenderer extends JLabel implements TableCellRenderer {
     public Component getTableCellRendererComponent(JTable table,
                                                    Object value, boolean isSelected, boolean hasFocus, int row,
                                                    int col) {
-        if(value.getClass() == TicketStatus.class){
 
-            TicketStatus status = (TicketStatus) value;
-            if(status.equals(TicketStatus.NEW)){
-                setBackground(Color.GREEN);
+        TicketStatus status = (TicketStatus) value;
+        if(!isSelected) {
+
+                if (status.equals(TicketStatus.NEW)) {
+                    setBackground(Color.GREEN);
+                    setForeground(Color.BLACK);
+                    setText(status.toString());
+                    return this;
+                } else if (status.equals(TicketStatus.REJECTED)) {
+                    setBackground(Color.RED);
+                    setForeground(Color.BLACK);
+                    setText(status.toString());
+                    return this;
+                }
+
+                setBackground(Color.WHITE);
                 setForeground(Color.BLACK);
                 setText(status.toString());
-                return this;
-            } else if(status.equals(TicketStatus.REJECTED)){
-                setBackground(Color.RED);
-                setForeground(Color.BLACK);
-                setText(status.toString());
-                return this;
-            }
 
-            setBackground(Color.WHITE);
+        } else{
+            setBackground(Color.BLUE);
             setForeground(Color.BLACK);
             setText(status.toString());
-
         }
         return this;
     }

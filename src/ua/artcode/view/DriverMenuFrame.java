@@ -16,7 +16,7 @@ public class DriverMenuFrame extends JFrame {
 
     private DriverController controller;
     private JPanel southPanel;
-    private JButton showTicketsButton, changeStatus, doneWithTicketButton, setLocationButton;
+    private JButton showTicketsButton, changeStatusButton, doneWithTicketButton, setLocationButton;
     private JLabel label;
     private JPanel northPanel;
 
@@ -48,25 +48,20 @@ public class DriverMenuFrame extends JFrame {
 
         showTicketsButton = new JButton("Show tickets");
         doneWithTicketButton = new JButton("Done with order");
-        changeStatus = new JButton(controller.isFree() == true ? "Start working" : "Take a day off");
+        changeStatusButton = new JButton(controller.isFree() ? "Start working" : "Take a day off");
+        repaintChangeStatusButton();
         setLocationButton = new JButton("Set location");
 
 
         // listeners
 
-        changeStatus.addActionListener(new ActionListener() {
+        changeStatusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
 
                     controller.changeStatus();
-                    if (controller.isFree() == true) {
-                        changeStatus.setText("Start working");
-                        changeStatus.setBackground(Color.YELLOW);
-                    } else {
-                        changeStatus.setText("Take a day off");
-                        changeStatus.setBackground(Color.GREEN);
-                    }
+                    repaintChangeStatusButton();
 
                 } catch (BusyDriverException e1) {
                     JOptionPane.showMessageDialog(DriverMenuFrame.this,
@@ -86,10 +81,20 @@ public class DriverMenuFrame extends JFrame {
         northPanel.add(setLocationButton);
         southPanel.add(label);
         southPanel.add(showTicketsButton);
-        southPanel.add(changeStatus);
+        southPanel.add(changeStatusButton);
         southPanel.add(doneWithTicketButton);
         getContentPane().add(southPanel);
         getContentPane().add(northPanel, new BorderLayout().NORTH);
+    }
+
+    private void repaintChangeStatusButton() {
+        if (controller.isFree()) {
+            changeStatusButton.setText("Start working");
+            changeStatusButton.setBackground(Color.YELLOW);
+        } else {
+            changeStatusButton.setText("Take a day off");
+            changeStatusButton.setBackground(Color.GREEN);
+        }
     }
 
 }

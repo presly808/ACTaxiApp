@@ -50,10 +50,13 @@ public class DriverController implements IDriverController{
     public void changeStatus() throws BusyDriverException {
         if(currentDriver.getIdCurrentTicket() == 0){
             currentDriver.changeStatus();
+            TaxiAppSave.save(appDataContainer);
+        }else {
+            throw new BusyDriverException("You can't change your status, \n" +
+                    "because you has already had a ticket.\n" +
+                    "Drop the ticket or do your work");
         }
-        throw new BusyDriverException("You can't change your status, \n" +
-                "because you has already had a ticket.\n" +
-                "Drop the ticket or do your work");
+
     }
 
     @Override
