@@ -1,8 +1,7 @@
 package ua.artcode.view;
 
 import org.jdesktop.xswingx.PromptSupport;
-import ua.artcode.controller.ITaxiController;
-import ua.artcode.controller.Login;
+import ua.artcode.controller.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -57,12 +56,7 @@ public class LoginFrame extends JFrame {
 
 
         registerButton = new JButton("Sign Up");
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new RegistrationFrame(login);
-            }
-        });
+        registerButton.addActionListener((e) -> new RegistrationFrame(login));
 
         loginButton = new JButton("Login");
         loginButton.addActionListener(new ActionListener() {
@@ -70,14 +64,23 @@ public class LoginFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 ITaxiController controller = login.login(loginField.getText(), passwordField.getText());
-                if (controller != null) {
-                    new MenuFrame(controller);
-                    LoginFrame.this.dispose();
-                } else
+                if (controller == null) {
+
                     JOptionPane.showMessageDialog(LoginFrame.this,
                             "Wrong username/password",
                             "Login error",
                             JOptionPane.ERROR_MESSAGE);
+
+                } else if(controller.getClass() == AdminController.class){
+                    new AdminMenuFrame((AdminController)controller);
+                    LoginFrame.this.dispose();
+                } else if(controller.getClass() == DriverController.class){
+                    new DriverMenuFrame((DriverController)controller);
+                    LoginFrame.this.dispose();
+                } else if(controller.getClass() == ClientController.class){
+                    new ClientMenuFrame((ClientController)controller);
+                    LoginFrame.this.dispose();
+                }
             }
         });
         southButtonsPanel.add(registerButton);
