@@ -1,6 +1,7 @@
 package ua.artcode.utils.geolocation;
 
 
+import com.google.gson.*;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,6 +14,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.concurrent.atomic.DoubleAccumulator;
 
 /**
  * Created by serhii on 20.12.15.
@@ -118,7 +120,20 @@ public class GoogleMapsAPIImpl implements GoogleMapsAPI {
         try {
             //todo use gsoup library for better mapping
             String body = sendGetRequest(formattedQuery);
-            System.out.println(body);
+
+            JsonParser jsonParser = new JsonParser();
+            JsonElement element = jsonParser.parse(body);
+
+            JsonObject asJsonObject = element.getAsJsonObject();
+            JsonArray routes = asJsonObject.getAsJsonArray("routes");
+            JsonObject asJsonObject1 = routes.get(0).getAsJsonObject();
+            JsonArray legs = asJsonObject1.getAsJsonArray("legs");
+            JsonObject asJsonObject2 = legs.get(0).getAsJsonObject();
+            JsonPrimitive jsonObject = asJsonObject2.getAsJsonObject("distance").getAsJsonPrimitive("value");
+            //System.out.println(jsonObject.toString());
+
+            return Double.parseDouble(jsonObject.getAsString());
+            //System.out.println(body);
         } catch (IOException e) {
             e.printStackTrace();
         }
