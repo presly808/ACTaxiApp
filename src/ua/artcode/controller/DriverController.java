@@ -92,6 +92,7 @@ public class DriverController implements IDriverController{
         currentTicket.setArrivalTaxiTime(Calculator.getTimeArrival(currentDriver.getDistanceToClient()));
 
         currentTicket.setArrivalDestinationTime(Calculator.getTimeArrival(
+                currentDriver.getDistanceToClient()+
                 Location.getDistance(currentTicket.getFromLocation(), currentTicket.getToLocation())));
 
         currentTicket.setStatus(TicketStatus.IN_PROGRESS);

@@ -10,13 +10,13 @@ import java.util.GregorianCalendar;
 public class Calculator {
 
     public static double getCost(double distance){
-        return Math.round(distance * 10);
+        return Math.round(distance / 100);
     }
 
     public static Date getTimeArrival(double distance){
 
         GregorianCalendar calendar = new GregorianCalendar();
-        calendar.add(Calendar.MINUTE, (int)distance);
+        calendar.add(Calendar.MINUTE, 3 * (((int)distance) / 1000));
 
         return calendar.getTime();
     }
