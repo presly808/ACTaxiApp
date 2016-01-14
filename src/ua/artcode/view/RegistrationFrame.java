@@ -1,6 +1,6 @@
 package ua.artcode.view;
 
-import org.jdesktop.xswingx.PromptSupport;
+import org.jdesktop.swingx.prompt.PromptSupport;
 import ua.artcode.controller.Login;
 
 import javax.swing.*;

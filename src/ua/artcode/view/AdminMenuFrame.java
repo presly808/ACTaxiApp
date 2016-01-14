@@ -4,8 +4,6 @@ import ua.artcode.controller.AdminController;
 import ua.artcode.controller.Login;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Created by dexter on 08.01.16.

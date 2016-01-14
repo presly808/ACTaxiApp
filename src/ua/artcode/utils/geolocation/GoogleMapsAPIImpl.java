@@ -6,15 +6,12 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import ua.artcode.utils.geolocation.GoogleMapsAPI;
-import ua.artcode.utils.geolocation.Location;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.concurrent.atomic.DoubleAccumulator;
 
 /**
  * Created by serhii on 20.12.15.
